@@ -1,8 +1,9 @@
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { ExternalLink, Github, Link } from 'lucide-react';
+import { ExternalLink, Link } from 'lucide-react';
 import Image from 'next/image';
+import { TbBrandGithub } from 'react-icons/tb';
 
 export default function Projects() {
   return (
@@ -37,7 +38,7 @@ export default function Projects() {
                     href="#"
                     className="text-slate-400 transition-all duration-300 hover:scale-125 hover:text-slate-600 dark:hover:text-slate-300"
                   >
-                    <Github className="h-4 w-4" />
+                    <TbBrandGithub className="h-4 w-4" />
                   </Link>
                   <Link
                     href="#"
@@ -84,7 +85,7 @@ export default function Projects() {
                     href="#"
                     className="text-slate-400 transition-all duration-300 hover:scale-125 hover:text-slate-600 dark:hover:text-slate-300"
                   >
-                    <Github className="h-4 w-4" />
+                    <TbBrandGithub className="h-4 w-4" />
                   </Link>
                   <Link
                     href="#"
@@ -131,7 +132,7 @@ export default function Projects() {
                     href="#"
                     className="text-slate-400 transition-all duration-300 hover:scale-125 hover:text-slate-600 dark:hover:text-slate-300"
                   >
-                    <Github className="h-4 w-4" />
+                    <TbBrandGithub className="h-4 w-4" />
                   </Link>
                   <Link
                     href="#"

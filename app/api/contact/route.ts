@@ -22,15 +22,18 @@ export async function POST(request: Request) {
     });
 
     const { error } = await resend.emails.send({
-      from: 'Contact Form <contact@taulantsela.dev>',
-      to: ['taulant1995@mail.com'],
+      from: 'Taulant Portfolio <onboarding@resend.dev>',
+      to: ['taulant1995@gmail.com'],
+      replyTo: email,
       subject: `New Contact Form Submission: ${subject}`,
       text: `
             Name: ${name}
             Email: ${email}
             Subject: ${subject}
-            Message:${message}
-            `,
+
+            Message:
+            ${message}
+      `,
     });
 
     if (error) {
