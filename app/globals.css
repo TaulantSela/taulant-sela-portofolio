@@ -1,7 +1,13 @@
-@import "tailwindcss";
-@import "tw-animate-css";
+@import 'tailwindcss';
+@import 'tw-animate-css';
 
 @custom-variant dark (&:is(.dark *));
+
+@layer base {
+  a {
+    @apply text-slate-600 transition-all duration-300 hover:scale-105 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-100;
+  }
+}
 
 @theme inline {
   --color-background: var(--background);
