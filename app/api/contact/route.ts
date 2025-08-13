@@ -21,7 +21,7 @@ export async function POST(request: Request) {
 
     try {
       await transporter.sendMail({
-        from: process.env.GMAIL_USER,
+        from: 'taulantsela.dev',
         to: 'taulant1995@gmail.com',
         replyTo: email,
         subject: `New Contact Form Submission: ${subject}`,
