@@ -1,7 +1,14 @@
 import { NextResponse } from 'next/server';
-import { Resend } from 'resend';
+import nodemailer from 'nodemailer';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+// Create reusable transporter object using Gmail SMTP
+const transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: process.env.GMAIL_USER,
+    pass: process.env.GMAIL_APP_PASSWORD,
+  },
+});
 
 export async function POST(request: Request) {
   try {
@@ -12,32 +19,23 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
     }
 
-    // Here you would typically send the email using a service like Resend
-    // For now, we'll just log it
-    console.log('Received contact form submission:', {
-      name,
-      email,
-      subject,
-      message,
-    });
-
-    const { error } = await resend.emails.send({
-      from: 'Taulant Portfolio <onboarding@resend.dev>',
-      to: ['taulant1995@gmail.com'],
-      replyTo: email,
-      subject: `New Contact Form Submission: ${subject}`,
-      text: `
+    try {
+      await transporter.sendMail({
+        from: process.env.GMAIL_USER,
+        to: 'taulant1995@gmail.com',
+        replyTo: email,
+        subject: `New Contact Form Submission: ${subject}`,
+        text: `
             Name: ${name}
             Email: ${email}
             Subject: ${subject}
 
             Message:
             ${message}
-      `,
-    });
-
-    if (error) {
-      console.error('Resend error:', error);
+        `,
+      });
+    } catch (error) {
+      console.error('Email error:', error);
       return NextResponse.json({ error: 'Failed to send email' }, { status: 500 });
     }
 
