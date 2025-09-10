@@ -27,8 +27,7 @@ export default function Hero() {
               <br />
               <br />
               Whether it&apos;s optimizing React state management or designing user-centered experiences, I bring
-              curiosity and technical depth to every project. Always excited to discuss innovative projects and
-              meaningful challenges!
+              curiosity and technical depth to every project.
             </p>
             <div className="flex flex-wrap gap-4">
               <Button
