@@ -34,7 +34,7 @@ export default function About() {
               </div>
               <div className="flex items-center space-x-3 transition-transform duration-300 hover:scale-105">
                 <Calendar className="h-5 w-5 text-slate-400 dark:text-slate-500" />
-                <span className="text-slate-600 dark:text-slate-400">5+ Years Experience</span>
+                <span className="text-slate-600 dark:text-slate-400">8+ Years Experience</span>
               </div>
             </div>
           </div>
