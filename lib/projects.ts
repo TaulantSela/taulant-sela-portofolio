@@ -130,12 +130,13 @@ export const projects: Project[] = [
   {
     id: 9,
     title: 'Orbit Irrigation Data Platform',
-    description: `Enterprise ETL and analytics pipeline that consolidates irrigation telemetry into Snowflake for Orbit's product and operations teams.`,
+    description:
+      'Enterprise ETL and analytics pipeline that consolidates irrigation telemetry into Snowflake for Orbit\'s product and operations teams.',
     image: '/projects/orbit-irrigation_logo.jpeg',
-    imageFit: 'contain',
     tags: ['ETL', 'Matillion', 'Snowflake', 'SQL', 'Data Warehousing'],
+    links: [{ label: 'Orbit', href: 'https://www.orbitonline.com/' }],
     role: 'company',
     context:
-      'While at Inspire11, engineered Matillion pipelines that ingested disparate sources, modelled relational schemas in Snowflake, and delivered trustable datasets that powered Orbit’s reporting and decision-making workflows.',
+      'Engineered Matillion pipelines that ingested disparate sources, modelled relational schemas in Snowflake, and delivered trustable datasets that powered Orbit’s reporting and decision-making workflows.',
   },
 ];
