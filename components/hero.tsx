@@ -1,8 +1,8 @@
 import profile from '@/public/profile_pic.jpg';
 import { Download, Mail } from 'lucide-react';
 import Image from 'next/image';
-import { TbBrandGithub, TbBrandLinkedin } from 'react-icons/tb';
 import Link from 'next/link';
+import { TbBrandGithub, TbBrandLinkedin } from 'react-icons/tb';
 
 import { Button } from './ui/button';
 
@@ -12,24 +12,25 @@ export default function Hero() {
       <div className="mx-auto max-w-6xl">
         <div className="grid items-center gap-12 lg:grid-cols-2">
           <div className="animate-in fade-in-50 slide-in-from-left-10 duration-700">
-            <h1 className="mb-6 text-4xl font-bold text-slate-900 sm:text-5xl lg:text-6xl dark:text-slate-100">
-              Hi, I&apos;m{' '}
+            <h1 className="mb-6 flex flex-col text-4xl font-bold text-slate-900 sm:text-5xl lg:text-6xl dark:text-slate-100">
+              <span>Hi, I&apos;m</span>
               <span className="animate-pulse bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
                 Taulant Sela
               </span>
             </h1>
             <p className="mb-8 text-xl leading-relaxed text-slate-600 dark:text-slate-400">
-              Curious Software Engineer who doesn&apos;t just build features, I dive deep to understand the product,
-              users, and systems that make everything work.
+              Software Engineer with 5+ years helping global teams ship high-impact React and Next.js experiences.
+              I&apos;ve led multi-brand platform modernizations at Goodyear, guided smart office product teams at Hoyo
+              Tech, and rebuilt digital music workflows for BMG Production Music.
               <br />
               <br />
-              With a Master&apos;s in Software Engineering, my experience spans data science and AI to scalable web and
-              mobile applications, with expertise rooted in frontend development and a growing focus on full-stack
-              capabilities.
+              I thrive where design systems, performant frontends, and cross-functional collaboration intersect—often
+              acting as the partner who translates product strategy into maintainable UI architecture, reusable
+              component libraries, and smooth delivery rituals.
               <br />
               <br />
-              Whether it&apos;s optimizing React state management or designing user-centered experiences, I bring
-              curiosity and technical depth to every project.
+              Currently exploring deeper full-stack touches with Express and Node.js while continuing to push the React
+              ecosystem forward through open-source contributions and technical storytelling.
             </p>
             <div className="flex flex-wrap gap-4">
               <Button

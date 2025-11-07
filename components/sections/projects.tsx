@@ -1,9 +1,12 @@
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { ExternalLink, Link } from 'lucide-react';
+import { ExternalLink, Link as LinkIcon } from 'lucide-react';
 import Image from 'next/image';
+import NextLink from 'next/link';
 import { TbBrandGithub } from 'react-icons/tb';
+
+import { projects } from '@/lib/projects';
 
 export default function Projects() {
   return (
@@ -20,156 +23,94 @@ export default function Projects() {
         </div>
 
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-          <Card className="group animate-in fade-in-50 slide-in-from-left-5 transition-all duration-700 hover:-translate-y-2 hover:shadow-xl">
-            <div className="aspect-video overflow-hidden rounded-t-lg">
-              <Image
-                src="/modern-ecommerce-dashboard.png"
-                alt="E-commerce Platform"
-                height={202}
-                width={360}
-                className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
-              />
-            </div>
-            <CardHeader>
-              <CardTitle className="flex items-center justify-between text-slate-900 dark:text-slate-100">
-                E-commerce Platform
-                <div className="flex space-x-2">
-                  <Link
-                    href="#"
-                    className="text-slate-400 transition-all duration-300 hover:scale-125 hover:text-slate-600 dark:hover:text-slate-300"
-                  >
-                    <TbBrandGithub className="h-4 w-4" />
-                  </Link>
-                  <Link
-                    href="#"
-                    className="text-slate-400 transition-all duration-300 hover:scale-125 hover:text-slate-600 dark:hover:text-slate-300"
-                  >
-                    <ExternalLink className="h-4 w-4" />
-                  </Link>
-                </div>
-              </CardTitle>
-              <CardDescription className="dark:text-slate-400">
-                Full-stack e-commerce solution with payment integration and admin dashboard
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="flex flex-wrap gap-1">
-                <Badge variant="outline" className="text-xs transition-transform duration-300 hover:scale-110">
-                  React
-                </Badge>
-                <Badge variant="outline" className="text-xs transition-transform duration-300 hover:scale-110">
-                  Node.js
-                </Badge>
-                <Badge variant="outline" className="text-xs transition-transform duration-300 hover:scale-110">
-                  Stripe
-                </Badge>
-              </div>
-            </CardContent>
-          </Card>
+          {projects.map((project, index) => {
+            const animationClass =
+              index % 3 === 0
+                ? 'slide-in-from-left-5'
+                : index % 3 === 1
+                  ? 'delay-200 slide-in-from-bottom-5'
+                  : 'delay-400 slide-in-from-right-5';
 
-          <Card className="group animate-in fade-in-50 slide-in-from-bottom-5 transition-all delay-200 duration-700 hover:-translate-y-2 hover:shadow-xl">
-            <div className="aspect-video overflow-hidden rounded-t-lg">
-              <Image
-                src="/task-management-app.png"
-                alt="Task Management App"
-                height={202}
-                width={360}
-                className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
-              />
-            </div>
-            <CardHeader>
-              <CardTitle className="flex items-center justify-between text-slate-900 dark:text-slate-100">
-                Task Management App
-                <div className="flex space-x-2">
-                  <Link
-                    href="#"
-                    className="text-slate-400 transition-all duration-300 hover:scale-125 hover:text-slate-600 dark:hover:text-slate-300"
-                  >
-                    <TbBrandGithub className="h-4 w-4" />
-                  </Link>
-                  <Link
-                    href="#"
-                    className="text-slate-400 transition-all duration-300 hover:scale-125 hover:text-slate-600 dark:hover:text-slate-300"
-                  >
-                    <ExternalLink className="h-4 w-4" />
-                  </Link>
+            return (
+              <Card
+                key={project.id}
+                className={`group animate-in fade-in-50 ${animationClass} transition-all duration-700 hover:-translate-y-2 hover:shadow-xl`}
+              >
+                <div className="aspect-[16/9] overflow-hidden rounded-t-lg bg-slate-900/80">
+                  <Image
+                    src={project.image || '/placeholder.png'}
+                    alt={project.title}
+                    height={202}
+                    width={360}
+                    className={`h-full w-full transition-transform duration-700 group-hover:scale-110 ${
+                      project.imageFit === 'contain' ? 'object-contain p-6 group-hover:scale-100' : 'object-cover'
+                    }`}
+                  />
                 </div>
-              </CardTitle>
-              <CardDescription className="dark:text-slate-400">
-                Collaborative task management tool with real-time updates and team features
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="flex flex-wrap gap-1">
-                <Badge variant="outline" className="text-xs transition-transform duration-300 hover:scale-110">
-                  Next.js
-                </Badge>
-                <Badge variant="outline" className="text-xs transition-transform duration-300 hover:scale-110">
-                  Socket.io
-                </Badge>
-                <Badge variant="outline" className="text-xs transition-transform duration-300 hover:scale-110">
-                  MongoDB
-                </Badge>
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card className="group animate-in fade-in-50 slide-in-from-right-5 transition-all delay-400 duration-700 hover:-translate-y-2 hover:shadow-xl">
-            <div className="aspect-video overflow-hidden rounded-t-lg">
-              <Image
-                src="/weather-app-interface.png"
-                alt="Weather Dashboard"
-                height={202}
-                width={360}
-                className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
-              />
-            </div>
-            <CardHeader>
-              <CardTitle className="flex items-center justify-between text-slate-900 dark:text-slate-100">
-                Weather Dashboard
-                <div className="flex space-x-2">
-                  <Link
-                    href="#"
-                    className="text-slate-400 transition-all duration-300 hover:scale-125 hover:text-slate-600 dark:hover:text-slate-300"
-                  >
-                    <TbBrandGithub className="h-4 w-4" />
-                  </Link>
-                  <Link
-                    href="#"
-                    className="text-slate-400 transition-all duration-300 hover:scale-125 hover:text-slate-600 dark:hover:text-slate-300"
-                  >
-                    <ExternalLink className="h-4 w-4" />
-                  </Link>
-                </div>
-              </CardTitle>
-              <CardDescription className="dark:text-slate-400">
-                Beautiful weather app with location-based forecasts and interactive maps
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="flex flex-wrap gap-1">
-                <Badge variant="outline" className="text-xs transition-transform duration-300 hover:scale-110">
-                  Vue.js
-                </Badge>
-                <Badge variant="outline" className="text-xs transition-transform duration-300 hover:scale-110">
-                  API
-                </Badge>
-                <Badge variant="outline" className="text-xs transition-transform duration-300 hover:scale-110">
-                  Charts
-                </Badge>
-              </div>
-            </CardContent>
-          </Card>
+                <CardHeader className="space-y-4 pb-6">
+                  <CardTitle className="text-slate-900 dark:text-slate-100">
+                    <div className="flex items-start justify-between gap-4">
+                      <div className="flex flex-col gap-2">
+                        <span className="block text-xs tracking-wide text-slate-400 uppercase dark:text-slate-500">
+                          {project.role === 'company'
+                            ? 'Company Project'
+                            : project.role === 'oss'
+                              ? 'Open Source'
+                              : 'Personal Project'}
+                        </span>
+                        <span>{project.title}</span>
+                      </div>
+                      <div className="flex shrink-0 space-x-2">
+                        {project.links?.map((link) => {
+                          const Icon = link.icon === 'github' ? TbBrandGithub : ExternalLink;
+                          return (
+                            <NextLink
+                              key={link.href}
+                              href={link.href}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-slate-400 transition-all duration-300 hover:scale-125 hover:text-slate-600 dark:hover:text-slate-300"
+                              aria-label={`${project.title} ${link.label}`}
+                            >
+                              <Icon className="h-4 w-4" />
+                            </NextLink>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  </CardTitle>
+                  <CardDescription className="dark:text-slate-400">{project.description}</CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-4 pt-0">
+                  <p className="text-sm text-slate-500 dark:text-slate-400">{project.context}</p>
+                  <div className="flex flex-wrap gap-1">
+                    {project.tags.map((tag) => (
+                      <Badge
+                        key={tag}
+                        variant="outline"
+                        className="text-xs transition-transform duration-300 hover:scale-110"
+                      >
+                        {tag}
+                      </Badge>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+            );
+          })}
         </div>
 
         <div className="animate-in fade-in-50 slide-in-from-bottom-5 mt-12 text-center delay-600 duration-700">
           <Button
+            asChild
             variant="outline"
             size="lg"
             className="bg-transparent transition-transform duration-300 hover:scale-105"
           >
-            View All Projects
-            <ExternalLink className="ml-2 h-4 w-4" />
+            <NextLink href="https://github.com/TaulantSela" target="_blank" rel="noopener noreferrer">
+              View All Projects
+              <LinkIcon className="ml-2 h-4 w-4" />
+            </NextLink>
           </Button>
         </div>
       </div>
