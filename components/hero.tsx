@@ -2,6 +2,8 @@ import profile from '@/public/profile_pic.jpg';
 import { Download, Mail } from 'lucide-react';
 import Image from 'next/image';
 import { TbBrandGithub, TbBrandLinkedin } from 'react-icons/tb';
+import Link from 'next/link';
+
 import { Button } from './ui/button';
 
 export default function Hero() {
@@ -31,11 +33,14 @@ export default function Hero() {
             </p>
             <div className="flex flex-wrap gap-4">
               <Button
+                asChild
                 size="lg"
                 className="bg-slate-900 transition-all duration-300 hover:scale-105 hover:bg-slate-800 active:scale-95 dark:bg-slate-100 dark:text-slate-900 dark:hover:bg-slate-200"
               >
-                <Mail className="mr-2 h-4 w-4" />
-                Get In Touch
+                <Link href="/#contact">
+                  <Mail className="mr-2 h-4 w-4" />
+                  Get In Touch
+                </Link>
               </Button>
               <a
                 className="focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive hover:bg-accent hover:text-accent-foreground dark:bg-input/30 dark:border-input dark:hover:bg-input/50 inline-flex h-10 shrink-0 items-center justify-center gap-2 rounded-md border bg-transparent px-6 text-sm font-medium whitespace-nowrap shadow-xs transition-all duration-300 outline-none hover:scale-105 focus-visible:ring-[3px] active:scale-95 disabled:pointer-events-none disabled:opacity-50 has-[>svg]:px-4 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4"
