@@ -34,7 +34,7 @@ export default function Projects() {
             return (
               <Card
                 key={project.id}
-                className={`group animate-in fade-in-50 ${animationClass} transition-all duration-700 hover:-translate-y-2 hover:shadow-xl`}
+                className={`group animate-in fade-in-50 ${animationClass} pt-0 pb-6 transition-all duration-700 hover:-translate-y-2 hover:shadow-xl`}
               >
                 <div className="aspect-[16/9] overflow-hidden rounded-t-lg bg-slate-900/80">
                   <Image
@@ -47,7 +47,7 @@ export default function Projects() {
                     }`}
                   />
                 </div>
-                <CardHeader className="space-y-4 pb-6">
+                <CardHeader className="space-y-4">
                   <CardTitle className="text-slate-900 dark:text-slate-100">
                     <div className="flex items-start justify-between gap-4">
                       <div className="flex flex-col gap-2">
@@ -81,9 +81,9 @@ export default function Projects() {
                   </CardTitle>
                   <CardDescription className="dark:text-slate-400">{project.description}</CardDescription>
                 </CardHeader>
-                <CardContent className="space-y-4 pt-0">
+                <CardContent className="flex flex-col justify-between space-y-4 pt-0">
                   <p className="text-sm text-slate-500 dark:text-slate-400">{project.context}</p>
-                  <div className="flex flex-wrap gap-1">
+                  <div className="flex flex-wrap gap-1 pt-4">
                     {project.tags.map((tag) => (
                       <Badge
                         key={tag}

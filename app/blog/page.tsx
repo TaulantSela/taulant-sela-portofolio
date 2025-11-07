@@ -40,7 +40,7 @@ export default function BlogPage() {
                   className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
                 />
               </div>
-              <CardHeader className="pb-3">
+              <CardHeader>
                 <div className="mb-2 flex items-center justify-between">
                   <Badge variant="secondary" className="text-xs">
                     {post.category}

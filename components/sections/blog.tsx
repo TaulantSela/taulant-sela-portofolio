@@ -24,19 +24,19 @@ export function Blog() {
           {posts.map((post, index) => (
             <Card
               key={post.id}
-              className="group animate-in fade-in-50 slide-in-from-bottom-5 transition-all duration-500 hover:-translate-y-2 hover:shadow-xl"
+              className="group animate-in fade-in-50 slide-in-from-bottom-5 pt-0 pb-6 transition-all duration-500 hover:-translate-y-2 hover:shadow-xl"
               style={{ animationDelay: `${index * 100}ms` }}
             >
-              <div className="aspect-video overflow-hidden rounded-t-lg">
+              <div className="aspect-[16/9] overflow-hidden rounded-t-lg bg-slate-900/80">
                 <Image
-                  src={post.image || '/placeholder.svg'}
+                  src={post.image || '/placeholder.png'}
                   alt={post.title}
                   height={312}
                   width={312}
                   className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
                 />
               </div>
-              <CardHeader className="pb-3">
+              <CardHeader>
                 <div className="mb-2 flex items-center justify-between">
                   <Badge variant="secondary" className="text-xs">
                     {post.category}
