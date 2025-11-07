@@ -1,15 +1,6 @@
 import { NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
 
-// Create reusable transporter object using Gmail SMTP
-const transporter = nodemailer.createTransport({
-  service: 'gmail',
-  auth: {
-    user: process.env.GMAIL_USER,
-    pass: process.env.GMAIL_APP_PASSWORD,
-  },
-});
-
 export async function POST(request: Request) {
   try {
     const { name, email, subject, message } = await request.json();
@@ -19,19 +10,42 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
     }
 
+    const { GMAIL_USER, GMAIL_APP_PASSWORD, CONTACT_RECIPIENT_EMAIL } = process.env;
+
+    if (!GMAIL_USER || !GMAIL_APP_PASSWORD) {
+      console.error('Email configuration is missing. Please set GMAIL_USER and GMAIL_APP_PASSWORD.');
+      return NextResponse.json({ error: 'Email service not configured' }, { status: 500 });
+    }
+
+    const transporter = nodemailer.createTransport({
+      host: 'smtp.gmail.com',
+      port: 465,
+      secure: true,
+      auth: {
+        user: GMAIL_USER,
+        pass: GMAIL_APP_PASSWORD,
+      },
+    });
+
     try {
       await transporter.sendMail({
-        from: 'taulantsela.dev',
-        to: 'taulant1995@gmail.com',
+        from: `Portfolio Contact <${GMAIL_USER}>`,
+        to: CONTACT_RECIPIENT_EMAIL || GMAIL_USER,
         replyTo: email,
         subject: `New Contact Form Submission: ${subject}`,
-        text: `
-            Name: ${name}
-            Email: ${email}
-            Subject: ${subject}
+        text: `Name: ${name}
+Email: ${email}
+Subject: ${subject}
 
-            Message:
-            ${message}
+Message:
+${message}`,
+        html: `
+          <h2>New message from your portfolio</h2>
+          <p><strong>Name:</strong> ${name}</p>
+          <p><strong>Email:</strong> ${email}</p>
+          <p><strong>Subject:</strong> ${subject}</p>
+          <p><strong>Message:</strong></p>
+          <p>${message.replace(/\n/g, '<br/>')}</p>
         `,
       });
     } catch (error) {

@@ -13,6 +13,7 @@ import { useState } from 'react';
 export function ContactForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -23,6 +24,7 @@ export function ContactForm() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setErrorMessage(null);
 
     try {
       const response = await fetch('/api/contact', {
@@ -34,14 +36,15 @@ export function ContactForm() {
       });
 
       if (!response.ok) {
-        throw new Error('Failed to send message');
+        const data = await response.json().catch(() => null);
+        throw new Error(data?.error ?? 'Failed to send message');
       }
 
       setIsSubmitted(true);
       setFormData({ name: '', email: '', subject: '', message: '' });
     } catch (error) {
       console.error('Error sending message:', error);
-      // You might want to show an error message to the user here
+      setErrorMessage('Something went wrong while sending your message. Please try again later or reach out directly.');
     } finally {
       setIsSubmitting(false);
     }
@@ -83,6 +86,11 @@ export function ContactForm() {
       </CardHeader>
       <CardContent>
         <form onSubmit={handleSubmit} className="space-y-6">
+          {errorMessage ? (
+            <p className="rounded-md border border-red-500/40 bg-red-500/10 px-4 py-3 text-sm text-red-600 dark:text-red-400">
+              {errorMessage}
+            </p>
+          ) : null}
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
             <div className="space-y-2">
               <Label htmlFor="name">Name</Label>
