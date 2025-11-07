@@ -11,22 +11,20 @@ export default function About() {
         <div className="animate-in fade-in-50 slide-in-from-bottom-5 mb-16 text-center duration-700">
           <h2 className="mb-4 text-3xl font-bold text-slate-900 sm:text-4xl dark:text-slate-100">About Me</h2>
           <p className="mx-auto max-w-2xl text-lg text-slate-600 dark:text-slate-400">
-            Software Engineer focused on crafting resilient, multi-brand experiences for global products across React,
-            Next.js, and modern delivery practices
+            Software Engineer crafting resilient, multi-brand React and Next.js experiences with pragmatic delivery
+            practices
           </p>
         </div>
 
         <div className="grid items-center gap-12 lg:grid-cols-2">
           <div className="animate-in fade-in-50 slide-in-from-left-5 delay-200 duration-700">
             <p className="mb-6 leading-relaxed text-slate-600 dark:text-slate-400">
-              From stewarding Goodyear&apos;s AEM-to-React migration across 30+ European markets to orchestrating the
-              Hoyo Tech smart office and HoyoHome rebuilds, I specialise in untangling complex frontends and guiding
-              teams through change. My background spans Valtech, Hoyo Tech, BMG Production Music, MonoChain, and more.
+              I&apos;ve helped Goodyear, Hoyo Tech, BMG, and others modernise React platforms, ship smarter interfaces,
+              and embed better delivery habits.
             </p>
             <p className="mb-8 leading-relaxed text-slate-600 dark:text-slate-400">
-              I enjoy partnering with product, design, and engineering to define component architectures, design
-              systems, and delivery rituals that scale. Outside of client work I contribute to open source, document
-              lessons learned, and mentor engineers looking to level-up in the React ecosystem.
+              I love translating product goals into reusable component systems, coaching teams through change, and
+              sharing what I learn through open-source and mentoring.
             </p>
 
             <div className="grid grid-cols-2 gap-6">
@@ -44,9 +42,9 @@ export default function About() {
           <div className="animate-in fade-in-50 slide-in-from-right-5 grid grid-cols-2 gap-4 delay-400 duration-700">
             <Card className="transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
               <CardContent className="p-6 text-center">
-                <div className="mb-2 animate-pulse text-3xl font-bold text-slate-900 dark:text-slate-100">30+</div>
+                <div className="mb-2 animate-pulse text-3xl font-bold text-slate-900 dark:text-slate-100">15+</div>
                 <div className="text-slate-600 dark:text-slate-400">
-                  Markets shipped across Goodyear&apos;s TBU network
+                  Products delivered across web, mobile, and data/analytics platforms
                 </div>
               </CardContent>
             </Card>
@@ -60,8 +58,10 @@ export default function About() {
             </Card>
             <Card className="transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
               <CardContent className="p-6 text-center">
-                <div className="mb-2 animate-pulse text-3xl font-bold text-slate-900 dark:text-slate-100">5+</div>
-                <div className="text-slate-600 dark:text-slate-400">Years shaping React and Next.js products</div>
+                <div className="mb-2 animate-pulse text-3xl font-bold text-slate-900 dark:text-slate-100">8+</div>
+                <div className="text-slate-600 dark:text-slate-400">
+                  Years engineering end-to-end software solutions
+                </div>
               </CardContent>
             </Card>
             <Card className="transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">

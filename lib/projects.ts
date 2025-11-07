@@ -139,4 +139,18 @@ export const projects: Project[] = [
     context:
       'Implemented the full ETL lifecycle: exporting relational data from SQL Server, applying cleansing and business logic in Matillion/AWS Lambda, and loading the curated models into Snowflake to power Orbit’s analytics workflows.',
   },
+  {
+    id: 10,
+    title: 'SEEU Departmental Web Decentralization',
+    description:
+      'WordPress multisite initiative that split the South East European University web presence into departmental subdomains and localized experiences to improve content ownership and publishing efficiency.',
+    image: '/projects/seeu_logo.webp',
+    imageFit: 'contain',
+    tags: ['WordPress', 'Multisite', 'Content Strategy', 'Localization', 'Governance'],
+    role: 'company',
+    context:
+      'As a webmaster assistant within the PR team, coordinated with department leads to scope requirements, stood up and themed subdomain sites, migrated legacy and multilingual content, and documented workflows so each unit could manage its own updates while staying on-brand.',
+  },
 ];
+
+export const featuredProjects = (count = 3) => projects.slice(0, count);

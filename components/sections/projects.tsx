@@ -1,14 +1,16 @@
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { ExternalLink, Link as LinkIcon } from 'lucide-react';
+import { ArrowRight, ExternalLink } from 'lucide-react';
 import Image from 'next/image';
 import NextLink from 'next/link';
 import { TbBrandGithub } from 'react-icons/tb';
 
-import { projects } from '@/lib/projects';
+import { featuredProjects } from '@/lib/projects';
 
 export default function Projects() {
+  const projects = featuredProjects();
+
   return (
     <section
       id="projects"
@@ -107,9 +109,9 @@ export default function Projects() {
             size="lg"
             className="bg-transparent transition-transform duration-300 hover:scale-105"
           >
-            <NextLink href="https://github.com/TaulantSela" target="_blank" rel="noopener noreferrer">
+            <NextLink href="/projects">
               View All Projects
-              <LinkIcon className="ml-2 h-4 w-4" />
+              <ArrowRight className="ml-2 h-4 w-4" />
             </NextLink>
           </Button>
         </div>

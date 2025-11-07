@@ -19,18 +19,12 @@ export default function Hero() {
               </span>
             </h1>
             <p className="mb-8 text-xl leading-relaxed text-slate-600 dark:text-slate-400">
-              Software Engineer with 5+ years helping global teams ship high-impact React and Next.js experiences.
-              I&apos;ve led multi-brand platform modernizations at Goodyear, guided smart office product teams at Hoyo
-              Tech, and rebuilt digital music workflows for BMG Production Music.
+              Front-end specialist shaping multi-brand React and Next.js products. I turn product strategy into
+              maintainable UI systems and delivery rituals that keep teams shipping.
               <br />
               <br />
-              I thrive where design systems, performant frontends, and cross-functional collaboration intersect—often
-              acting as the partner who translates product strategy into maintainable UI architecture, reusable
-              component libraries, and smooth delivery rituals.
-              <br />
-              <br />
-              Currently exploring deeper full-stack touches with Express and Node.js while continuing to push the React
-              ecosystem forward through open-source contributions and technical storytelling.
+              Recent work spans Goodyear&apos;s European platform, Hoyo Tech smart environments, and BMG Production
+              Music. I&apos;m currently deepening my Express/Node skills while contributing back to the React community.
             </p>
             <div className="flex flex-wrap gap-4">
               <Button

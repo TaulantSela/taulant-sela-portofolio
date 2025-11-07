@@ -33,7 +33,9 @@ export function Blog() {
                   alt={post.title}
                   height={312}
                   width={312}
-                  className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  className={`h-full w-full transition-transform duration-700 group-hover:scale-110 ${
+                    post.imageFit === 'contain' ? 'object-contain p-6 group-hover:scale-100' : 'object-cover'
+                  }`}
                 />
               </div>
               <CardHeader>

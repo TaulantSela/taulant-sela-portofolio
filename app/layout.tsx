@@ -1,3 +1,5 @@
+import Footer from '@/components/footer';
+import Navigation from '@/components/navigation';
 import { ThemeProvider } from '@/components/theme-provider';
 import { GeistMono } from 'geist/font/mono';
 import { GeistSans } from 'geist/font/sans';
@@ -29,9 +31,15 @@ export default function RootLayout({
           }
         `}</style>
       </head>
-      <body className={inter.className}>
+      <body
+        className={`${inter.className} bg-slate-50 text-slate-900 transition-colors duration-500 dark:bg-slate-900 dark:text-slate-100`}
+      >
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
-          {children}
+          <div className="flex min-h-screen flex-col bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800">
+            <Navigation />
+            <main className="flex flex-1 flex-col">{children}</main>
+            <Footer />
+          </div>
         </ThemeProvider>
       </body>
     </html>

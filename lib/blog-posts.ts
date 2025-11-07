@@ -6,6 +6,7 @@ export type BlogPost = {
   readTime: string;
   category: string;
   image: string;
+  imageFit?: 'cover' | 'contain';
   author: string;
   url: string;
 };
