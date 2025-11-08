@@ -163,7 +163,7 @@ export const projects: Project[] = [
       'The platform combines a modern PHP + MySQL frontend with an authenticated admin dashboard to add devices, manage categories, and publish service offerings without touching code.',
     links: [
       { label: 'Elite Mobile', href: 'https://elite-mobile.vercel.app/' },
-      { label: 'GitHub', href: 'https://github.com/TaulantSela/bachelor-capstone', icon: 'github' },
+      { label: 'GitHub', href: 'https://github.com/TaulantSela/elite-mobile', icon: 'github' },
     ],
   },
   {
@@ -181,6 +181,21 @@ export const projects: Project[] = [
     role: 'personal',
     context:
       'Built to model dispatcher strategies for an elevator system, showcasing hall/cabin call prioritization, transition messaging, and UI polish for teaching control-system concepts.',
+  },
+  {
+    id: 13,
+    title: 'Legion Training Platform API',
+    description:
+      'Multi-tenant REST API for gyms and coaches to orchestrate workouts, track progress, and manage members with granular role-based auth.',
+    image: '/projects/legion-training-api_logo.svg',
+    tags: ['Node.js', 'Express', 'Swagger UI', 'JWT', 'Vercel'],
+    links: [
+      { label: 'API Docs', href: 'https://legion-training-api.vercel.app' },
+      { label: 'GitHub', href: 'https://github.com/TaulantSela/legion-training-api', icon: 'github' },
+    ],
+    role: 'personal',
+    context:
+      'Designed a modular Express service with JWT authentication, automated Swagger documentation, caching, and CI-ready integration tests—deployed serverlessly on Vercel.',
   },
 ];
 
