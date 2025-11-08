@@ -162,7 +162,7 @@ export const projects: Project[] = [
     context:
       'The platform combines a modern PHP + MySQL frontend with an authenticated admin dashboard to add devices, manage categories, and publish service offerings without touching code.',
     links: [
-      { label: 'Elite Mobile', href: 'https://elite-mobile-nton9vhu7-taulantselas-projects.vercel.app/' },
+      { label: 'Elite Mobile', href: 'https://elite-mobile.vercel.app/' },
       { label: 'GitHub', href: 'https://github.com/TaulantSela/bachelor-capstone', icon: 'github' },
     ],
   },
