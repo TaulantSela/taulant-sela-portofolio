@@ -151,6 +151,37 @@ export const projects: Project[] = [
     context:
       'As a webmaster assistant within the PR team, coordinated with department leads to scope requirements, stood up and themed subdomain sites, migrated legacy and multilingual content, and documented workflows so each unit could manage its own updates while staying on-brand.',
   },
+  {
+    id: 11,
+    title: 'Elite Mobile',
+    description:
+      'Elite Mobile is a full-featured online storefront for flagship smartphones, providing a curated catalog, rich product pages, and professional repair service listings.',
+    image: '/projects/elite-mobile_logo.png',
+    tags: ['PHP', 'MySQL', 'Bootstrap', 'CRUD'],
+    role: 'personal',
+    context:
+      'The platform combines a modern PHP + MySQL frontend with an authenticated admin dashboard to add devices, manage categories, and publish service offerings without touching code.',
+    links: [
+      { label: 'Elite Mobile', href: 'https://elite-mobile-nton9vhu7-taulantselas-projects.vercel.app/' },
+      { label: 'GitHub', href: 'https://github.com/TaulantSela/bachelor-capstone', icon: 'github' },
+    ],
+  },
+  {
+    id: 12,
+    title: 'Elevator Simulator System',
+    description:
+      'Elevator simulator that visualizes hall-call priorities, cabin actions, and dispatch sequencing in real time.',
+    image: '/projects/elevator-system_logo.svg',
+    imageFit: 'contain',
+    tags: ['React', 'TypeScript', 'State Machines', 'Simulation'],
+    links: [
+      { label: 'Elevator Simulator', href: 'https://elevator-simulator-system.vercel.app/' },
+      { label: 'GitHub', href: 'https://github.com/TaulantSela/elevator-system', icon: 'github' },
+    ],
+    role: 'personal',
+    context:
+      'Built to model dispatcher strategies for an elevator system, showcasing hall/cabin call prioritization, transition messaging, and UI polish for teaching control-system concepts.',
+  },
 ];
 
 export const featuredProjects = (count = 3) => projects.slice(0, count);
