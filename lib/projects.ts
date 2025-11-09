@@ -81,7 +81,7 @@ export const projects: Project[] = [
       'Migrated a legacy Angular 8 catalog and licensing tool to Next.js 15 with React 19, unlocking faster search, preview, and licensing flows for music supervisors.',
     image: '/projects/bmgpm_logo.webp',
     tags: ['Next.js', 'React 19', 'TypeScript', 'Tailwind CSS'],
-    links: [{ label: 'BMG Production Music', href: 'https://productionmusic.bmg.com/' }],
+    links: [{ label: 'BMG Production Music', href: 'https://bmgproductionmusic.com/' }],
     role: 'company',
     context:
       'Spearheaded the full rewrite from Angular to a modern Next.js stack—rebuilding feature parity, modernizing the UI system, and ensuring SSR/ISR performance for global catalog searches.',
