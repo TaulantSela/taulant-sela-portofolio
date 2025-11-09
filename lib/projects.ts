@@ -147,6 +147,7 @@ export const projects: Project[] = [
     image: '/projects/seeu_logo.webp',
     imageFit: 'contain',
     tags: ['WordPress', 'Multisite', 'Content Strategy', 'Localization', 'Governance'],
+    links: [{ label: 'SEEU', href: 'https://seeu.edu.mk/' }],
     role: 'company',
     context:
       'As a webmaster assistant within the PR team, coordinated with department leads to scope requirements, stood up and themed subdomain sites, migrated legacy and multilingual content, and documented workflows so each unit could manage its own updates while staying on-brand.',
