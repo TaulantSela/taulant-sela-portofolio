@@ -16,7 +16,7 @@ const posts: BlogPost[] = [
     id: 1,
     title: 'Introducing Pack It Up: The Smart Packing List Generator for Modern Travelers',
     excerpt:
-      'Pack It Up is an intelligent packing assistant that generates AI-powered, trip-specific checklists based on destination, weather, and planned activities.',
+      'Pack It Up is an intelligent packing assistant that generates AI-powered, trip-specific checklists based on destination, weather, and planned activities. It layers in packing heuristics for climate, trip length, and planned activities, while offering real-time editing, sharing, and export tools tailored for solo travelers and teams.',
     date: '2025-11-07',
     readTime: '9 min read',
     category: 'Next.js',

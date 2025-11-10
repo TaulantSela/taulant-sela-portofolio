@@ -1,78 +1,53 @@
-import { Card, CardContent } from '@/components/ui/card';
-import { Calendar, MapPin } from 'lucide-react';
+'use client';
+
+import { ScrollReveal } from '@/components/scroll-reveal';
 
 export default function About() {
   return (
     <section
       id="about"
-      className="bg-white px-4 py-20 transition-colors duration-500 sm:px-6 lg:px-8 dark:bg-slate-900"
+      className="relative isolate px-6 py-24 text-slate-950 transition-colors duration-500 sm:px-10 lg:px-16 dark:text-white"
     >
-      <div className="mx-auto max-w-6xl">
-        <div className="animate-in fade-in-50 slide-in-from-bottom-5 mb-16 text-center duration-700">
-          <h2 className="mb-4 text-3xl font-bold text-slate-900 sm:text-4xl dark:text-slate-100">About Me</h2>
-          <p className="mx-auto max-w-2xl text-lg text-slate-600 dark:text-slate-400">
-            Software Engineer crafting resilient, multi-brand React and Next.js experiences with pragmatic delivery
-            practices
+      <div className="relative mx-auto max-w-6xl space-y-12">
+        <ScrollReveal className="space-y-4">
+          <div className="inline-flex items-center gap-3 rounded-full border border-slate-300/60 bg-white/70 px-5 py-2 text-xs tracking-[0.4em] text-slate-500 uppercase dark:border-white/20 dark:bg-white/10 dark:text-white/60">
+            About
+            <span className="h-1.5 w-1.5 rounded-full bg-slate-600 dark:bg-white/70" />
+            Taulant
+          </div>
+          <h2 className="max-w-3xl text-4xl leading-tight font-semibold text-slate-900 sm:text-5xl dark:text-white">
+            Software engineer with a bias for clarity and momentum.
+          </h2>
+          <p className="max-w-3xl text-base text-slate-600 sm:text-lg dark:text-white/70">
+            Remote-first from North Macedonia, I keep product intent, design detail, and engineering execution on the
+            same track. Years of full-stack delivery—interface engineering, system design, integrations, and ops—help
+            teams ship with less friction.
           </p>
-        </div>
+        </ScrollReveal>
 
-        <div className="grid items-center gap-12 lg:grid-cols-2">
-          <div className="animate-in fade-in-50 slide-in-from-left-5 delay-200 duration-700">
-            <p className="mb-6 leading-relaxed text-slate-600 dark:text-slate-400">
-              I&apos;ve helped Goodyear, Hoyo Tech, BMG, and others modernise React platforms, ship smarter interfaces,
-              and embed better delivery habits.
+        <div className="grid gap-12 lg:grid-cols-[1.1fr_0.9fr]">
+          <ScrollReveal
+            className="space-y-6 rounded-3xl border border-slate-200/80 bg-white/80 p-8 shadow-[0_16px_50px_rgba(148,163,184,0.25)] transition-transform duration-500 hover:-translate-y-1 dark:border-white/10 dark:bg-white/5 dark:shadow-[0_16px_50px_rgba(15,23,42,0.45)]"
+            delay={120}
+          >
+            <h3 className="text-lg font-semibold text-slate-900 dark:text-white">How I work</h3>
+            <p className="text-sm text-slate-600 dark:text-white/70">
+              Transparent scope, quick prototypes, written decisions, and patterns teams can keep scaling after
+              handoff—on both the UI and service layers.
             </p>
-            <p className="mb-8 leading-relaxed text-slate-600 dark:text-slate-400">
-              I love translating product goals into reusable component systems, coaching teams through change, and
-              sharing what I learn through open-source and mentoring.
-            </p>
+          </ScrollReveal>
 
-            <div className="grid grid-cols-2 gap-6">
-              <div className="flex items-center space-x-3 transition-transform duration-300 hover:scale-105">
-                <MapPin className="h-5 w-5 text-slate-400 dark:text-slate-500" />
-                <span className="text-slate-600 dark:text-slate-400">Struga, North Macedonia</span>
-              </div>
-              <div className="flex items-center space-x-3 transition-transform duration-300 hover:scale-105">
-                <Calendar className="h-5 w-5 text-slate-400 dark:text-slate-500" />
-                <span className="text-slate-600 dark:text-slate-400">8+ Years Experience</span>
-              </div>
+          <ScrollReveal
+            className="space-y-6 rounded-3xl border border-slate-200/80 bg-white/80 p-8 shadow-[0_16px_50px_rgba(148,163,184,0.25)] transition-transform duration-500 hover:-translate-y-1 dark:border-white/10 dark:bg-white/5 dark:shadow-[0_16px_50px_rgba(15,23,42,0.45)]"
+            delay={240}
+          >
+            <h3 className="text-lg font-semibold text-slate-900 dark:text-white">Quick facts</h3>
+            <div className="space-y-3 text-sm text-slate-600 dark:text-white/70">
+              <p>• Remote from Struga, collaborating across time zones.</p>
+              <p>• React 19, Next.js 15, Tailwind, TypeScript, Node.js, cloud services.</p>
+              <p>• Comfortable jumping between UI polish, service integrations, and delivery coaching.</p>
             </div>
-          </div>
-
-          <div className="animate-in fade-in-50 slide-in-from-right-5 grid grid-cols-2 gap-4 delay-400 duration-700">
-            <Card className="transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
-              <CardContent className="p-6 text-center">
-                <div className="mb-2 animate-pulse text-3xl font-bold text-slate-900 dark:text-slate-100">15+</div>
-                <div className="text-slate-600 dark:text-slate-400">
-                  Products delivered across web, mobile, and data/analytics platforms
-                </div>
-              </CardContent>
-            </Card>
-            <Card className="transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
-              <CardContent className="p-6 text-center">
-                <div className="mb-2 animate-pulse text-3xl font-bold text-slate-900 dark:text-slate-100">3</div>
-                <div className="text-slate-600 dark:text-slate-400">
-                  Major platform rewrites delivered (Goodyear, Hoyo, BMG)
-                </div>
-              </CardContent>
-            </Card>
-            <Card className="transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
-              <CardContent className="p-6 text-center">
-                <div className="mb-2 animate-pulse text-3xl font-bold text-slate-900 dark:text-slate-100">8+</div>
-                <div className="text-slate-600 dark:text-slate-400">
-                  Years engineering end-to-end software solutions
-                </div>
-              </CardContent>
-            </Card>
-            <Card className="transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
-              <CardContent className="p-6 text-center">
-                <div className="mb-2 animate-pulse text-3xl font-bold text-slate-900 dark:text-slate-100">3+</div>
-                <div className="text-slate-600 dark:text-slate-400">
-                  Cross-functional squads coached through agile delivery
-                </div>
-              </CardContent>
-            </Card>
-          </div>
+          </ScrollReveal>
         </div>
       </div>
     </section>

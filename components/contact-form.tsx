@@ -49,7 +49,6 @@ export function ContactForm() {
       setIsSubmitting(false);
     }
 
-    // Reset success message after 3 seconds
     setTimeout(() => {
       setIsSubmitted(false);
     }, 3000);
@@ -64,11 +63,11 @@ export function ContactForm() {
 
   if (isSubmitted) {
     return (
-      <Card className="animate-in fade-in-50 mx-auto w-full max-w-2xl duration-500">
-        <CardContent className="p-8 text-center">
-          <CheckCircle className="animate-in zoom-in-50 mx-auto mb-4 h-16 w-16 text-green-500 duration-700" />
-          <h3 className="mb-2 text-2xl font-semibold text-slate-900 dark:text-slate-100">Message Sent Successfully!</h3>
-          <p className="text-slate-600 dark:text-slate-400">
+      <Card className="animate-in fade-in-50 mx-auto flex h-full w-full max-w-2xl flex-col border border-slate-200 bg-white/95 p-8 text-slate-900 shadow-[0_24px_70px_rgba(15,23,42,0.12)] backdrop-blur duration-500 dark:border-white/10 dark:bg-white/[0.08] dark:text-white dark:shadow-[0_24px_70px_rgba(15,23,42,0.55)]">
+        <CardContent className="flex flex-1 flex-col items-center justify-center p-0 text-center">
+          <CheckCircle className="mx-auto mb-4 h-16 w-16 text-emerald-400 dark:text-emerald-300" />
+          <h3 className="mb-2 text-2xl font-semibold">Message sent successfully!</h3>
+          <p className="text-sm text-slate-600 dark:text-white/70">
             Thank you for reaching out. I&apos;ll get back to you soon!
           </p>
         </CardContent>
@@ -77,34 +76,38 @@ export function ContactForm() {
   }
 
   return (
-    <Card className="animate-in slide-in-from-bottom-5 mx-auto w-full max-w-2xl duration-700">
-      <CardHeader>
-        <CardTitle className="text-center text-2xl">Send me a message</CardTitle>
-        <CardDescription className="text-center">
+    <Card className="animate-in slide-in-from-bottom-5 mx-auto flex h-full w-full max-w-2xl flex-col border border-slate-200 bg-white/95 text-slate-900 shadow-[0_24px_70px_rgba(15,23,42,0.12)] backdrop-blur duration-700 dark:border-white/10 dark:bg-slate-950/70 dark:text-white dark:shadow-[0_24px_70px_rgba(15,23,42,0.55)]">
+      <CardHeader className="border-b border-slate-200/70 pb-8 text-center dark:border-white/10">
+        <CardTitle className="text-2xl">Send me a message</CardTitle>
+        <CardDescription className="text-slate-600 dark:text-white/60">
           I&apos;d love to hear about your project or just say hello!
         </CardDescription>
       </CardHeader>
-      <CardContent>
-        <form onSubmit={handleSubmit} className="space-y-6">
+      <CardContent className="flex flex-1 flex-col pt-8">
+        <form onSubmit={handleSubmit} className="flex flex-1 flex-col gap-6">
           {errorMessage ? (
-            <p className="rounded-md border border-red-500/40 bg-red-500/10 px-4 py-3 text-sm text-red-600 dark:text-red-400">
+            <p className="rounded-md border border-red-500/30 bg-red-500/10 px-4 py-3 text-sm text-red-600 dark:border-red-500/40 dark:text-red-300">
               {errorMessage}
             </p>
           ) : null}
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
             <div className="space-y-2">
-              <Label htmlFor="name">Name</Label>
+              <Label htmlFor="name" className="text-xs tracking-[0.3em] text-slate-500 uppercase dark:text-white/60">
+                Name
+              </Label>
               <Input
                 id="name"
                 name="name"
                 value={formData.name}
                 onChange={handleChange}
                 required
-                className="transition-all duration-300 focus:scale-[1.02]"
+                className="border-slate-200 bg-white text-slate-900 transition duration-300 placeholder:text-slate-400 focus:border-slate-400 focus:ring-0 focus:outline-none dark:border-white/10 dark:bg-white/10 dark:text-white dark:placeholder:text-white/40 dark:focus:border-white/40"
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="email">Email</Label>
+              <Label htmlFor="email" className="text-xs tracking-[0.3em] text-slate-500 uppercase dark:text-white/60">
+                Email
+              </Label>
               <Input
                 id="email"
                 name="email"
@@ -112,50 +115,56 @@ export function ContactForm() {
                 value={formData.email}
                 onChange={handleChange}
                 required
-                className="transition-all duration-300 focus:scale-[1.02]"
+                className="border-slate-200 bg-white text-slate-900 transition duration-300 placeholder:text-slate-400 focus:border-slate-400 focus:ring-0 focus:outline-none dark:border-white/10 dark:bg-white/10 dark:text-white dark:placeholder:text-white/40 dark:focus:border-white/40"
               />
             </div>
           </div>
           <div className="space-y-2">
-            <Label htmlFor="subject">Subject</Label>
+            <Label htmlFor="subject" className="text-xs tracking-[0.3em] text-slate-500 uppercase dark:text-white/60">
+              Subject
+            </Label>
             <Input
               id="subject"
               name="subject"
               value={formData.subject}
               onChange={handleChange}
               required
-              className="transition-all duration-300 focus:scale-[1.02]"
+              className="border-slate-200 bg-white text-slate-900 transition duration-300 placeholder:text-slate-400 focus:border-slate-400 focus:ring-0 focus:outline-none dark:border-white/10 dark:bg-white/10 dark:text-white dark:placeholder:text-white/40 dark:focus:border-white/40"
             />
           </div>
-          <div className="space-y-2">
-            <Label htmlFor="message">Message</Label>
+          <div className="flex flex-1 flex-col space-y-2">
+            <Label htmlFor="message" className="text-xs tracking-[0.3em] text-slate-500 uppercase dark:text-white/60">
+              Message
+            </Label>
             <Textarea
               id="message"
               name="message"
               value={formData.message}
               onChange={handleChange}
               required
-              rows={5}
-              className="resize-none transition-all duration-300 focus:scale-[1.02]"
+              rows={6}
+              className="flex-1 resize-none border-slate-200 bg-white text-slate-900 transition duration-300 placeholder:text-slate-400 focus:border-slate-400 focus:ring-0 focus:outline-none dark:border-white/10 dark:bg-white/10 dark:text-white dark:placeholder:text-white/40 dark:focus:border-white/40"
             />
           </div>
-          <Button
-            type="submit"
-            disabled={isSubmitting}
-            className="w-full transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]"
-          >
-            {isSubmitting ? (
-              <>
-                <div className="mr-2 h-4 w-4 animate-spin rounded-full border-b-2 border-white"></div>
-                Sending...
-              </>
-            ) : (
-              <>
-                <Send className="mr-2 h-4 w-4" />
-                Send Message
-              </>
-            )}
-          </Button>
+          <div className="pt-2">
+            <Button
+              type="submit"
+              disabled={isSubmitting}
+              className="w-full rounded-full bg-slate-900 text-white transition duration-300 hover:-translate-y-1 hover:bg-slate-800 dark:bg-white dark:text-slate-950 dark:hover:bg-slate-100"
+            >
+              {isSubmitting ? (
+                <>
+                  <div className="mr-2 h-4 w-4 animate-spin rounded-full border-b-2 border-white dark:border-slate-900" />
+                  Sending...
+                </>
+              ) : (
+                <>
+                  <Send className="mr-2 h-4 w-4" />
+                  Submit message
+                </>
+              )}
+            </Button>
+          </div>
         </form>
       </CardContent>
     </Card>

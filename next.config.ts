@@ -7,6 +7,14 @@ const nextConfig: NextConfig = {
         protocol: 'https',
         hostname: 'hoyo.tech',
       },
+      {
+        protocol: 'https',
+        hostname: 'ghchart.rshah.org',
+      },
+      {
+        protocol: 'https',
+        hostname: 'github-contributions.vercel.app',
+      },
     ],
   },
 };

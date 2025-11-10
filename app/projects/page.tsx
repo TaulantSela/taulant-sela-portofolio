@@ -1,3 +1,7 @@
+'use client';
+
+import { AuroraBackground } from '@/components/aurora-background';
+import { ScrollReveal } from '@/components/scroll-reveal';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -10,12 +14,13 @@ import { projects } from '@/lib/projects';
 
 export default function ProjectsPage() {
   return (
-    <main className="px-4 py-20 transition-colors duration-500 sm:px-6 lg:px-8">
-      <div className="mx-auto max-w-6xl">
-        <div className="mb-12 flex flex-col items-center justify-between gap-6 text-center sm:flex-row sm:text-left">
-          <div>
+    <main className="relative isolate overflow-hidden bg-slate-50 px-4 py-20 transition-colors duration-500 sm:px-6 lg:px-8 dark:bg-slate-900/50">
+      <AuroraBackground />
+      <div className="relative mx-auto max-w-6xl">
+        <ScrollReveal className="mb-12 flex flex-col items-center justify-between gap-6 text-center sm:flex-row sm:text-left">
+          <div className="space-y-5 sm:space-y-6">
             <h1 className="text-3xl font-bold text-slate-900 sm:text-4xl dark:text-slate-100">All Projects</h1>
-            <p className="mt-2 max-w-2xl text-lg text-slate-600 dark:text-slate-400">
+            <p className="max-w-2xl text-lg text-slate-600 dark:text-slate-400">
               Browse the full collection of company initiatives, open source contributions, and personal products I have
               built.
             </p>
@@ -26,74 +31,75 @@ export default function ProjectsPage() {
               Back to Highlights
             </Link>
           </Button>
-        </div>
+        </ScrollReveal>
 
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-          {projects.map((project) => (
-            <Card
-              key={project.id}
-              className="group pt-0 pb-6 transition-all duration-500 hover:-translate-y-2 hover:shadow-xl"
-            >
-              <div className="aspect-[16/9] overflow-hidden rounded-t-lg bg-slate-900/80">
-                <Image
-                  src={project.image || '/placeholder.png'}
-                  alt={project.title}
-                  height={202}
-                  width={360}
-                  className={`h-full w-full transition-transform duration-700 group-hover:scale-110 ${
-                    project.imageFit === 'contain' ? 'object-contain p-6 group-hover:scale-100' : 'object-cover'
-                  }`}
-                />
-              </div>
-              <CardHeader className="space-y-4">
-                <CardTitle className="text-slate-900 dark:text-slate-100">
-                  <div className="flex items-start justify-between gap-4">
-                    <div className="flex flex-col gap-2">
-                      <span className="block text-xs tracking-wide text-slate-400 uppercase dark:text-slate-500">
-                        {project.role === 'company'
-                          ? 'Company Project'
-                          : project.role === 'oss'
-                            ? 'Open Source'
-                            : 'Personal Project'}
-                      </span>
-                      <span>{project.title}</span>
-                    </div>
-                    <div className="flex shrink-0 space-x-2">
-                      {project.links?.map((link) => {
-                        const Icon = link.icon === 'github' ? TbBrandGithub : ExternalLink;
-                        return (
-                          <Link
-                            key={link.href}
-                            href={link.href}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-slate-400 transition-all duration-300 hover:scale-125 hover:text-slate-600 dark:hover:text-slate-300"
-                            aria-label={`${project.title} ${link.label}`}
-                          >
-                            <Icon className="h-4 w-4" />
-                          </Link>
-                        );
-                      })}
-                    </div>
-                  </div>
-                </CardTitle>
-                <CardDescription className="dark:text-slate-400">{project.description}</CardDescription>
-              </CardHeader>
-              <CardContent className="flex flex-col justify-between space-y-4 pt-0">
-                <p className="text-sm text-slate-500 dark:text-slate-400">{project.context}</p>
-                <div className="flex flex-wrap gap-1 pt-4">
-                  {project.tags.map((tag) => (
-                    <Badge
-                      key={tag}
-                      variant="outline"
-                      className="text-xs transition-transform duration-300 hover:scale-110"
-                    >
-                      {tag}
-                    </Badge>
-                  ))}
+        <div className="grid [grid-template-columns:repeat(auto-fit,minmax(260px,320px))] justify-center justify-items-center gap-8">
+          {projects.map((project, index) => (
+            <ScrollReveal key={project.id} delay={80 + index * 60} threshold={0.05} className="group h-full w-full">
+              <Card className="flex h-[600px] w-full max-w-[320px] flex-col overflow-hidden rounded-2xl border border-slate-200 pt-0 transition-transform duration-300 hover:scale-[1.02] hover:shadow-xl dark:border-white/10">
+                <div className="aspect-[16/9] flex-none overflow-hidden rounded-t-2xl bg-slate-900/80">
+                  <Image
+                    src={project.image || '/placeholder.png'}
+                    alt={project.title}
+                    height={202}
+                    width={360}
+                    className={`h-full w-full transition-transform duration-700 group-hover:scale-110 ${
+                      project.imageFit === 'contain' ? 'object-contain p-6 group-hover:scale-100' : 'object-cover'
+                    }`}
+                  />
                 </div>
-              </CardContent>
-            </Card>
+                <CardHeader className="flex flex-col gap-4 pt-6">
+                  <CardTitle className="text-slate-900 dark:text-slate-100">
+                    <div className="flex items-start justify-between gap-4">
+                      <div className="flex flex-col gap-2">
+                        <span className="block text-xs tracking-wide text-slate-400 uppercase dark:text-slate-500">
+                          {project.role === 'company'
+                            ? 'Company Project'
+                            : project.role === 'oss'
+                              ? 'Open Source'
+                              : 'Personal Project'}
+                        </span>
+                        <span>{project.title}</span>
+                      </div>
+                      <div className="flex shrink-0 space-x-2">
+                        {project.links?.map((link) => {
+                          const Icon = link.icon === 'github' ? TbBrandGithub : ExternalLink;
+                          return (
+                            <Link
+                              key={link.href}
+                              href={link.href}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-slate-400 transition-all duration-300 hover:scale-125 hover:text-slate-600 dark:hover:text-slate-300"
+                              aria-label={`${project.title} ${link.label}`}
+                            >
+                              <Icon className="h-4 w-4" />
+                            </Link>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  </CardTitle>
+                  <CardDescription className="line-clamp-5 text-sm dark:text-slate-400">
+                    {project.description}
+                  </CardDescription>
+                </CardHeader>
+                <CardContent className="flex flex-1 flex-col justify-between gap-4 pt-0">
+                  <p className="line-clamp-5 text-sm text-slate-500 dark:text-slate-400">{project.context}</p>
+                  <div className="flex flex-wrap gap-2 pt-2">
+                    {project.tags.slice(0, 6).map((tag) => (
+                      <Badge
+                        key={tag}
+                        variant="outline"
+                        className="text-xs transition-transform duration-300 hover:scale-110"
+                      >
+                        {tag}
+                      </Badge>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+            </ScrollReveal>
           ))}
         </div>
       </div>

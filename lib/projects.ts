@@ -200,4 +200,14 @@ export const projects: Project[] = [
   },
 ];
 
-export const featuredProjects = (count = 3) => projects.slice(0, count);
+const featuredOrder = [3, 1, 2, 4, 5, 6];
+
+export const featuredProjects = (count = 3) => {
+  const ordered = featuredOrder
+    .map((id) => projects.find((project) => project.id === id))
+    .filter((project): project is Project => Boolean(project));
+
+  const remaining = projects.filter((project) => !featuredOrder.includes(project.id));
+
+  return [...ordered, ...remaining].slice(0, count);
+};

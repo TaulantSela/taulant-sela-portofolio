@@ -1,3 +1,7 @@
+'use client';
+
+import { AuroraBackground } from '@/components/aurora-background';
+import { ScrollReveal } from '@/components/scroll-reveal';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -11,13 +15,15 @@ export default function BlogPage() {
   const posts = blogPosts;
 
   return (
-    <main className="bg-slate-50 px-4 py-20 sm:px-6 lg:px-8 dark:bg-slate-900/50">
-      <div className="mx-auto max-w-6xl">
-        <div className="mb-12 flex flex-col items-center justify-between gap-6 text-center sm:flex-row sm:text-left">
-          <div>
+    <main className="relative isolate min-h-screen overflow-hidden bg-slate-50 px-4 py-20 pb-32 transition-colors duration-500 sm:px-6 lg:px-8 dark:bg-slate-900/50">
+      <AuroraBackground />
+      <div className="relative mx-auto max-w-6xl">
+        <ScrollReveal className="mb-12 flex flex-col items-center justify-between gap-6 text-center sm:flex-row sm:text-left">
+          <div className="space-y-5 sm:space-y-6">
             <h1 className="text-3xl font-bold text-slate-900 sm:text-4xl dark:text-slate-100">All Blog Posts</h1>
-            <p className="mt-2 max-w-2xl text-lg text-slate-600 dark:text-slate-400">
-              Explore the full collection of Hoyo Tech insights on ESG, smart environments, and modern web development.
+            <p className="max-w-2xl text-lg text-slate-600 dark:text-slate-400">
+              Explore the full collection of writing on modern products, thoughtful engineering, and steady team
+              delivery.
             </p>
           </div>
           <Button asChild variant="ghost" size="sm" className="self-center sm:self-end">
@@ -26,56 +32,62 @@ export default function BlogPage() {
               Back to Highlights
             </Link>
           </Button>
-        </div>
+        </ScrollReveal>
 
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-          {posts.map((post) => (
-            <Card key={post.id} className="group transition-all duration-500 hover:-translate-y-2 hover:shadow-xl">
-              <div className="aspect-video overflow-hidden rounded-t-lg">
-                <Image
-                  src={post.image || '/placeholder.svg'}
-                  alt={post.title}
-                  height={312}
-                  width={312}
-                  className={`h-full w-full transition-transform duration-700 group-hover:scale-110 ${
-                    post.imageFit === 'contain' ? 'object-contain p-6 group-hover:scale-100' : 'object-cover'
-                  }`}
-                />
-              </div>
-              <CardHeader>
-                <div className="mb-2 flex items-center justify-between">
-                  <Badge variant="secondary" className="text-xs">
-                    {post.category}
-                  </Badge>
-                  <div className="flex items-center text-xs text-slate-500 dark:text-slate-400">
-                    <Calendar className="mr-1 h-3 w-3" />
-                    {new Date(post.date).toLocaleDateString()}
-                  </div>
+          {posts.map((post, index) => (
+            <ScrollReveal
+              key={post.id}
+              delay={120 + index * 80}
+              className="group overflow-hidden pt-0 transition-all duration-500 hover:-translate-y-2 hover:shadow-xl"
+            >
+              <Card className="h-full overflow-hidden pt-0">
+                <div className="aspect-video overflow-hidden rounded-t-lg">
+                  <Image
+                    src={post.image || '/placeholder.svg'}
+                    alt={post.title}
+                    height={312}
+                    width={312}
+                    className={`h-full w-full transition-transform duration-700 group-hover:scale-110 ${
+                      post.imageFit === 'contain' ? 'object-contain group-hover:scale-100' : 'object-cover'
+                    }`}
+                  />
                 </div>
-                <CardTitle className="text-lg leading-tight transition-colors duration-300 group-hover:text-purple-600 dark:group-hover:text-purple-400">
-                  {post.title}
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="pt-0">
-                <CardDescription className="mb-4 line-clamp-3 text-sm">{post.excerpt}</CardDescription>
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center text-xs text-slate-500 dark:text-slate-400">
-                    <User className="mr-1 h-3 w-3" />
-                    {post.author}
+                <CardHeader className="pt-6">
+                  <div className="mb-2 flex items-center justify-between">
+                    <Badge variant="secondary" className="text-xs">
+                      {post.category}
+                    </Badge>
+                    <div className="flex items-center text-xs text-slate-500 dark:text-slate-400">
+                      <Calendar className="mr-1 h-3 w-3" />
+                      {new Date(post.date).toLocaleDateString()}
+                    </div>
                   </div>
-                  <div className="flex items-center text-xs text-slate-500 dark:text-slate-400">
-                    <Clock className="mr-1 h-3 w-3" />
-                    {post.readTime}
+                  <CardTitle className="text-lg leading-tight transition-colors duration-300 group-hover:text-purple-600 dark:group-hover:text-purple-400">
+                    {post.title}
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="flex h-full flex-col pt-0">
+                  <CardDescription className="mb-4 line-clamp-3 text-sm">{post.excerpt}</CardDescription>
+                  <div className="mb-4 flex items-center justify-between">
+                    <div className="flex items-center text-xs text-slate-500 dark:text-slate-400">
+                      <User className="mr-1 h-3 w-3" />
+                      {post.author}
+                    </div>
+                    <div className="flex items-center text-xs text-slate-500 dark:text-slate-400">
+                      <Clock className="mr-1 h-3 w-3" />
+                      {post.readTime}
+                    </div>
                   </div>
-                </div>
-                <Link href={post.url} target="_blank" rel="noopener noreferrer" className="mt-4 block">
-                  <Button variant="ghost" size="sm" className="group/btn w-full">
-                    Read More
-                    <ArrowRight className="ml-2 h-3 w-3 transition-transform duration-300 group-hover/btn:translate-x-1" />
-                  </Button>
-                </Link>
-              </CardContent>
-            </Card>
+                  <Link href={post.url} target="_blank" rel="noopener noreferrer" className="mt-auto block">
+                    <Button variant="ghost" size="sm" className="group/btn w-full">
+                      Read More
+                      <ArrowRight className="ml-2 h-3 w-3 transition-transform duration-300 group-hover/btn:translate-x-1" />
+                    </Button>
+                  </Link>
+                </CardContent>
+              </Card>
+            </ScrollReveal>
           ))}
         </div>
       </div>

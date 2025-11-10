@@ -31,13 +31,13 @@ export default function RootLayout({
           }
         `}</style>
       </head>
-      <body
-        className={`${inter.className} bg-slate-50 text-slate-900 transition-colors duration-500 dark:bg-slate-900 dark:text-slate-100`}
-      >
+      <body className={`${inter.className} bg-background text-foreground antialiased transition-colors duration-500`}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
-          <div className="flex min-h-screen flex-col bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800">
+          <div className="relative z-0 flex min-h-screen flex-col">
             <Navigation />
-            <main className="flex flex-1 flex-col">{children}</main>
+            <main className="relative isolate flex flex-1 flex-col bg-slate-50 transition-colors duration-500 dark:bg-slate-900">
+              {children}
+            </main>
             <Footer />
           </div>
         </ThemeProvider>
