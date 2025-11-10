@@ -1,16 +1,56 @@
-'use client';
-
 import { AuroraBackground } from '@/components/aurora-background';
 import { ScrollReveal } from '@/components/scroll-reveal';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { ArrowLeft, ExternalLink } from 'lucide-react';
+import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { TbBrandGithub } from 'react-icons/tb';
 
 import { projects } from '@/lib/projects';
+
+const siteUrl = 'https://taulantsela.com';
+const pageUrl = `${siteUrl}/projects`;
+const socialImage = `${siteUrl}/og-image.svg`;
+
+export const metadata: Metadata = {
+  title: 'Projects',
+  description:
+    'Explore projects delivered by Taulant Sela across product engineering, open source, and experimental builds.',
+  alternates: {
+    canonical: '/projects',
+  },
+  openGraph: {
+    type: 'website',
+    url: pageUrl,
+    title: 'Projects by Taulant Sela',
+    description:
+      'A curated portfolio of production launches, open source contributions, and personal experiments from Taulant Sela.',
+    images: [
+      {
+        url: socialImage,
+        width: 1200,
+        height: 630,
+        alt: 'Taulant Sela - Portfolio',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Taulant Sela — Projects',
+    description: 'Recent product launches, open source work, and personal experiments built by Taulant Sela.',
+    images: [socialImage],
+  },
+  keywords: [
+    'Taulant Sela projects',
+    'software portfolio',
+    'Next.js projects',
+    'React projects',
+    'frontend engineering work',
+  ],
+};
 
 export default function ProjectsPage() {
   return (

@@ -1,15 +1,54 @@
-'use client';
-
 import { AuroraBackground } from '@/components/aurora-background';
 import { ScrollReveal } from '@/components/scroll-reveal';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { ArrowLeft, ArrowRight, Calendar, Clock, User } from 'lucide-react';
+import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 
 import { blogPosts } from '@/lib/blog-posts';
+
+const siteUrl = 'https://taulantsela.com';
+const pageUrl = `${siteUrl}/blog`;
+const socialImage = `${siteUrl}/og-image.svg`;
+
+export const metadata: Metadata = {
+  title: 'Blog',
+  description:
+    'Read articles by Taulant Sela on shipping reliable products, web engineering best practices, and modern development workflows.',
+  alternates: {
+    canonical: '/blog',
+  },
+  openGraph: {
+    type: 'article',
+    url: pageUrl,
+    title: 'Articles by Taulant Sela',
+    description:
+      'Insights on shipping reliable products, web engineering best practices, and modern development workflows.',
+    images: [
+      {
+        url: socialImage,
+        width: 1200,
+        height: 630,
+        alt: 'Taulant Sela - Portfolio',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Taulant Sela — Blog',
+    description: 'Engineering essays and notes on building resilient products, modern tooling, and impactful teams.',
+    images: [socialImage],
+  },
+  keywords: [
+    'Taulant Sela blog',
+    'software engineering articles',
+    'web development insights',
+    'frontend best practices',
+  ],
+};
 
 export default function BlogPage() {
   const posts = blogPosts;

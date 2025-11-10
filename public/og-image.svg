@@ -1,0 +1,30 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="gradient" x1="0" y1="0" x2="1200" y2="630" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#1D4ED8" />
+      <stop offset="0.5" stop-color="#9333EA" />
+      <stop offset="1" stop-color="#0D9488" />
+    </linearGradient>
+    <linearGradient id="glow" x1="600" y1="0" x2="600" y2="630" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.25" />
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#gradient)" />
+  <rect width="1200" height="630" fill="url(#glow)" />
+  <g fill="#ffffff">
+    <text x="120" y="290" font-size="88" font-weight="700" letter-spacing="0.04em">
+      Taulant Sela
+    </text>
+    <text x="120" y="385" font-size="42" font-weight="400" opacity="0.92">
+      Software Engineer
+    </text>
+    <text x="120" y="455" font-size="32" font-weight="300" opacity="0.85">
+      React · TypeScript · Next.js · Node.js
+    </text>
+  </g>
+  <circle cx="1030" cy="150" r="110" fill="#ffffff" fill-opacity="0.12" />
+  <circle cx="1090" cy="510" r="70" fill="#ffffff" fill-opacity="0.14" />
+  <circle cx="940" cy="460" r="150" fill="#ffffff" fill-opacity="0.08" />
+</svg>
+
