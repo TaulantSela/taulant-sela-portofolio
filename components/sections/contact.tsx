@@ -64,14 +64,14 @@ export default function Contact() {
           <header className="space-y-6 text-center">
             <div className="mx-auto flex max-w-md items-center justify-center gap-3 rounded-full border border-slate-200/60 bg-white/70 px-5 py-3 text-sm tracking-[0.3em] text-slate-500 dark:border-white/15 dark:bg-white/10 dark:text-white/70">
               <Rocket className="h-4 w-4 text-emerald-500 dark:text-purple-300" />
-              Let's build something amazing
+              Let&apos;s build something amazing
             </div>
             <h2 className="text-4xl leading-tight font-semibold text-slate-900 sm:text-5xl dark:text-white">
               Ready to bring your next idea to life?
             </h2>
             <p className="mx-auto max-w-2xl text-base text-slate-600 sm:text-lg dark:text-white/70">
               Ready to ship your next big thing? Tell me the vision, the constraints, or the gap you need to close, and
-              I'll chart the path from idea to launch.
+              I&apos;ll chart the path from idea to launch.
             </p>
           </header>
         </ScrollReveal>

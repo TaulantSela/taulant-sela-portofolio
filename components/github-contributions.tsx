@@ -135,11 +135,6 @@ export default function GithubContributions() {
     return (startOfYear.getUTCDay() + 6) % 7;
   }, [activeYear]);
 
-  const weeksCount = useMemo(() => {
-    if (normalizedDays.length === 0) return 0;
-    return Math.ceil((firstDayOffset + normalizedDays.length) / 7);
-  }, [firstDayOffset, normalizedDays.length]);
-
   const total = useMemo(() => normalizedDays.reduce((acc, day) => acc + day.count, 0), [normalizedDays]);
   const showGrid = normalizedDays.length > 0;
   // Always use 53 weeks for consistent width across all years
