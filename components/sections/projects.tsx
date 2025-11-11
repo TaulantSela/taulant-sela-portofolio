@@ -7,17 +7,20 @@ import NextLink from 'next/link';
 import { ScrollReveal } from '@/components/scroll-reveal';
 import { Button } from '@/components/ui/button';
 import type { Project } from '@/lib/projects/projects';
+import type { ProjectsSectionContent } from '@/lib/projects/projects-section-content';
 
 type ProjectsProps = {
   projects: Project[];
+  content: ProjectsSectionContent;
 };
 
-export default function Projects({ projects }: ProjectsProps) {
+export default function Projects({ projects, content }: ProjectsProps) {
   if (!projects.length) {
     return null;
   }
 
   const [leadProject, ...otherProjects] = projects;
+  const { badgeLeading, badgeTrailing, heading, description } = content;
 
   return (
     <section
@@ -29,18 +32,14 @@ export default function Projects({ projects }: ProjectsProps) {
           <div className="space-y-4">
             <div className="flex items-center gap-4 text-xs tracking-[0.4em] text-slate-500 uppercase dark:text-white/60">
               <span className="rounded-full border border-slate-300/70 bg-white/80 px-4 py-1 text-slate-600 dark:border-white/20 dark:bg-white/10 dark:text-white/70">
-                Selected Projects
+                {badgeLeading}
               </span>
-              <span className="hidden text-slate-500 lg:inline-flex dark:text-white/60">
-                Recent partnerships & experiments
-              </span>
+              <span className="hidden text-slate-500 lg:inline-flex dark:text-white/60">{badgeTrailing}</span>
             </div>
             <h2 className="max-w-xl text-4xl leading-tight font-semibold text-slate-900 sm:text-5xl lg:text-6xl dark:text-white">
-              Lean collaborations rooted in steady delivery.
+              {heading}
             </h2>
-            <p className="max-w-2xl text-base text-slate-600 sm:text-lg dark:text-white/70">
-              Front-end architecture, design system tuning, and release support for teams shipping on schedule.
-            </p>
+            <p className="max-w-2xl text-base text-slate-600 sm:text-lg dark:text-white/70">{description}</p>
           </div>
           <Button
             asChild
