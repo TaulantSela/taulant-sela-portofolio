@@ -8,7 +8,7 @@ import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { blogPosts } from '@/lib/blog-posts';
+import { fetchBlogPosts } from '@/lib/blog-posts';
 
 const siteUrl = 'https://taulantsela.com';
 const pageUrl = `${siteUrl}/blog`;
@@ -50,8 +50,8 @@ export const metadata: Metadata = {
   ],
 };
 
-export default function BlogPage() {
-  const posts = blogPosts;
+export default async function BlogPage() {
+  const posts = await fetchBlogPosts();
 
   return (
     <main className="relative isolate min-h-screen overflow-hidden bg-slate-50 px-6 py-24 pb-32 transition-colors duration-500 sm:px-10 sm:py-32 lg:px-16 dark:bg-slate-900/50">
@@ -73,62 +73,68 @@ export default function BlogPage() {
           </Button>
         </ScrollReveal>
 
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-          {posts.map((post, index) => (
-            <ScrollReveal
-              key={post.id}
-              delay={120 + index * 80}
-              className="group overflow-hidden pt-0 transition-all duration-500 hover:-translate-y-2 hover:shadow-xl"
-            >
-              <Card className="h-full overflow-hidden pt-0">
-                <div className="aspect-video overflow-hidden rounded-t-lg">
-                  <Image
-                    src={post.image || '/placeholder.svg'}
-                    alt={post.title}
-                    height={312}
-                    width={312}
-                    className={`h-full w-full transition-transform duration-700 group-hover:scale-110 ${
-                      post.imageFit === 'contain' ? 'object-contain group-hover:scale-100' : 'object-cover'
-                    }`}
-                  />
-                </div>
-                <CardHeader className="pt-6">
-                  <div className="mb-2 flex items-center justify-between">
-                    <Badge variant="secondary" className="text-xs">
-                      {post.category}
-                    </Badge>
-                    <div className="flex items-center text-xs text-slate-500 dark:text-slate-400">
-                      <Calendar className="mr-1 h-3 w-3" />
-                      {new Date(post.date).toLocaleDateString()}
-                    </div>
+        {posts.length ? (
+          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+            {posts.map((post, index) => (
+              <ScrollReveal
+                key={post.id}
+                delay={120 + index * 80}
+                className="group overflow-hidden pt-0 transition-all duration-500 hover:-translate-y-2 hover:shadow-xl"
+              >
+                <Card className="h-full overflow-hidden pt-0">
+                  <div className="aspect-video overflow-hidden rounded-t-lg">
+                    <Image
+                      src={post.image || '/placeholder.svg'}
+                      alt={post.title}
+                      height={312}
+                      width={312}
+                      className={`h-full w-full transition-transform duration-700 group-hover:scale-110 ${
+                        post.imageFit === 'contain' ? 'object-contain group-hover:scale-100' : 'object-cover'
+                      }`}
+                    />
                   </div>
-                  <CardTitle className="text-lg leading-tight transition-colors duration-300 group-hover:text-purple-600 dark:group-hover:text-purple-400">
-                    {post.title}
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="flex h-full flex-col pt-0">
-                  <CardDescription className="mb-4 line-clamp-3 text-sm">{post.excerpt}</CardDescription>
-                  <div className="mb-4 flex items-center justify-between">
-                    <div className="flex items-center text-xs text-slate-500 dark:text-slate-400">
-                      <User className="mr-1 h-3 w-3" />
-                      {post.author}
+                  <CardHeader className="flex flex-col gap-2 pt-6">
+                    <div className="mb-2 flex w-full items-center justify-between">
+                      <Badge variant="secondary" className="shrink-0 text-xs">
+                        {post.category}
+                      </Badge>
+                      <div className="flex items-center text-xs text-slate-500 dark:text-slate-400">
+                        <Calendar className="mr-1 h-3 w-3" />
+                        {new Date(post.date).toLocaleDateString()}
+                      </div>
                     </div>
-                    <div className="flex items-center text-xs text-slate-500 dark:text-slate-400">
-                      <Clock className="mr-1 h-3 w-3" />
-                      {post.readTime}
+                    <CardTitle className="text-lg leading-tight transition-colors duration-300 group-hover:text-purple-600 dark:group-hover:text-purple-400">
+                      {post.title}
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="flex h-full flex-col pt-2">
+                    <CardDescription className="mb-4 line-clamp-3 text-sm">{post.excerpt}</CardDescription>
+                    <div className="mb-4 flex items-center justify-between">
+                      <div className="flex items-center text-xs text-slate-500 dark:text-slate-400">
+                        <User className="mr-1 h-3 w-3" />
+                        {post.author}
+                      </div>
+                      <div className="flex items-center text-xs text-slate-500 dark:text-slate-400">
+                        <Clock className="mr-1 h-3 w-3" />
+                        {post.readTime}
+                      </div>
                     </div>
-                  </div>
-                  <Link href={post.url} target="_blank" rel="noopener noreferrer" className="mt-auto block">
-                    <Button variant="ghost" size="sm" className="group/btn w-full">
-                      Read More
-                      <ArrowRight className="ml-2 h-3 w-3 transition-transform duration-300 group-hover/btn:translate-x-1" />
-                    </Button>
-                  </Link>
-                </CardContent>
-              </Card>
-            </ScrollReveal>
-          ))}
-        </div>
+                    <Link href={post.url} target="_blank" rel="noopener noreferrer" className="mt-auto block">
+                      <Button variant="ghost" size="sm" className="group/btn w-full">
+                        Read More
+                        <ArrowRight className="ml-2 h-3 w-3 transition-transform duration-300 group-hover/btn:translate-x-1" />
+                      </Button>
+                    </Link>
+                  </CardContent>
+                </Card>
+              </ScrollReveal>
+            ))}
+          </div>
+        ) : (
+          <div className="rounded-3xl border border-slate-200 bg-white/80 p-12 text-center text-slate-500 shadow-[0_18px_45px_rgba(15,23,42,0.08)] dark:border-white/15 dark:bg-white/5 dark:text-white/60">
+            No blog posts published yet.
+          </div>
+        )}
       </div>
     </main>
   );

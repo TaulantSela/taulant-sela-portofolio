@@ -20,6 +20,22 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
+## Contentful setup
+
+1. Create a free [Contentful](https://www.contentful.com/) space and add a dataset (environment) – the default is `master`.
+2. Define two content models:
+   - `Post` with fields for title, slug, excerpt, publishDate, readTime, category, author, externalUrl, imageFit (optional enum: `cover`, `contain`), and heroImage (asset).
+   - `Project` with fields for title, slug, description, context, tags (short text list), role (enum: `company`, `personal`, `oss`), links (JSON array of `{ label, href, icon }`), imageFit (optional enum), heroImage (asset), and featuredIndex (number for ordering highlights).
+3. Generate a Content Delivery API access token (and an optional Preview API token for draft previewing).
+4. Add the following environment variables when running locally or deploying:
+   - `CONTENTFUL_SPACE_ID`
+   - `CONTENTFUL_ENVIRONMENT` (defaults to `master` if omitted)
+   - `CONTENTFUL_DELIVERY_TOKEN`
+   - `CONTENTFUL_PREVIEW_TOKEN` (only required if you enable preview mode)
+5. Trigger a rebuild (or run `npm run dev`) after updating CMS content so the latest entries are fetched.
+
+The site expects the Contentful credentials to be present; without them the blog and projects sections will render empty states.
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:

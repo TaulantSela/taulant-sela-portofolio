@@ -15,6 +15,10 @@ const nextConfig: NextConfig = {
         protocol: 'https',
         hostname: 'github-contributions.vercel.app',
       },
+      {
+        protocol: 'https',
+        hostname: 'images.ctfassets.net',
+      },
     ],
   },
 };

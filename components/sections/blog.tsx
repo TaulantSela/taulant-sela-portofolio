@@ -5,10 +5,17 @@ import { Button } from '@/components/ui/button';
 import { ArrowRight, Calendar, Clock } from 'lucide-react';
 import Link from 'next/link';
 
-import { latestBlogPosts } from '@/lib/blog-posts';
+import type { BlogPost } from '@/lib/blog-posts';
 
-export function Blog() {
-  const posts = latestBlogPosts();
+type BlogProps = {
+  posts: BlogPost[];
+};
+
+export function Blog({ posts }: BlogProps) {
+  if (!posts.length) {
+    return null;
+  }
+
   const [leadPost, ...otherPosts] = posts;
 
   return (
@@ -63,7 +70,7 @@ export function Blog() {
   );
 }
 
-type Post = ReturnType<typeof latestBlogPosts>[number];
+type Post = BlogPost;
 
 function LeadArticle({ post }: { post: Post }) {
   return (
@@ -75,9 +82,9 @@ function LeadArticle({ post }: { post: Post }) {
     >
       <div className="pointer-events-none absolute inset-0 overflow-hidden rounded-3xl bg-[radial-gradient(circle_at_top_left,rgba(59,130,246,0.18),transparent_55%),radial-gradient(circle_at_bottom_right,rgba(251,191,36,0.18),transparent_45%)] opacity-80 transition-opacity duration-700 group-hover:opacity-100 dark:bg-[radial-gradient(circle_at_top_left,rgba(79,70,229,0.35),transparent_55%),radial-gradient(circle_at_bottom_right,rgba(236,72,153,0.25),transparent_45%)]" />
       <div className="relative flex h-full flex-col justify-between p-8 text-slate-900 dark:text-white">
-        <div className="flex items-center justify-between text-xs tracking-[0.35em] text-slate-500 uppercase dark:text-white/70">
+        <div className="flex items-center text-xs tracking-[0.35em] text-slate-500 uppercase dark:text-white/70">
           <span className="flex-1">{post.category}</span>
-          <span className="inline-flex items-center gap-2 pl-4">
+          <span className="ml-auto inline-flex items-center gap-2 pl-4">
             <Calendar className="h-3.5 w-3.5" />
             {new Date(post.date).toLocaleDateString()}
           </span>
@@ -108,10 +115,10 @@ function ArticleCard({ post }: { post: Post }) {
       className="group relative flex flex-col gap-3 rounded-3xl border border-slate-200 bg-white/90 p-5 shadow-[0_10px_30px_rgba(148,163,184,0.2)] transition-transform duration-300 hover:-translate-y-1 hover:border-slate-300 dark:border-white/15 dark:bg-gradient-to-br dark:from-slate-900 dark:via-slate-900/90 dark:to-slate-800 dark:shadow-[0_12px_40px_rgba(15,23,42,0.35)]"
     >
       <div className="pointer-events-none absolute inset-0 overflow-hidden rounded-3xl bg-[radial-gradient(circle_at_top_left,rgba(59,130,246,0.12),transparent_55%),radial-gradient(circle_at_bottom_right,rgba(251,191,36,0.12),transparent_45%)] opacity-80 transition-opacity duration-500 group-hover:opacity-100 dark:bg-[radial-gradient(circle_at_top_left,rgba(79,70,229,0.25),transparent_55%),radial-gradient(circle_at_bottom_right,rgba(236,72,153,0.2),transparent_45%)]" />
-      <div className="relative flex flex-1 flex-col gap-2 text-slate-900 dark:text-white">
-        <div className="flex items-center justify-between text-xs tracking-[0.3em] text-slate-500 uppercase dark:text-white/60">
+      <div className="relative flex flex-1 flex-col gap-3 text-slate-900 dark:text-white">
+        <div className="flex items-center text-xs tracking-[0.3em] text-slate-500 uppercase dark:text-white/60">
           <span className="flex-1">{post.category}</span>
-          <span className="inline-flex items-center gap-2 pl-4">
+          <span className="ml-auto inline-flex items-center gap-2 pl-4">
             <Calendar className="h-3.5 w-3.5" />
             {new Date(post.date).toLocaleDateString()}
           </span>

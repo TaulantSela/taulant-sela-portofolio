@@ -1,213 +1,140 @@
+import type { Asset, Entry, EntryFieldTypes, EntrySkeletonType } from 'contentful';
+import { cache } from 'react';
+
+import { extractAssetUrl, getContentfulClient, isContentfulConfigured, resolveLocalizedField } from '@/lib/contentful';
+
+export type ProjectLink = { label: string; href: string; icon?: 'github' | 'external' };
+
 export type Project = {
-  id: number;
+  id: string;
   title: string;
   description: string;
   image: string;
   tags: string[];
-  links?: Array<{ label: string; href: string; icon?: 'github' | 'external' }>;
+  links?: ProjectLink[];
   imageFit?: 'cover' | 'contain';
   role: 'company' | 'personal' | 'oss';
   context: string;
+  featuredIndex?: number | null;
 };
 
-export const projects: Project[] = [
-  {
-    id: 1,
-    title: 'Pack It Up - Smart Packing Assistant',
-    description:
-      'AI-assisted packing planner that generates travel-ready checklists from trip details, weather, and activities with real-time editing tools.',
-    image: '/projects/pack-it-up_logo.avif',
-    tags: ['Next.js 15', 'Clerk', 'Prisma', 'Neon', 'OpenAI', 'Tailwind CSS'],
-    links: [
-      { label: 'Live Demo', href: 'https://packitup.vercel.app/' },
-      { label: 'GitHub', href: 'https://github.com/TaulantSela/pack-it-up', icon: 'github' },
-    ],
-    role: 'personal',
-    context: 'Built as a personal SaaS-style project to explore AI-assisted UX and modern Next.js app router patterns.',
-  },
-  {
-    id: 2,
-    title: 'Hoyo Tech Smart Office & HoyoHome',
-    description:
-      'Second-generation smart office and smart living ecosystem that delivers real-time energy analytics, environmental intelligence, smart lighting, and climate automation across Hoyo Tech environments.',
-    image: '/projects/hoyohome_logo.webp',
-    tags: ['Scrum Mastery', 'Product Leadership', 'React', 'React Native', 'IoT'],
-    links: [
-      { label: 'Smart Office', href: 'https://smart.hoyo.tech/' },
-      { label: 'Hoyo Tech', href: 'https://hoyo.tech/' },
-    ],
-    role: 'company',
-    context:
-      'As Scrum Master, coordinated cross-functional squads, migrated Angular modules to React, rebuilt native apps in React Native, and documented agile workflows to keep the platform shipping predictably.',
-  },
-
-  {
-    id: 3,
-    title: 'Goodyear - Multi-Brand B2C Platform',
-    description:
-      'AEM-powered B2C ecosystem serving Goodyear, Dunlop, Vulco, Premio, SuperService, and other brands across 30+ markets, covering consumer, commercial, retail, shop and motorcycle TBUs.',
-    image: '/projects/goodyear_logo.jpg',
-    tags: ['React', 'TypeScript', 'Redux Toolkit', 'Tailwind CSS', 'AEM', 'GraphQL'],
-    links: [
-      { label: 'Goodyear', href: 'https://www.goodyear.eu/' },
-      { label: 'Dunlop', href: 'https://www.dunlop.eu/' },
-      { label: 'Premio', href: 'https://www.premio.pl/' },
-      { label: 'Vulco', href: 'https://www.vulco.es/' },
-      { label: 'SuperService', href: 'https://www.retesuperservice.it/' },
-    ],
-    role: 'company',
-    context:
-      'Maintained the legacy React/Class Components codebase while leading the migration to functional React + TypeScript, RTK Query, Tailwind CSS, and reusable Storybook-driven components. Embedded React modules into AEM via Web Components, delivered REST/GraphQL integrations, and implemented extensive unit testing to support the Chameleon architecture that powers each brand and market variant.',
-  },
-  {
-    id: 4,
-    title: 'React Google Places Autocomplete (Enhanced Fork)',
-    description:
-      'Open-source fork that layers additional DX features on top of the community library, including richer suggestion handling and configuration.',
-    image: '/projects/react-google-places-autocomplete_logo.svg',
-    imageFit: 'contain',
-    tags: ['React', 'TypeScript', 'Open Source'],
-    links: [
-      { label: 'GitHub', href: 'https://github.com/TaulantSela/react-google-places-autocomplete', icon: 'github' },
-    ],
-    role: 'oss',
-    context:
-      'Exposed the `customSuggestions` prop, rewired load options, and adjusted option mapping to support advanced search experiences used in production apps.',
-  },
-  {
-    id: 5,
-    title: 'BMG Production Music Platform',
-    description:
-      'Migrated a legacy Angular 8 catalog and licensing tool to Next.js 15 with React 19, unlocking faster search, preview, and licensing flows for music supervisors.',
-    image: '/projects/bmgpm_logo.webp',
-    tags: ['Next.js', 'React 19', 'TypeScript', 'Tailwind CSS'],
-    links: [{ label: 'BMG Production Music', href: 'https://bmgproductionmusic.com/' }],
-    role: 'company',
-    context:
-      'Spearheaded the full rewrite from Angular to a modern Next.js stack—rebuilding feature parity, modernizing the UI system, and ensuring SSR/ISR performance for global catalog searches.',
-  },
-
-  {
-    id: 6,
-    title: 'Parkber - Parking Management System',
-    description:
-      'Operations dashboard that centralizes parking inventory, user roles, facility health, and real-time utilization reporting for mobility operators.',
-    image: '/projects/parkber_logo.png',
-    imageFit: 'contain',
-    tags: ['React', 'Redux', 'Material UI', 'REST APIs'],
-    role: 'company',
-    context:
-      'As a lead engineer, designed role-based workspaces, monitoring widgets, and admin tooling that streamlined operations for municipal partners, focusing on UX and maintainable Redux patterns.',
-  },
-  {
-    id: 7,
-    title: 'Stepline - Document Template Management',
-    description:
-      'Legal document automation platform serving Swiss advocacy groups with template editing, approvals, and canton-specific exports.',
-    image: '/projects/stepline_logo.png',
-    imageFit: 'contain',
-    tags: ['Angular', 'RxJS', 'TypeScript'],
-    links: [{ label: 'Stepline', href: 'https://stepline.ch/' }],
-    role: 'company',
-    context:
-      'As a lead engineer, implemented modular services, reactive forms, and access controls to help legal teams standardize document generation while reducing manual effort.',
-  },
-  {
-    id: 8,
-    title: 'MonoChain Product Suite',
-    description:
-      'Set of React and React Native applications for sustainable fashion provenance, including the MonoChain web dashboards and the Twig (ex-DIEM) mobile experience.',
-    image: '/projects/monochain_logo.jpeg',
-    tags: ['React', 'React Native', 'Redux', 'Node.js', 'MongoDB', 'Next.js'],
-    links: [
-      { label: 'MonoChain', href: 'https://www.mono-chain.com/' },
-      { label: 'Twig Mobile', href: 'https://twigpay.co.uk/' },
-    ],
-    role: 'company',
-    context:
-      'Shipped cross-platform features—index dashboards, certification tooling, and the Twig mobile app—while contributing to microservice integrations and dev tooling.',
-  },
-  {
-    id: 9,
-    title: 'Orbit Irrigation Data Platform',
-    description:
-      "Data foundation that delivers analytics-ready information to Orbit's product and operations teams by consolidating irrigation telemetry into Snowflake.",
-    image: '/projects/orbit-irrigation_logo.jpeg',
-    tags: ['ETL', 'Matillion', 'Snowflake', 'SQL', 'Data Warehousing'],
-    links: [{ label: 'Orbit', href: 'https://www.orbitonline.com/' }],
-    role: 'company',
-    context:
-      'Implemented the full ETL lifecycle: exporting relational data from SQL Server, applying cleansing and business logic in Matillion/AWS Lambda, and loading the curated models into Snowflake to power Orbit’s analytics workflows.',
-  },
-  {
-    id: 10,
-    title: 'SEEU Departmental Web Decentralization',
-    description:
-      'WordPress multisite initiative that split the South East European University web presence into departmental subdomains and localized experiences to improve content ownership and publishing efficiency.',
-    image: '/projects/seeu_logo.webp',
-    imageFit: 'contain',
-    tags: ['WordPress', 'Multisite', 'Content Strategy', 'Localization', 'Governance'],
-    links: [{ label: 'SEEU', href: 'https://seeu.edu.mk/' }],
-    role: 'company',
-    context:
-      'As a webmaster assistant within the PR team, coordinated with department leads to scope requirements, stood up and themed subdomain sites, migrated legacy and multilingual content, and documented workflows so each unit could manage its own updates while staying on-brand.',
-  },
-  {
-    id: 11,
-    title: 'Elite Mobile',
-    description:
-      'Elite Mobile is a full-featured online storefront for flagship smartphones, providing a curated catalog, rich product pages, and professional repair service listings.',
-    image: '/projects/elite-mobile_logo.png',
-    tags: ['PHP', 'MySQL', 'Bootstrap', 'CRUD'],
-    role: 'personal',
-    context:
-      'The platform combines a modern PHP + MySQL frontend with an authenticated admin dashboard to add devices, manage categories, and publish service offerings without touching code.',
-    links: [
-      { label: 'Elite Mobile', href: 'https://elite-mobile.vercel.app/' },
-      { label: 'GitHub', href: 'https://github.com/TaulantSela/elite-mobile', icon: 'github' },
-    ],
-  },
-  {
-    id: 12,
-    title: 'Elevator Simulator System',
-    description:
-      'Elevator simulator that visualizes hall-call priorities, cabin actions, and dispatch sequencing in real time.',
-    image: '/projects/elevator-system_logo.svg',
-    imageFit: 'contain',
-    tags: ['React', 'TypeScript', 'State Machines', 'Simulation'],
-    links: [
-      { label: 'Elevator Simulator', href: 'https://elevator-simulator-system.vercel.app/' },
-      { label: 'GitHub', href: 'https://github.com/TaulantSela/elevator-system', icon: 'github' },
-    ],
-    role: 'personal',
-    context:
-      'Built to model dispatcher strategies for an elevator system, showcasing hall/cabin call prioritization, transition messaging, and UI polish for teaching control-system concepts.',
-  },
-  {
-    id: 13,
-    title: 'Legion Training Platform API',
-    description:
-      'Multi-tenant REST API for gyms and coaches to orchestrate workouts, track progress, and manage members with granular role-based auth.',
-    image: '/projects/legion-training-api_logo.svg',
-    tags: ['Node.js', 'Express', 'Swagger UI', 'JWT', 'Vercel'],
-    links: [
-      { label: 'API Docs', href: 'https://legion-training-api.vercel.app' },
-      { label: 'GitHub', href: 'https://github.com/TaulantSela/legion-training-api', icon: 'github' },
-    ],
-    role: 'personal',
-    context:
-      'Designed a modular Express service with JWT authentication, automated Swagger documentation, caching, and CI-ready integration tests—deployed serverlessly on Vercel.',
-  },
-];
-
-const featuredOrder = [3, 1, 2, 4, 5, 6];
-
-export const featuredProjects = (count = 3) => {
-  const ordered = featuredOrder
-    .map((id) => projects.find((project) => project.id === id))
-    .filter((project): project is Project => Boolean(project));
-
-  const remaining = projects.filter((project) => !featuredOrder.includes(project.id));
-
-  return [...ordered, ...remaining].slice(0, count);
+type ContentfulProjectLinkFields = {
+  label: string | null;
+  href: string | null;
+  icon: string | null;
 };
+
+type ContentfulProjectFields = {
+  title: EntryFieldTypes.Symbol;
+  slug?: EntryFieldTypes.Symbol;
+  description: EntryFieldTypes.Text;
+  context: EntryFieldTypes.Text;
+  tags?: EntryFieldTypes.Array<EntryFieldTypes.Symbol>;
+  role?: EntryFieldTypes.Symbol<'company' | 'personal' | 'oss'>;
+  links?: EntryFieldTypes.Object<Array<ContentfulProjectLinkFields | null>>;
+  imageFit?: EntryFieldTypes.Symbol<'cover' | 'contain'>;
+  heroImage?: EntryFieldTypes.AssetLink;
+  featuredIndex?: EntryFieldTypes.Integer;
+};
+
+type ContentfulProjectSkeleton = EntrySkeletonType<ContentfulProjectFields, 'project'>;
+type ContentfulProjectEntry = Entry<ContentfulProjectSkeleton>;
+
+function mapProject(entry: ContentfulProjectEntry): Project | null {
+  const { sys, fields } = entry;
+
+  const title = resolveLocalizedField<string>(fields.title);
+  const description = resolveLocalizedField<string>(fields.description);
+  const context = resolveLocalizedField<string>(fields.context);
+
+  if (!title || !description || !context) {
+    return null;
+  }
+
+  let links: ProjectLink[] | undefined;
+  const linkEntries = resolveLocalizedField<Array<ContentfulProjectLinkFields | null>>(fields.links);
+
+  if (Array.isArray(linkEntries)) {
+    links = linkEntries
+      .map((link): ProjectLink | null => {
+        if (!link) {
+          return null;
+        }
+
+        const rawLabel = typeof link.label === 'string' ? link.label : '';
+        const rawHref = typeof link.href === 'string' ? link.href : '';
+
+        const label = rawLabel.trim();
+        const href = rawHref.trim();
+
+        if (!label || !href) {
+          return null;
+        }
+
+        const icon =
+          typeof link.icon === 'string' && link.icon === 'github'
+            ? 'github'
+            : typeof link.icon === 'string' && link.icon === 'external'
+              ? 'external'
+              : undefined;
+
+        return { label, href, icon };
+      })
+      .filter((link): link is ProjectLink => Boolean(link && link.href && link.label));
+  }
+
+  const heroImage = resolveLocalizedField<Asset | null>(fields.heroImage) ?? null;
+  const tags = resolveLocalizedField<string[]>(fields.tags) ?? [];
+  const role = resolveLocalizedField<'company' | 'personal' | 'oss'>(fields.role) ?? 'personal';
+  const imageFit = resolveLocalizedField<'cover' | 'contain'>(fields.imageFit);
+  const featuredIndex = resolveLocalizedField<number | null>(fields.featuredIndex);
+
+  return {
+    id: sys.id,
+    title,
+    description,
+    context,
+    tags,
+    role,
+    image: extractAssetUrl(heroImage),
+    imageFit,
+    links,
+    featuredIndex: typeof featuredIndex === 'number' ? featuredIndex : null,
+  };
+}
+
+export const fetchProjects = cache(async (): Promise<Project[]> => {
+  if (!isContentfulConfigured) {
+    return [];
+  }
+
+  try {
+    const client = getContentfulClient();
+    const entries = await client.getEntries<ContentfulProjectSkeleton>({
+      content_type: 'project',
+      order: ['fields.featuredIndex', '-sys.createdAt'],
+      include: 2,
+    });
+
+    const mapped = entries.items.map(mapProject).filter((project): project is Project => Boolean(project));
+
+    return mapped.sort((a, b) => {
+      const aIndex = a.featuredIndex ?? Number.POSITIVE_INFINITY;
+      const bIndex = b.featuredIndex ?? Number.POSITIVE_INFINITY;
+
+      if (aIndex !== bIndex) {
+        return aIndex - bIndex;
+      }
+
+      return a.title.localeCompare(b.title);
+    });
+  } catch (error) {
+    console.error('Failed to fetch projects from Contentful', error);
+    return [];
+  }
+});
+
+export async function fetchFeaturedProjects(count = 3) {
+  const projects = await fetchProjects();
+  return projects.slice(0, count);
+}

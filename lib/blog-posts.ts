@@ -1,5 +1,10 @@
+import type { Asset, Entry, EntryFieldTypes, EntrySkeletonType } from 'contentful';
+import { cache } from 'react';
+
+import { extractAssetUrl, getContentfulClient, isContentfulConfigured, resolveLocalizedField } from '@/lib/contentful';
+
 export type BlogPost = {
-  id: number;
+  id: string;
   title: string;
   excerpt: string;
   date: string;
@@ -11,47 +16,74 @@ export type BlogPost = {
   url: string;
 };
 
-const posts: BlogPost[] = [
-  {
-    id: 1,
-    title: 'Introducing Pack It Up: The Smart Packing List Generator for Modern Travelers',
-    excerpt:
-      'Pack It Up is an intelligent packing assistant that generates AI-powered, trip-specific checklists based on destination, weather, and planned activities. It layers in packing heuristics for climate, trip length, and planned activities, while offering real-time editing, sharing, and export tools tailored for solo travelers and teams.',
-    date: '2025-11-07',
-    readTime: '9 min read',
-    category: 'Next.js',
-    image: '/blog/pack-it-up_blog.avif',
-    author: 'Taulant Sela',
-    url: 'https://hoyo.tech/article/introducing-pack-it-up-the-smart-packing-list-generator-for-modern-travelers',
-  },
-  {
-    id: 2,
-    title: 'Optimizing File Uploads with AWS Pre-Signed URLs',
-    excerpt:
-      'Why shifting from direct uploads to pre-signed S3 URLs strengthened performance, hardened security, and reduced infrastructure load for registration workflows.',
-    date: '2025-04-04',
-    readTime: '7 min read',
-    category: 'AWS',
-    image: '/blog/aws-presign_blog.webp',
-    author: 'Taulant Sela',
-    url: 'https://hoyo.tech/article/optimizing-file-uploads-with-aws-pre-signed-urls',
-  },
-  {
-    id: 3,
-    title: 'React State Management: Exploring global and local insights',
-    excerpt:
-      'A walkthrough of when to reach for Redux Toolkit, Context API, or local state tools like useState, and how to blend them for scalable React architectures.',
-    date: '2023-12-13',
-    readTime: '8 min read',
-    category: 'React',
-    image: '/blog/react-state-management_blog.jpg',
-    author: 'Taulant Sela',
-    url: 'https://hoyo.tech/article/react-state-management-exploring-global-and-local-insights',
-  },
-];
+type ContentfulBlogPostFields = {
+  title: EntryFieldTypes.Symbol;
+  slug?: EntryFieldTypes.Symbol;
+  excerpt?: EntryFieldTypes.Text;
+  publishDate?: EntryFieldTypes.Date;
+  readTime?: EntryFieldTypes.Symbol;
+  category?: EntryFieldTypes.Symbol;
+  author?: EntryFieldTypes.Symbol;
+  externalUrl?: EntryFieldTypes.Symbol;
+  imageFit?: EntryFieldTypes.Symbol<'cover' | 'contain'>;
+  heroImage?: EntryFieldTypes.AssetLink;
+};
 
-posts.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+type ContentfulBlogPostSkeleton = EntrySkeletonType<ContentfulBlogPostFields, 'post'>;
+type ContentfulBlogPostEntry = Entry<ContentfulBlogPostSkeleton>;
 
-export const blogPosts = posts;
+function mapBlogPost(entry: ContentfulBlogPostEntry): BlogPost | null {
+  const { sys, fields } = entry;
 
-export const latestBlogPosts = (count = 3) => blogPosts.slice(0, count);
+  const title = resolveLocalizedField<string>(fields.title);
+  const publishDate = resolveLocalizedField<string>(fields.publishDate);
+
+  if (!title || !publishDate) {
+    return null;
+  }
+
+  const externalUrl = resolveLocalizedField<string>(fields.externalUrl);
+  const slug = resolveLocalizedField<string>(fields.slug);
+
+  const url = externalUrl ?? (slug ? `https://taulantsela.com/blog/${slug}` : 'https://taulantsela.com/blog');
+
+  const heroImage = resolveLocalizedField<Asset | null>(fields.heroImage) ?? null;
+
+  return {
+    id: sys.id,
+    title,
+    excerpt: resolveLocalizedField<string>(fields.excerpt) ?? '',
+    date: publishDate,
+    readTime: resolveLocalizedField<string>(fields.readTime) ?? '',
+    category: resolveLocalizedField<string>(fields.category) ?? 'General',
+    image: extractAssetUrl(heroImage),
+    imageFit: resolveLocalizedField<'cover' | 'contain'>(fields.imageFit),
+    author: resolveLocalizedField<string>(fields.author) ?? 'Taulant Sela',
+    url,
+  };
+}
+
+export const fetchBlogPosts = cache(async (): Promise<BlogPost[]> => {
+  if (!isContentfulConfigured) {
+    return [];
+  }
+
+  try {
+    const client = getContentfulClient();
+    const entries = await client.getEntries<ContentfulBlogPostSkeleton>({
+      content_type: 'post',
+      order: ['-fields.publishDate'],
+      include: 2,
+    });
+
+    return entries.items.map(mapBlogPost).filter((post): post is BlogPost => Boolean(post));
+  } catch (error) {
+    console.error('Failed to fetch blog posts from Contentful', error);
+    return [];
+  }
+});
+
+export async function fetchLatestBlogPosts(count = 3) {
+  const posts = await fetchBlogPosts();
+  return posts.slice(0, count);
+}

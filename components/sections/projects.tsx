@@ -1,15 +1,23 @@
 'use client';
 
+import { ArrowRight } from 'lucide-react';
 import Image from 'next/image';
 import NextLink from 'next/link';
-import { ArrowRight } from 'lucide-react';
 
 import { ScrollReveal } from '@/components/scroll-reveal';
 import { Button } from '@/components/ui/button';
-import { featuredProjects } from '@/lib/projects';
+import type { Project } from '@/lib/projects';
 
-export default function Projects() {
-  const [leadProject, ...otherProjects] = featuredProjects(3);
+type ProjectsProps = {
+  projects: Project[];
+};
+
+export default function Projects({ projects }: ProjectsProps) {
+  if (!projects.length) {
+    return null;
+  }
+
+  const [leadProject, ...otherProjects] = projects;
 
   return (
     <section
@@ -71,7 +79,7 @@ export default function Projects() {
 }
 
 type SpotlightProps = {
-  project: ReturnType<typeof featuredProjects>[number];
+  project: Project;
 };
 
 function ProjectSpotlight({ project }: SpotlightProps) {
@@ -133,7 +141,7 @@ function ProjectSpotlight({ project }: SpotlightProps) {
 }
 
 type CardProps = {
-  project: ReturnType<typeof featuredProjects>[number];
+  project: Project;
 };
 
 function ProjectCard({ project }: CardProps) {
