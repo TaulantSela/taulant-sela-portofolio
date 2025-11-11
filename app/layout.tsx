@@ -1,6 +1,7 @@
 import Footer from '@/components/footer';
 import Navigation from '@/components/navigation';
 import { ThemeProvider } from '@/components/theme-provider';
+import { Analytics } from '@vercel/analytics/next';
 import { GeistMono } from 'geist/font/mono';
 import { GeistSans } from 'geist/font/sans';
 import type { Metadata } from 'next';
@@ -139,6 +140,7 @@ export default function RootLayout({
             <Navigation />
             <main className="relative isolate flex flex-1 flex-col bg-slate-50 transition-colors duration-500 dark:bg-slate-900">
               {children}
+              <Analytics />
             </main>
             <Footer />
           </div>
