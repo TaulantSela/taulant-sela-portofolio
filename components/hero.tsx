@@ -7,19 +7,11 @@ import { ScrollReveal } from './scroll-reveal';
 import { Button } from './ui/button';
 import { DraggableMarquee } from './ui/draggable-marquee';
 
-const marqueeItems = [
-  'Clean Architecture',
-  'Performance Optimization',
-  'Maintainable Codebases',
-  'Scalable Systems',
-  'Technical Consulting',
-  'Codebase Refactoring',
-  'Team Leadership',
-  'Technical Mentorship',
-  'Agile & Scrum',
-];
+type HeroProps = {
+  marqueeItems: string[];
+};
 
-export default function Hero() {
+export default function Hero({ marqueeItems }: HeroProps) {
   return (
     <section
       id="hero"

@@ -5,16 +5,21 @@ import Contact from '@/components/sections/contact';
 import Projects from '@/components/sections/projects';
 import Skills from '@/components/sections/skills';
 import { fetchLatestBlogPosts } from '@/lib/blog-posts';
+import { fetchMarqueeItems } from '@/lib/marquee-items';
 import { fetchFeaturedProjects } from '@/lib/projects';
 
 export default async function Portfolio() {
-  const [featuredProjects, latestPosts] = await Promise.all([fetchFeaturedProjects(3), fetchLatestBlogPosts(3)]);
+  const [marqueeItems, featuredProjects, latestPosts] = await Promise.all([
+    fetchMarqueeItems(),
+    fetchFeaturedProjects(3),
+    fetchLatestBlogPosts(3),
+  ]);
 
   return (
     <div className="relative overflow-hidden">
       <AuroraBackground variant="portfolio" />
       <div className="relative flex flex-col gap-24 py-24 sm:gap-28 sm:py-32 lg:gap-32">
-        <Hero />
+        <Hero marqueeItems={marqueeItems} />
         {featuredProjects.length ? (
           <Projects projects={featuredProjects} />
         ) : (
