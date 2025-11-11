@@ -1,11 +1,11 @@
 'use client';
 
 import NextLink from 'next/link';
-import type { CSSProperties } from 'react';
 
 import GithubContributions from './github-contributions';
 import { ScrollReveal } from './scroll-reveal';
 import { Button } from './ui/button';
+import { DraggableMarquee } from './ui/draggable-marquee';
 
 const marqueeItems = [
   'Clean Architecture',
@@ -18,12 +18,6 @@ const marqueeItems = [
   'Technical Mentorship',
   'Agile & Scrum',
 ];
-
-const MARQUEE_DURATION_SECONDS = 28;
-
-const marqueeStyles = {
-  '--marquee-duration': `${MARQUEE_DURATION_SECONDS}s`,
-} as CSSProperties;
 
 export default function Hero() {
   return (
@@ -79,13 +73,7 @@ export default function Hero() {
           delay={320}
           className="relative overflow-hidden rounded-full border border-slate-200/80 bg-white/80 py-4 text-xs text-slate-500 uppercase backdrop-blur dark:border-white/10 dark:bg-white/5 dark:text-white/60"
         >
-          <div className="animate-marquee flex min-w-max items-center gap-10 tracking-[0.5em]" style={marqueeStyles}>
-            {marqueeItems.concat(marqueeItems).map((item, index) => (
-              <span key={`${item}-${index}`} className="flex-shrink-0 whitespace-nowrap">
-                {item}
-              </span>
-            ))}
-          </div>
+          <DraggableMarquee items={marqueeItems} className="gap-10 tracking-[0.5em]" />
           <div className="pointer-events-none absolute inset-y-0 left-0 w-28 bg-gradient-to-r from-slate-900/20 via-slate-900/5 to-transparent dark:from-black/60 dark:via-black/20" />
           <div className="pointer-events-none absolute inset-y-0 right-0 w-28 bg-gradient-to-l from-slate-900/20 via-slate-900/5 to-transparent dark:from-black/60 dark:via-black/20" />
         </ScrollReveal>

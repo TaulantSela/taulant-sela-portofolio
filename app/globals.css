@@ -140,13 +140,6 @@
 }
 
 @layer utilities {
-  .animate-marquee {
-    animation-name: marquee;
-    animation-duration: var(--marquee-duration, 22s);
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
-    will-change: transform;
-  }
   .animate-drift-slow {
     animation: drift 26s ease-in-out infinite;
   }
@@ -184,15 +177,6 @@
     animation: heartbeat 1.35s ease-in-out infinite;
     transform-origin: center;
     will-change: transform;
-  }
-}
-
-@keyframes marquee {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-50%);
   }
 }
 
