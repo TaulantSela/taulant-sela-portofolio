@@ -5,7 +5,7 @@
   <h1>Taulant Sela — Portfolio</h1>
 
   <p>
-    <a href="https://taulantsela.com"><strong>Visit the Live Site ↗</strong></a>
+    <a href="https://taulantsela.com" target="_blank"><strong>Visit the Live Site ↗</strong></a>
   </p>
 
   <p>Personal portfolio built with Next.js, TypeScript and Contentful.</p>
