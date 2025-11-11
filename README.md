@@ -20,6 +20,10 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
+## Project documentation
+
+- `docs/project-overview.md` — architecture summary, integrations and update log. Update this file with every noticeable change.
+
 ## Contentful setup
 
 1. Create a free [Contentful](https://www.contentful.com/) space and add a dataset (environment) – the default is `master`.
@@ -37,6 +41,26 @@ This project uses [`next/font`](https://nextjs.org/docs/app/building-your-applic
    - `CONTENTFUL_BLOG_PAGE_CONTENT_TYPE_ID` (defaults to `blogPage`)
    - `CONTENTFUL_PROJECTS_PAGE_CONTENT_TYPE_ID` (defaults to `projectsPage`)
 5. Trigger a rebuild (or run `npm run dev`) after updating CMS content so the latest entries are fetched.
+
+### Managing archive pages
+
+- The full `/blog` archive pulls its heading and description from the single `Blog Page` entry. The “Back to Highlights” button always links to `/#blog`.
+- The `/projects` archive works the same way using the `Projects Page` entry and returns to `/#projects`.
+- Update those entries in Contentful to change the copy without redeploying code. If either entry is missing required fields, the page will throw an error during rendering.
+
+## Email setup (contact form)
+
+The `/contact` form sends submissions through Gmail using Nodemailer.
+
+1. Enable 2-Step Verification on the Gmail account you plan to send from.
+2. Generate a Gmail App Password (Account settings → Security → App passwords) and copy it.
+3. Add the following environment variables locally (`.env`) and in your deployment platform:
+   - `_MAIL_USER`\_ the Gmail address used to send emails.
+   - `GMAIL_APP_PASSWORD`: the 16-character app password generated above.
+   - `CONTACT_RECIPIENT_EMAIL` _(optional)_: overrides the inbox that receives messages. Defaults to `GMAIL_USER`.
+4. After updating the variables, restart the dev server (`npm run dev`) or redeploy so the new credentials are picked up.
+
+If either `GMAIL_USER` or `GMAIL_APP_PASSWORD` is missing, the API will return a 500 error and log a configuration warning.
 
 The site expects the Contentful credentials to be present; without them the blog and projects sections will render empty states.
 
