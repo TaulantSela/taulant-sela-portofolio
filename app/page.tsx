@@ -4,19 +4,21 @@ import { Blog } from '@/components/sections/blog';
 import Contact from '@/components/sections/contact';
 import Projects from '@/components/sections/projects';
 import Skills from '@/components/sections/skills';
-import { fetchLatestBlogPosts } from '@/lib/blog-posts';
-import { fetchBlogSectionContent } from '@/lib/blog-section-content';
+import { fetchLatestBlogPosts } from '@/lib/blog/blog-posts';
+import { fetchBlogSectionContent } from '@/lib/blog/blog-section-content';
 import { fetchContactSectionContent } from '@/lib/contact-content';
 import { fetchMarqueeItems } from '@/lib/marquee-items';
-import { fetchFeaturedProjects } from '@/lib/projects';
+import { fetchFeaturedProjects } from '@/lib/projects/projects';
+import { fetchSkillsSectionContent } from '@/lib/skills/skills-section-content';
 
 export default async function Portfolio() {
-  const [marqueeItems, featuredProjects, latestPosts, contactContent, blogContent] = await Promise.all([
+  const [marqueeItems, featuredProjects, latestPosts, contactContent, blogContent, skillsContent] = await Promise.all([
     fetchMarqueeItems(),
     fetchFeaturedProjects(3),
     fetchLatestBlogPosts(3),
     fetchContactSectionContent(),
     fetchBlogSectionContent(),
+    fetchSkillsSectionContent(),
   ]);
 
   if (!contactContent) {
@@ -25,6 +27,10 @@ export default async function Portfolio() {
 
   if (!blogContent) {
     throw new Error('Blog section content is not configured in Contentful.');
+  }
+
+  if (!skillsContent) {
+    throw new Error('Skills section content is not configured in Contentful.');
   }
 
   return (
@@ -46,7 +52,7 @@ export default async function Portfolio() {
             </div>
           </section>
         )}
-        <Skills />
+        <Skills content={skillsContent} />
         {latestPosts.length ? (
           <Blog posts={latestPosts} content={blogContent} />
         ) : (

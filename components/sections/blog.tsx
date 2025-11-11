@@ -5,8 +5,8 @@ import { Button } from '@/components/ui/button';
 import { ArrowRight, Calendar, Clock } from 'lucide-react';
 import Link from 'next/link';
 
-import type { BlogPost } from '@/lib/blog-posts';
-import type { BlogSectionContent } from '@/lib/blog-section-content';
+import type { BlogPost } from '@/lib/blog/blog-posts';
+import type { BlogSectionContent } from '@/lib/blog/blog-section-content';
 
 type BlogProps = {
   posts: BlogPost[];

@@ -9,7 +9,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { TbBrandGithub } from 'react-icons/tb';
 
-import { fetchProjects } from '@/lib/projects';
+import { fetchProjects } from '@/lib/projects/projects';
 
 const siteUrl = 'https://taulantsela.com';
 const pageUrl = `${siteUrl}/projects`;

@@ -6,7 +6,7 @@ import NextLink from 'next/link';
 
 import { ScrollReveal } from '@/components/scroll-reveal';
 import { Button } from '@/components/ui/button';
-import type { Project } from '@/lib/projects';
+import type { Project } from '@/lib/projects/projects';
 
 type ProjectsProps = {
   projects: Project[];

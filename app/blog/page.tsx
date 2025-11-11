@@ -8,7 +8,7 @@ import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { fetchBlogPosts } from '@/lib/blog-posts';
+import { fetchBlogPosts } from '@/lib/blog/blog-posts';
 
 const siteUrl = 'https://taulantsela.com';
 const pageUrl = `${siteUrl}/blog`;
