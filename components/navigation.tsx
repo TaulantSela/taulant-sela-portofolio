@@ -102,7 +102,7 @@ export default function Navigation() {
             <Image src="/favicon.ico" alt="Taulant Sela logo" width={18} height={18} className="h-4 w-4" unoptimized />
             Taulant Sela
           </Link>
-          <span className="text-[11px] tracking-[0.35em] text-slate-500 uppercase transition-colors duration-300 md:inline dark:text-white/60">
+          <span className="hidden text-[11px] tracking-[0.35em] text-slate-500 uppercase transition-colors duration-300 sm:inline dark:text-white/60">
             Software Engineer
           </span>
         </div>
