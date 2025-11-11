@@ -9,6 +9,7 @@ import Link from 'next/link';
 import { TbBrandGithub } from 'react-icons/tb';
 
 import { fetchProjects } from '@/lib/projects/projects';
+import { fetchProjectsPageContent } from '@/lib/projects/projects-page-content';
 
 const siteUrl = 'https://taulantsela.com';
 const pageUrl = `${siteUrl}/projects`;
@@ -52,18 +53,21 @@ export const metadata: Metadata = {
 };
 
 export default async function ProjectsPage() {
-  const projects = await fetchProjects();
+  const [projects, pageContent] = await Promise.all([fetchProjects(), fetchProjectsPageContent()]);
+
+  if (!pageContent) {
+    throw new Error('Projects page content is not configured in Contentful.');
+  }
+
+  const { heading, description } = pageContent;
 
   return (
     <main className="relative isolate overflow-hidden px-6 py-24 transition-colors duration-500 sm:px-10 sm:py-32 lg:px-16">
       <div className="relative mx-auto max-w-6xl">
         <ScrollReveal className="mb-12 flex flex-col items-center justify-between gap-6 text-center sm:flex-row sm:text-left">
           <div className="space-y-5 sm:space-y-6">
-            <h1 className="text-3xl font-bold text-slate-900 sm:text-4xl dark:text-slate-100">All Projects</h1>
-            <p className="max-w-2xl text-lg text-slate-600 dark:text-slate-400">
-              Browse the full collection of company initiatives, open source contributions, and personal products I have
-              built.
-            </p>
+            <h1 className="text-3xl font-bold text-slate-900 sm:text-4xl dark:text-slate-100">{heading}</h1>
+            <p className="max-w-2xl text-lg text-slate-600 dark:text-slate-400">{description}</p>
           </div>
           <Button asChild variant="ghost" size="sm" className="self-center sm:self-end">
             <Link href="/#projects">

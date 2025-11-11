@@ -7,6 +7,7 @@ import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 
+import { fetchBlogPageContent } from '@/lib/blog/blog-page-content';
 import { fetchBlogPosts } from '@/lib/blog/blog-posts';
 
 const siteUrl = 'https://taulantsela.com';
@@ -50,18 +51,21 @@ export const metadata: Metadata = {
 };
 
 export default async function BlogPage() {
-  const posts = await fetchBlogPosts();
+  const [posts, pageContent] = await Promise.all([fetchBlogPosts(), fetchBlogPageContent()]);
+
+  if (!pageContent) {
+    throw new Error('Blog page content is not configured in Contentful.');
+  }
+
+  const { heading, description } = pageContent;
 
   return (
     <main className="relative isolate min-h-screen overflow-hidden px-6 py-24 pb-32 transition-colors duration-500 sm:px-10 sm:py-32 lg:px-16">
       <div className="relative mx-auto max-w-6xl">
         <ScrollReveal className="mb-12 flex flex-col items-center justify-between gap-6 text-center sm:flex-row sm:text-left">
           <div className="space-y-5 sm:space-y-6">
-            <h1 className="text-3xl font-bold text-slate-900 sm:text-4xl dark:text-slate-100">All Blog Posts</h1>
-            <p className="max-w-2xl text-lg text-slate-600 dark:text-slate-400">
-              Explore the full collection of writing on modern products, thoughtful engineering, and steady team
-              delivery.
-            </p>
+            <h1 className="text-3xl font-bold text-slate-900 sm:text-4xl dark:text-slate-100">{heading}</h1>
+            <p className="max-w-2xl text-lg text-slate-600 dark:text-slate-400">{description}</p>
           </div>
           <Button asChild variant="ghost" size="sm" className="self-center sm:self-end">
             <Link href="/#blog">
