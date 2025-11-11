@@ -1,3 +1,17 @@
+<div align="center">
+
+  <h1>Taulant Sela — Portfolio</h1>
+
+  <p>
+    <a href="https://taulantsela.com"><strong>Visit the Live Site ↗</strong></a>
+  </p>
+
+  <p>Personal portfolio built with Next.js, TypeScript and Contentful.</p>
+
+</div>
+
+---
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
