@@ -6,17 +6,20 @@ import { ArrowRight, Calendar, Clock } from 'lucide-react';
 import Link from 'next/link';
 
 import type { BlogPost } from '@/lib/blog-posts';
+import type { BlogSectionContent } from '@/lib/blog-section-content';
 
 type BlogProps = {
   posts: BlogPost[];
+  content: BlogSectionContent;
 };
 
-export function Blog({ posts }: BlogProps) {
+export function Blog({ posts, content }: BlogProps) {
   if (!posts.length) {
     return null;
   }
 
   const [leadPost, ...otherPosts] = posts;
+  const { eyebrow, heading, description } = content;
 
   return (
     <section
@@ -28,14 +31,12 @@ export function Blog({ posts }: BlogProps) {
           <header className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
             <div className="space-y-5">
               <div className="inline-flex items-center gap-3 rounded-full border border-slate-300/60 bg-white/80 px-4 py-2 text-xs tracking-[0.4em] text-slate-500 uppercase dark:border-white/20 dark:bg-white/10 dark:text-white/60">
-                Blog
+                {eyebrow}
               </div>
               <h2 className="max-w-3xl text-4xl leading-tight font-semibold text-slate-900 sm:text-5xl dark:text-white">
-                Blog posts on building modern products and leading teams steadily.
+                {heading}
               </h2>
-              <p className="max-w-2xl text-base text-slate-600 sm:text-lg dark:text-white/70">
-                Occasional write-ups covering front-end decisions, design system upkeep, and day-to-day delivery habits.
-              </p>
+              <p className="max-w-2xl text-base text-slate-600 sm:text-lg dark:text-white/70">{description}</p>
             </div>
             <Button
               asChild

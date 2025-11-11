@@ -5,20 +5,26 @@ import Contact from '@/components/sections/contact';
 import Projects from '@/components/sections/projects';
 import Skills from '@/components/sections/skills';
 import { fetchLatestBlogPosts } from '@/lib/blog-posts';
+import { fetchBlogSectionContent } from '@/lib/blog-section-content';
 import { fetchContactSectionContent } from '@/lib/contact-content';
 import { fetchMarqueeItems } from '@/lib/marquee-items';
 import { fetchFeaturedProjects } from '@/lib/projects';
 
 export default async function Portfolio() {
-  const [marqueeItems, featuredProjects, latestPosts, contactContent] = await Promise.all([
+  const [marqueeItems, featuredProjects, latestPosts, contactContent, blogContent] = await Promise.all([
     fetchMarqueeItems(),
     fetchFeaturedProjects(3),
     fetchLatestBlogPosts(3),
     fetchContactSectionContent(),
+    fetchBlogSectionContent(),
   ]);
 
   if (!contactContent) {
     throw new Error('Contact section content is not configured in Contentful.');
+  }
+
+  if (!blogContent) {
+    throw new Error('Blog section content is not configured in Contentful.');
   }
 
   return (
@@ -42,7 +48,7 @@ export default async function Portfolio() {
         )}
         <Skills />
         {latestPosts.length ? (
-          <Blog posts={latestPosts} />
+          <Blog posts={latestPosts} content={blogContent} />
         ) : (
           <section
             id="blog"
