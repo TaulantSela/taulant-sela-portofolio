@@ -53,9 +53,9 @@ export default function Hero() {
                 variant="outline"
                 className="border-slate-300 bg-white/70 text-slate-900 transition-transform duration-300 hover:-translate-y-1 hover:bg-white dark:border-white/40 dark:bg-white/10 dark:text-white dark:hover:bg-white/20"
               >
-                <NextLink href="/cv.pdf" target="_blank" rel="noopener noreferrer">
+                <a href="/cv.pdf" target="_blank" rel="noopener noreferrer">
                   Download credentials
-                </NextLink>
+                </a>
               </Button>
             </div>
             <ScrollReveal once delay={150}>
