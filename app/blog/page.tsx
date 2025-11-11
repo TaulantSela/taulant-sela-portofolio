@@ -54,7 +54,7 @@ export default function BlogPage() {
   const posts = blogPosts;
 
   return (
-    <main className="relative isolate min-h-screen overflow-hidden bg-slate-50 px-4 py-20 pb-32 transition-colors duration-500 sm:px-6 lg:px-8 dark:bg-slate-900/50">
+    <main className="relative isolate min-h-screen overflow-hidden bg-slate-50 px-6 py-24 pb-32 transition-colors duration-500 sm:px-10 sm:py-32 lg:px-16 dark:bg-slate-900/50">
       <AuroraBackground />
       <div className="relative mx-auto max-w-6xl">
         <ScrollReveal className="mb-12 flex flex-col items-center justify-between gap-6 text-center sm:flex-row sm:text-left">

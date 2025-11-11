@@ -22,7 +22,7 @@ export default function Hero() {
   return (
     <section
       id="hero"
-      className="relative isolate overflow-hidden px-6 text-slate-950 transition-colors duration-500 sm:px-8 dark:text-white"
+      className="relative isolate overflow-hidden px-6 text-slate-950 transition-colors duration-500 sm:px-10 lg:px-16 dark:text-white"
     >
       <div className="relative mx-auto flex max-w-6xl flex-col gap-16 lg:gap-20">
         <ScrollReveal once delay={80}>

@@ -54,7 +54,7 @@ export const metadata: Metadata = {
 
 export default function ProjectsPage() {
   return (
-    <main className="relative isolate overflow-hidden bg-slate-50 px-4 py-20 transition-colors duration-500 sm:px-6 lg:px-8 dark:bg-slate-900/50">
+    <main className="relative isolate overflow-hidden bg-slate-50 px-6 py-24 transition-colors duration-500 sm:px-10 sm:py-32 lg:px-16 dark:bg-slate-900/50">
       <AuroraBackground />
       <div className="relative mx-auto max-w-6xl">
         <ScrollReveal className="mb-12 flex flex-col items-center justify-between gap-6 text-center sm:flex-row sm:text-left">
@@ -73,10 +73,10 @@ export default function ProjectsPage() {
           </Button>
         </ScrollReveal>
 
-        <div className="grid [grid-template-columns:repeat(auto-fit,minmax(260px,320px))] justify-center justify-items-center gap-8">
+        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
           {projects.map((project, index) => (
             <ScrollReveal key={project.id} delay={80 + index * 60} threshold={0.05} className="group h-full w-full">
-              <Card className="flex h-[600px] w-full max-w-[320px] flex-col overflow-hidden rounded-2xl border border-slate-200 pt-0 transition-transform duration-300 hover:scale-[1.02] hover:shadow-xl dark:border-white/10">
+              <Card className="flex h-[600px] w-full flex-col overflow-hidden rounded-2xl border border-slate-200 pt-0 transition-transform duration-300 hover:scale-[1.02] hover:shadow-xl dark:border-white/10">
                 <div className="aspect-[16/9] flex-none overflow-hidden rounded-t-2xl bg-slate-900/80">
                   <Image
                     src={project.image || '/placeholder.png'}

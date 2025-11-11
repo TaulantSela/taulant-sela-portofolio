@@ -2,8 +2,10 @@
 
 import Image from 'next/image';
 import NextLink from 'next/link';
+import { ArrowRight } from 'lucide-react';
 
 import { ScrollReveal } from '@/components/scroll-reveal';
+import { Button } from '@/components/ui/button';
 import { featuredProjects } from '@/lib/projects';
 
 export default function Projects() {
@@ -32,13 +34,16 @@ export default function Projects() {
               Front-end architecture, design system tuning, and release support for teams shipping on schedule.
             </p>
           </div>
-          <NextLink
-            href="/projects"
-            className="inline-flex items-center gap-3 rounded-full border border-slate-300/70 bg-white/80 px-6 py-3 text-sm tracking-[0.3em] text-slate-600 uppercase transition-all duration-300 hover:-translate-y-1 hover:border-slate-400 hover:text-slate-900 dark:border-white/20 dark:bg-white/5 dark:text-white/70 dark:hover:border-white/60 dark:hover:text-white"
+          <Button
+            asChild
+            variant="outline"
+            className="inline-flex items-center gap-3 rounded-full border-slate-300/70 bg-white/80 px-6 py-2 text-xs tracking-[0.3em] text-slate-600 uppercase transition-transform duration-300 hover:-translate-y-1 hover:border-slate-400 hover:text-slate-900 dark:border-white/20 dark:bg-white/10 dark:text-white/70 dark:hover:border-white/40 dark:hover:text-white"
           >
-            All projects
-            <span className="h-2 w-2 rounded-full bg-emerald-400 dark:bg-purple-300" />
-          </NextLink>
+            <NextLink href="/projects">
+              View all projects
+              <ArrowRight className="ml-2 h-4 w-4" />
+            </NextLink>
+          </Button>
         </ScrollReveal>
 
         <div className="grid gap-12 lg:grid-cols-[1.2fr_0.8fr]">
