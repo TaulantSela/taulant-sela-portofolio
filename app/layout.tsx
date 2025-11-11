@@ -1,6 +1,7 @@
 import Footer from '@/components/footer';
 import Navigation from '@/components/navigation';
 import { ThemeProvider } from '@/components/theme-provider';
+import { AuroraBackground } from '@/components/aurora-background';
 import { Analytics } from '@vercel/analytics/next';
 import { GeistMono } from 'geist/font/mono';
 import { GeistSans } from 'geist/font/sans';
@@ -138,7 +139,8 @@ export default function RootLayout({
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           <div className="relative z-0 flex min-h-screen flex-col">
             <Navigation />
-            <main className="relative isolate flex flex-1 flex-col bg-slate-50 transition-colors duration-500 dark:bg-slate-900">
+            <main className="relative isolate flex flex-1 flex-col overflow-hidden bg-slate-50 transition-colors duration-500 dark:bg-slate-900">
+              <AuroraBackground />
               {children}
               <Analytics />
             </main>

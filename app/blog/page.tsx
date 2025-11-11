@@ -1,4 +1,3 @@
-import { AuroraBackground } from '@/components/aurora-background';
 import { ScrollReveal } from '@/components/scroll-reveal';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -54,8 +53,7 @@ export default async function BlogPage() {
   const posts = await fetchBlogPosts();
 
   return (
-    <main className="relative isolate min-h-screen overflow-hidden bg-slate-50 px-6 py-24 pb-32 transition-colors duration-500 sm:px-10 sm:py-32 lg:px-16 dark:bg-slate-900/50">
-      <AuroraBackground />
+    <main className="relative isolate min-h-screen overflow-hidden px-6 py-24 pb-32 transition-colors duration-500 sm:px-10 sm:py-32 lg:px-16">
       <div className="relative mx-auto max-w-6xl">
         <ScrollReveal className="mb-12 flex flex-col items-center justify-between gap-6 text-center sm:flex-row sm:text-left">
           <div className="space-y-5 sm:space-y-6">
