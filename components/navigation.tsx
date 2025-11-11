@@ -4,8 +4,9 @@ import { Menu, X } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
+import { useOutsideClick } from '@/lib/hooks/use-outside-click';
 import { ThemeToggle } from './theme-toggle';
 
 const navLinks = [
@@ -17,6 +18,8 @@ const navLinks = [
 
 export default function Navigation() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const toggleRef = useRef<HTMLButtonElement | null>(null);
+  const menuRef = useRef<HTMLDivElement | null>(null);
   const pathname = usePathname();
   const router = useRouter();
 
@@ -32,6 +35,10 @@ export default function Navigation() {
     };
   }, [isMenuOpen]);
 
+  const closeMenu = useCallback(() => setIsMenuOpen(false), []);
+  const outsideClickRefs = useMemo(() => [menuRef, toggleRef], []);
+  useOutsideClick(outsideClickRefs, closeMenu, isMenuOpen);
+
   // Handle scrolling to hash on page load (when navigating from other pages)
   useEffect(() => {
     if (pathname === '/' && window.location.hash) {
@@ -46,7 +53,7 @@ export default function Navigation() {
   }, [pathname]);
 
   const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    setIsMenuOpen(false);
+    closeMenu();
 
     // Get the href and extract the section ID
     const href = (e.currentTarget as HTMLAnchorElement).getAttribute('href');
@@ -72,7 +79,7 @@ export default function Navigation() {
 
   const handleLogoClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
-    setIsMenuOpen(false);
+    closeMenu();
 
     // If we're on the homepage, scroll to top
     if (pathname === '/') {
@@ -108,7 +115,8 @@ export default function Navigation() {
             aria-expanded={isMenuOpen}
             aria-controls="mobile-navigation"
             aria-label="Toggle navigation menu"
-            className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-700 transition-colors duration-300 hover:bg-slate-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-400 dark:border-white/10 dark:bg-white/10 dark:text-white dark:hover:bg-white/20 dark:focus-visible:ring-white/40"
+            ref={toggleRef}
+            className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-700 shadow-sm transition-all duration-300 hover:translate-y-[-2px] hover:border-slate-300 hover:bg-white hover:shadow-[0_10px_24px_rgba(15,23,42,0.12)] focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-400 dark:border-white/10 dark:bg-white/10 dark:text-white dark:shadow-[0_4px_14px_rgba(15,23,42,0.18)] dark:hover:border-white/25 dark:hover:bg-white/15 dark:hover:shadow-[0_12px_28px_rgba(15,23,42,0.35)] dark:focus-visible:ring-white/40"
           >
             {isMenuOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
           </button>
@@ -132,6 +140,7 @@ export default function Navigation() {
       {isMenuOpen ? (
         <div
           id="mobile-navigation"
+          ref={menuRef}
           className="border-t border-slate-200/70 bg-white/95 backdrop-blur-xl transition-colors duration-500 lg:hidden dark:border-white/10 dark:bg-slate-950/90"
         >
           <div className="mx-auto flex w-full max-w-6xl flex-col gap-4 px-4 py-6 sm:px-6">
@@ -140,9 +149,12 @@ export default function Navigation() {
                 key={link.href}
                 href={link.href}
                 onClick={handleLinkClick}
-                className="text-sm font-medium text-slate-700 transition-colors duration-300 hover:text-slate-900 dark:text-white/80 dark:hover:text-white"
+                className="group flex items-center justify-between rounded-xl border border-transparent px-5 py-3 text-sm font-medium text-slate-700 transition-colors duration-300 hover:border-slate-200 hover:bg-slate-900/5 hover:text-slate-900 dark:text-white/80 dark:hover:border-white/15 dark:hover:bg-white/10 dark:hover:text-white"
               >
-                {link.label}
+                <span>{link.label}</span>
+                <span className="w-6 text-right text-xs tracking-[0.4em] text-slate-300 uppercase opacity-0 transition-opacity duration-300 group-hover:opacity-100 dark:text-white/50">
+                  →
+                </span>
               </Link>
             ))}
           </div>
