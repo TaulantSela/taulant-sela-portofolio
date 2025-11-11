@@ -1,5 +1,7 @@
 <div align="center">
 
+  <img src="app/favicon.ico" alt="Taulant Sela logo" width="96" height="96" />
+
   <h1>Taulant Sela — Portfolio</h1>
 
   <p>
