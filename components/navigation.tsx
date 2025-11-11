@@ -95,12 +95,12 @@ export default function Navigation() {
             <Image src="/favicon.ico" alt="Taulant Sela logo" width={18} height={18} className="h-4 w-4" unoptimized />
             Taulant Sela
           </Link>
-          <span className="hidden text-[11px] tracking-[0.35em] text-slate-500 uppercase transition-colors duration-300 md:inline dark:text-white/60">
+          <span className="text-[11px] tracking-[0.35em] text-slate-500 uppercase transition-colors duration-300 md:inline dark:text-white/60">
             Software Engineer
           </span>
         </div>
 
-        <div className="flex items-center gap-1 md:hidden">
+        <div className="flex items-center gap-1 lg:hidden">
           <ThemeToggle />
           <button
             type="button"
@@ -114,7 +114,7 @@ export default function Navigation() {
           </button>
         </div>
 
-        <div className="hidden items-center gap-8 md:flex">
+        <div className="hidden items-center gap-8 lg:flex">
           {navLinks.map((link) => (
             <Link
               key={link.href}
@@ -132,7 +132,7 @@ export default function Navigation() {
       {isMenuOpen ? (
         <div
           id="mobile-navigation"
-          className="border-t border-slate-200/70 bg-white/95 backdrop-blur-xl transition-colors duration-500 md:hidden dark:border-white/10 dark:bg-slate-950/90"
+          className="border-t border-slate-200/70 bg-white/95 backdrop-blur-xl transition-colors duration-500 lg:hidden dark:border-white/10 dark:bg-slate-950/90"
         >
           <div className="mx-auto flex w-full max-w-6xl flex-col gap-4 px-4 py-6 sm:px-6">
             {navLinks.map((link) => (
