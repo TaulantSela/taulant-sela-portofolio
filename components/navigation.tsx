@@ -99,7 +99,14 @@ export default function Navigation() {
             onClick={handleLogoClick}
             className="inline-flex items-center gap-2 rounded-full border border-slate-800/40 bg-slate-900 px-4 py-1 text-xs tracking-[0.4em] text-slate-200 uppercase transition-colors duration-300 hover:border-slate-700 hover:bg-slate-800 dark:border-white/20 dark:bg-white/10 dark:text-white"
           >
-            <Image src="/favicon.ico" alt="Taulant Sela logo" width={18} height={18} className="h-4 w-4" unoptimized />
+            <Image
+              src="/favicon.ico"
+              alt="Taulant Sela logo"
+              width={28}
+              height={28}
+              className="block h-7 w-7 -translate-y-0.5 transform"
+              unoptimized
+            />
             Taulant Sela
           </Link>
           <span className="hidden text-[11px] tracking-[0.35em] text-slate-500 uppercase transition-colors duration-300 sm:inline dark:text-white/60">
