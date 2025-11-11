@@ -62,11 +62,11 @@ export default function Contact() {
       <div className="relative mx-auto flex max-w-6xl flex-col gap-16">
         <ScrollReveal asChild className="space-y-6 text-center">
           <header className="space-y-6 text-center">
-            <div className="mx-auto flex max-w-md items-center justify-center gap-3 rounded-full border border-slate-200/60 bg-white/70 px-5 py-3 text-sm tracking-[0.3em] text-slate-500 dark:border-white/15 dark:bg-white/10 dark:text-white/70">
-              <Rocket className="h-4 w-4 text-emerald-500 dark:text-purple-300" />
-              Let&apos;s build something amazing
+            <div className="mx-auto flex max-w-md items-center justify-center gap-3 rounded-full border border-slate-200/60 bg-white/70 px-4 py-2.5 text-xs tracking-[0.2em] text-slate-500 sm:px-5 sm:py-3 sm:text-sm sm:tracking-[0.3em] dark:border-white/15 dark:bg-white/10 dark:text-white/70">
+              <Rocket className="h-4 w-4 flex-shrink-0 text-emerald-500 dark:text-purple-300" />
+              <span className="truncate">Let&apos;s build something amazing</span>
             </div>
-            <h2 className="text-4xl leading-tight font-semibold text-slate-900 sm:text-5xl dark:text-white">
+            <h2 className="text-3xl leading-tight font-semibold text-slate-900 sm:text-4xl lg:text-5xl dark:text-white">
               Ready to bring your next idea to life?
             </h2>
             <p className="mx-auto max-w-2xl text-base text-slate-600 sm:text-lg dark:text-white/70">
@@ -76,13 +76,13 @@ export default function Contact() {
           </header>
         </ScrollReveal>
 
-        <div className="grid items-stretch gap-12 lg:grid-cols-[0.85fr_1.15fr]">
-          <div className="space-y-6">
-            <ScrollReveal className="rounded-3xl border border-slate-200 bg-white/95 p-8 shadow-[0_24px_70px_rgba(15,23,42,0.12)] dark:border-white/15 dark:bg-white/[0.06] dark:shadow-[0_24px_70px_rgba(15,23,42,0.55)]">
-              <div className="flex items-center justify-between text-xs tracking-[0.4em] text-slate-500 uppercase dark:text-white/60">
+        <div className="grid items-stretch gap-8 lg:grid-cols-[0.85fr_1.15fr] lg:gap-12">
+          <div className="space-y-4 lg:space-y-6">
+            <ScrollReveal className="rounded-3xl border border-slate-200 bg-white/95 p-6 shadow-[0_24px_70px_rgba(15,23,42,0.12)] sm:p-8 dark:border-white/15 dark:bg-white/[0.06] dark:shadow-[0_24px_70px_rgba(15,23,42,0.55)]">
+              <div className="flex items-center justify-between text-xs tracking-[0.3em] text-slate-500 uppercase sm:tracking-[0.4em] dark:text-white/60">
                 <span className="text-slate-600 dark:text-white/70">How I work</span>
               </div>
-              <p className="mt-6 text-sm text-slate-600 dark:text-white/70">
+              <p className="mt-4 text-sm text-slate-600 sm:mt-6 dark:text-white/70">
                 I stay close to product, design, and engineering partners—listening first, iterating thoughtfully, and
                 shipping software that feels personal and dependable.
               </p>
@@ -97,21 +97,28 @@ export default function Contact() {
                   <ScrollReveal
                     key={title}
                     delay={160 + index * 120}
-                    className="group flex items-center justify-between rounded-3xl border border-slate-200 bg-white px-6 py-5 shadow-[0_18px_50px_rgba(15,23,42,0.08)] transition-transform duration-300 hover:-translate-y-1 hover:border-slate-300 dark:border-white/10 dark:bg-white/[0.04] dark:shadow-none dark:hover:border-white/30"
+                    className="group flex items-center justify-between rounded-3xl border border-slate-200 bg-white px-4 py-4 shadow-[0_18px_50px_rgba(15,23,42,0.08)] transition-transform duration-300 hover:-translate-y-1 hover:border-slate-300 sm:px-6 sm:py-5 dark:border-white/10 dark:bg-white/[0.04] dark:shadow-none dark:hover:border-white/30"
                   >
-                    <Link href={href} {...linkProps} className="flex flex-1 items-center gap-4" prefetch={false}>
-                      <span className="flex h-11 w-11 items-center justify-center rounded-2xl border border-slate-200 bg-white text-slate-700 transition-colors duration-300 group-hover:border-slate-300 group-hover:text-slate-900 dark:border-white/20 dark:bg-white/10 dark:text-white dark:group-hover:border-white/40 dark:group-hover:text-white/90">
-                        <Icon className="h-5 w-5" />
+                    <Link
+                      href={href}
+                      {...linkProps}
+                      className="flex min-w-0 flex-1 items-center gap-3 sm:gap-4"
+                      prefetch={false}
+                    >
+                      <span className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-2xl border border-slate-200 bg-white text-slate-700 transition-colors duration-300 group-hover:border-slate-300 group-hover:text-slate-900 sm:h-11 sm:w-11 dark:border-white/20 dark:bg-white/10 dark:text-white dark:group-hover:border-white/40 dark:group-hover:text-white/90">
+                        <Icon className="h-4 w-4 sm:h-5 sm:w-5" />
                       </span>
-                      <div className="min-w-0">
-                        <p className="text-sm tracking-[0.3em] text-slate-500 uppercase dark:text-white/60">{title}</p>
-                        <p className="text-lg font-medium whitespace-nowrap text-slate-800 transition-colors duration-300 group-hover:text-slate-600 dark:text-white dark:group-hover:text-white/80">
+                      <div className="min-w-0 flex-1">
+                        <p className="text-xs tracking-[0.2em] text-slate-500 uppercase sm:text-sm sm:tracking-[0.3em] dark:text-white/60">
+                          {title}
+                        </p>
+                        <p className="truncate text-base font-medium text-slate-800 transition-colors duration-300 group-hover:text-slate-600 sm:text-lg dark:text-white dark:group-hover:text-white/80">
                           {subtitle}
                         </p>
                       </div>
                     </Link>
                     {actions?.length ? (
-                      <div className="ml-3 flex items-center gap-1.5">
+                      <div className="ml-2 flex flex-shrink-0 items-center gap-1 sm:ml-3 sm:gap-1.5">
                         {actions.map(({ title: actionTitle, href: actionHref, icon: ActionIcon, isExternal }) => {
                           const actionLinkProps = isExternal ? { target: '_blank', rel: 'noopener noreferrer' } : {};
 
@@ -121,16 +128,16 @@ export default function Contact() {
                               href={actionHref}
                               {...actionLinkProps}
                               aria-label={`${actionTitle} via ${title}`}
-                              className="flex h-9 w-9 items-center justify-center rounded-2xl border border-slate-200 bg-white text-slate-600 transition-colors duration-300 hover:border-slate-300 hover:text-slate-900 dark:border-white/20 dark:bg-white/10 dark:text-white/70 dark:hover:border-white/40 dark:hover:text-white"
+                              className="flex h-8 w-8 items-center justify-center rounded-2xl border border-slate-200 bg-white text-slate-600 transition-colors duration-300 hover:border-slate-300 hover:text-slate-900 sm:h-9 sm:w-9 dark:border-white/20 dark:bg-white/10 dark:text-white/70 dark:hover:border-white/40 dark:hover:text-white"
                               prefetch={false}
                             >
-                              <ActionIcon className="h-4 w-4" />
+                              <ActionIcon className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
                             </Link>
                           );
                         })}
                       </div>
                     ) : (
-                      <Sparkles className="h-5 w-5 text-emerald-400 transition-transform duration-300 group-hover:animate-pulse group-hover:text-emerald-500 dark:text-white/40 dark:group-hover:text-white/80" />
+                      <Sparkles className="h-5 w-5 flex-shrink-0 text-emerald-400 transition-transform duration-300 group-hover:animate-pulse group-hover:text-emerald-500 dark:text-white/40 dark:group-hover:text-white/80" />
                     )}
                   </ScrollReveal>
                 );
