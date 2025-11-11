@@ -6,16 +6,16 @@ import Projects from '@/components/sections/projects';
 import Skills from '@/components/sections/skills';
 import { fetchLatestBlogPosts } from '@/lib/blog/blog-posts';
 import { fetchBlogSectionContent } from '@/lib/blog/blog-section-content';
-import { fetchContactSectionContent } from '@/lib/contact-content';
-import { fetchMarqueeItems } from '@/lib/marquee-items';
+import { fetchContactSectionContent } from '@/lib/contact/contact-section-content';
+import { fetchHeroSectionContent } from '@/lib/hero/hero-section-content';
 import { fetchFeaturedProjects } from '@/lib/projects/projects';
 import { fetchProjectsSectionContent } from '@/lib/projects/projects-section-content';
 import { fetchSkillsSectionContent } from '@/lib/skills/skills-section-content';
 
 export default async function Portfolio() {
-  const [marqueeItems, projectsContent, featuredProjects, skillsContent, blogContent, latestPosts, contactContent] =
+  const [heroContent, projectsContent, featuredProjects, skillsContent, blogContent, latestPosts, contactContent] =
     await Promise.all([
-      fetchMarqueeItems(),
+      fetchHeroSectionContent(),
       fetchProjectsSectionContent(),
       fetchFeaturedProjects(3),
       fetchSkillsSectionContent(),
@@ -24,27 +24,31 @@ export default async function Portfolio() {
       fetchContactSectionContent(),
     ]);
 
-  if (!contactContent) {
-    throw new Error('Contact section content is not configured in Contentful.');
-  }
-
-  if (!blogContent) {
-    throw new Error('Blog section content is not configured in Contentful.');
-  }
-
-  if (!skillsContent) {
-    throw new Error('Skills section content is not configured in Contentful.');
+  if (!heroContent) {
+    throw new Error('Hero section content is not configured in Contentful.');
   }
 
   if (!projectsContent) {
     throw new Error('Projects section content is not configured in Contentful.');
   }
 
+  if (!skillsContent) {
+    throw new Error('Skills section content is not configured in Contentful.');
+  }
+
+  if (!blogContent) {
+    throw new Error('Blog section content is not configured in Contentful.');
+  }
+
+  if (!contactContent) {
+    throw new Error('Contact section content is not configured in Contentful.');
+  }
+
   return (
     <div className="relative overflow-hidden">
       <AuroraBackground variant="portfolio" />
       <div className="relative flex flex-col gap-24 py-24 sm:gap-28 sm:py-32 lg:gap-32">
-        <Hero marqueeItems={marqueeItems} />
+        <Hero content={heroContent} />
         {featuredProjects.length ? (
           <Projects projects={featuredProjects} content={projectsContent} />
         ) : (

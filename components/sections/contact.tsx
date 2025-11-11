@@ -8,7 +8,7 @@ import { Rocket, Send, Sparkles, UserPlus } from 'lucide-react';
 import { SiViber } from 'react-icons/si';
 import { TbBrandGithub, TbBrandLinkedin, TbBrandWhatsapp } from 'react-icons/tb';
 
-import type { ContactSectionContent } from '@/lib/contact-content';
+import type { ContactSectionContent } from '@/lib/contact/contact-section-content';
 
 const contactLinks = [
   {

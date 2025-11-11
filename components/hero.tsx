@@ -1,4 +1,4 @@
-'use client';
+import type { HeroSectionContent } from '@/lib/hero/hero-section-content';
 
 import NextLink from 'next/link';
 
@@ -8,10 +8,12 @@ import { Button } from './ui/button';
 import { DraggableMarquee } from './ui/draggable-marquee';
 
 type HeroProps = {
-  marqueeItems: string[];
+  content: HeroSectionContent;
 };
 
-export default function Hero({ marqueeItems }: HeroProps) {
+export default function Hero({ content }: HeroProps) {
+  const { headlineHighlight, headlineSecondary, description, marqueeItems, cvUrl } = content;
+
   return (
     <section
       id="hero"
@@ -23,14 +25,11 @@ export default function Hero({ marqueeItems }: HeroProps) {
             <div className="flex flex-col gap-6">
               <h1 className="text-4xl leading-tight font-semibold sm:text-6xl sm:leading-[1.05] lg:text-7xl">
                 <span className="block">
-                  <span className="animate-gradient-text">Taulant Sela</span>
+                  <span className="animate-gradient-text">{headlineHighlight}</span>
                 </span>
-                <span className="block">Software Engineer turning ideas into refined products.</span>
+                <span className="block">{headlineSecondary}</span>
               </h1>
-              <p className="max-w-2xl text-lg text-slate-600 sm:text-xl dark:text-white/70">
-                Collaborating with teams to design and develop modern web products that are built with clean
-                architecture, reliable systems, and long-term maintainability in mind.
-              </p>
+              <p className="max-w-2xl text-lg text-slate-600 sm:text-xl dark:text-white/70">{description}</p>
             </div>
             <div className="flex flex-wrap gap-4">
               <Button
@@ -46,7 +45,7 @@ export default function Hero({ marqueeItems }: HeroProps) {
                 variant="outline"
                 className="border-slate-300 bg-white/70 text-slate-900 transition-transform duration-300 hover:-translate-y-1 hover:bg-white dark:border-white/40 dark:bg-white/10 dark:text-white dark:hover:bg-white/20"
               >
-                <a href="/cv.pdf" target="_blank" rel="noopener noreferrer">
+                <a href={cvUrl} target="_blank" rel="noopener noreferrer">
                   Download credentials
                 </a>
               </Button>
