@@ -5,15 +5,21 @@ import Contact from '@/components/sections/contact';
 import Projects from '@/components/sections/projects';
 import Skills from '@/components/sections/skills';
 import { fetchLatestBlogPosts } from '@/lib/blog-posts';
+import { fetchContactSectionContent } from '@/lib/contact-content';
 import { fetchMarqueeItems } from '@/lib/marquee-items';
 import { fetchFeaturedProjects } from '@/lib/projects';
 
 export default async function Portfolio() {
-  const [marqueeItems, featuredProjects, latestPosts] = await Promise.all([
+  const [marqueeItems, featuredProjects, latestPosts, contactContent] = await Promise.all([
     fetchMarqueeItems(),
     fetchFeaturedProjects(3),
     fetchLatestBlogPosts(3),
+    fetchContactSectionContent(),
   ]);
+
+  if (!contactContent) {
+    throw new Error('Contact section content is not configured in Contentful.');
+  }
 
   return (
     <div className="relative overflow-hidden">
@@ -49,7 +55,7 @@ export default async function Portfolio() {
             </div>
           </section>
         )}
-        <Contact />
+        <Contact content={contactContent} />
       </div>
     </div>
   );

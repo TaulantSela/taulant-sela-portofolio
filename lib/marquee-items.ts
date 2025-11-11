@@ -14,7 +14,7 @@ type ContentfulMarqueeItemFields = {
   order?: EntryFieldTypes.Integer;
 };
 
-type ContentfulMarqueeItemSkeleton = EntrySkeletonType<ContentfulMarqueeItemFields, 'marqueeItem'>;
+type ContentfulMarqueeItemSkeleton = EntrySkeletonType<ContentfulMarqueeItemFields, string>;
 type ContentfulMarqueeItemEntry = Entry<ContentfulMarqueeItemSkeleton>;
 
 function mapMarqueeItem(entry: ContentfulMarqueeItemEntry): MarqueeItem | null {
@@ -33,6 +33,8 @@ function mapMarqueeItem(entry: ContentfulMarqueeItemEntry): MarqueeItem | null {
   };
 }
 
+const marqueeContentTypeId = process.env.CONTENTFUL_MARQUEE_CONTENT_TYPE_ID ?? 'marqueeItem';
+
 export const fetchMarqueeItems = cache(async (): Promise<string[]> => {
   if (!isContentfulConfigured) {
     return [];
@@ -41,7 +43,7 @@ export const fetchMarqueeItems = cache(async (): Promise<string[]> => {
   try {
     const client = getContentfulClient();
     const entries = await client.getEntries<ContentfulMarqueeItemSkeleton>({
-      content_type: 'marqueeItem',
+      content_type: marqueeContentTypeId,
       include: 0,
     });
 
@@ -60,7 +62,7 @@ export const fetchMarqueeItems = cache(async (): Promise<string[]> => {
       })
       .map((item) => item.label);
   } catch (error) {
-    console.error('Failed to fetch marquee items from Contentful', error);
+    console.error(`Failed to fetch marquee items from Contentful (content_type="${marqueeContentTypeId}")`, error);
     return [];
   }
 });

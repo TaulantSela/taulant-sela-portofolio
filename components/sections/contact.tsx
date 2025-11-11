@@ -8,6 +8,8 @@ import { Rocket, Send, Sparkles, UserPlus } from 'lucide-react';
 import { SiViber } from 'react-icons/si';
 import { TbBrandGithub, TbBrandLinkedin, TbBrandWhatsapp } from 'react-icons/tb';
 
+import type { ContactSectionContent } from '@/lib/contact-content';
+
 const contactLinks = [
   {
     title: 'Email',
@@ -53,7 +55,13 @@ const contactLinks = [
   },
 ];
 
-export default function Contact() {
+type ContactProps = {
+  content: ContactSectionContent;
+};
+
+export default function Contact({ content }: ContactProps) {
+  const { eyebrow, heading, description, highlightLabel, highlightDescription } = content;
+
   return (
     <section
       id="contact"
@@ -64,15 +72,12 @@ export default function Contact() {
           <header className="space-y-6 text-center">
             <div className="mx-auto flex max-w-md items-center justify-center gap-3 rounded-full border border-slate-200/60 bg-white/70 px-4 py-2.5 text-xs tracking-[0.2em] text-slate-500 sm:px-5 sm:py-3 sm:text-sm sm:tracking-[0.3em] dark:border-white/15 dark:bg-white/10 dark:text-white/70">
               <Rocket className="h-4 w-4 flex-shrink-0 text-emerald-500 dark:text-purple-300" />
-              <span className="truncate">Let&apos;s build something amazing</span>
+              <span className="truncate">{eyebrow}</span>
             </div>
             <h2 className="text-3xl leading-tight font-semibold text-slate-900 sm:text-4xl lg:text-5xl dark:text-white">
-              Ready to bring your next idea to life?
+              {heading}
             </h2>
-            <p className="mx-auto max-w-2xl text-base text-slate-600 sm:text-lg dark:text-white/70">
-              Ready to ship your next big thing? Tell me the vision, the constraints, or the gap you need to close, and
-              I&apos;ll chart the path from idea to launch.
-            </p>
+            <p className="mx-auto max-w-2xl text-base text-slate-600 sm:text-lg dark:text-white/70">{description}</p>
           </header>
         </ScrollReveal>
 
@@ -80,12 +85,9 @@ export default function Contact() {
           <div className="space-y-4 lg:space-y-6">
             <ScrollReveal className="rounded-3xl border border-slate-200 bg-white/95 p-6 shadow-[0_24px_70px_rgba(15,23,42,0.12)] sm:p-8 dark:border-white/15 dark:bg-white/[0.06] dark:shadow-[0_24px_70px_rgba(15,23,42,0.55)]">
               <div className="flex items-center justify-between text-xs tracking-[0.3em] text-slate-500 uppercase sm:tracking-[0.4em] dark:text-white/60">
-                <span className="text-slate-600 dark:text-white/70">How I work</span>
+                <span className="text-slate-600 dark:text-white/70">{highlightLabel}</span>
               </div>
-              <p className="mt-4 text-sm text-slate-600 sm:mt-6 dark:text-white/70">
-                I stay close to product, design, and engineering partners—listening first, iterating thoughtfully, and
-                shipping software that feels personal and dependable.
-              </p>
+              <p className="mt-4 text-sm text-slate-600 sm:mt-6 dark:text-white/70">{highlightDescription}</p>
             </ScrollReveal>
 
             <div className="space-y-4">

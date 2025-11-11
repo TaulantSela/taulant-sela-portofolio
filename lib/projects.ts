@@ -37,7 +37,7 @@ type ContentfulProjectFields = {
   featuredIndex?: EntryFieldTypes.Integer;
 };
 
-type ContentfulProjectSkeleton = EntrySkeletonType<ContentfulProjectFields, 'project'>;
+type ContentfulProjectSkeleton = EntrySkeletonType<ContentfulProjectFields, string>;
 type ContentfulProjectEntry = Entry<ContentfulProjectSkeleton>;
 
 function mapProject(entry: ContentfulProjectEntry): Project | null {
@@ -108,10 +108,12 @@ export const fetchProjects = cache(async (): Promise<Project[]> => {
     return [];
   }
 
+  const projectContentTypeId = process.env.CONTENTFUL_PROJECT_CONTENT_TYPE_ID ?? 'project';
+
   try {
     const client = getContentfulClient();
     const entries = await client.getEntries<ContentfulProjectSkeleton>({
-      content_type: 'project',
+      content_type: projectContentTypeId,
       order: ['fields.featuredIndex', '-sys.createdAt'],
       include: 2,
     });
@@ -129,7 +131,7 @@ export const fetchProjects = cache(async (): Promise<Project[]> => {
       return a.title.localeCompare(b.title);
     });
   } catch (error) {
-    console.error('Failed to fetch projects from Contentful', error);
+    console.error(`Failed to fetch projects from Contentful (content_type="${projectContentTypeId}")`, error);
     return [];
   }
 });

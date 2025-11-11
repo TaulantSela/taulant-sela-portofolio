@@ -29,7 +29,7 @@ type ContentfulBlogPostFields = {
   heroImage?: EntryFieldTypes.AssetLink;
 };
 
-type ContentfulBlogPostSkeleton = EntrySkeletonType<ContentfulBlogPostFields, 'post'>;
+type ContentfulBlogPostSkeleton = EntrySkeletonType<ContentfulBlogPostFields, string>;
 type ContentfulBlogPostEntry = Entry<ContentfulBlogPostSkeleton>;
 
 function mapBlogPost(entry: ContentfulBlogPostEntry): BlogPost | null {
@@ -68,17 +68,19 @@ export const fetchBlogPosts = cache(async (): Promise<BlogPost[]> => {
     return [];
   }
 
+  const blogPostContentTypeId = process.env.CONTENTFUL_BLOG_POST_CONTENT_TYPE_ID ?? 'post';
+
   try {
     const client = getContentfulClient();
     const entries = await client.getEntries<ContentfulBlogPostSkeleton>({
-      content_type: 'post',
+      content_type: blogPostContentTypeId,
       order: ['-fields.publishDate'],
       include: 2,
     });
 
     return entries.items.map(mapBlogPost).filter((post): post is BlogPost => Boolean(post));
   } catch (error) {
-    console.error('Failed to fetch blog posts from Contentful', error);
+    console.error(`Failed to fetch blog posts from Contentful (content_type="${blogPostContentTypeId}")`, error);
     return [];
   }
 });
