@@ -10,6 +10,12 @@
 
   <p>Personal portfolio built with Next.js, TypeScript and Contentful.</p>
 
+  <p>
+    <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://taulantsela.com" alt="QR Code - Scan to visit portfolio" />
+  </p>
+
+  <p><em>Scan the QR code to visit my portfolio</em></p>
+
 </div>
 
 ---
