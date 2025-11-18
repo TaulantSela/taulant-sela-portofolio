@@ -1,8 +1,9 @@
+import { AuroraBackground } from '@/components/aurora-background';
 import Footer from '@/components/footer';
 import Navigation from '@/components/navigation';
 import { ThemeProvider } from '@/components/theme-provider';
-import { AuroraBackground } from '@/components/aurora-background';
 import { Analytics } from '@vercel/analytics/next';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 import { GeistMono } from 'geist/font/mono';
 import { GeistSans } from 'geist/font/sans';
 import type { Metadata } from 'next';
@@ -143,6 +144,7 @@ export default function RootLayout({
               <AuroraBackground />
               {children}
               <Analytics />
+              <SpeedInsights />
             </main>
             <Footer />
           </div>
