@@ -63,7 +63,7 @@ export function ContactForm() {
 
   if (isSubmitted) {
     return (
-      <Card className="animate-in fade-in-50 mx-auto flex h-full w-full max-w-2xl flex-col border border-slate-200 bg-white/95 p-8 text-slate-900 shadow-[0_24px_70px_rgba(15,23,42,0.12)] backdrop-blur duration-500 dark:border-white/10 dark:bg-white/[0.08] dark:text-white dark:shadow-[0_24px_70px_rgba(15,23,42,0.55)]">
+      <Card className="animate-in fade-in-50 mx-auto flex h-full w-full max-w-2xl flex-col rounded-[calc(1.5rem-0.25rem)] border border-slate-200 bg-white/95 p-8 text-slate-900 shadow-[0_24px_70px_rgba(15,23,42,0.12)] backdrop-blur duration-500 dark:border-white/10 dark:bg-white/8 dark:text-white dark:shadow-[0_24px_70px_rgba(15,23,42,0.55)]">
         <CardContent className="flex flex-1 flex-col items-center justify-center p-0 text-center">
           <CheckCircle className="mx-auto mb-4 h-16 w-16 text-emerald-400 dark:text-emerald-300" />
           <h3 className="mb-2 text-2xl font-semibold">Message sent successfully!</h3>
@@ -76,7 +76,7 @@ export function ContactForm() {
   }
 
   return (
-    <Card className="animate-in slide-in-from-bottom-5 mx-auto flex h-full w-full max-w-2xl flex-col border border-slate-200 bg-white/95 text-slate-900 shadow-[0_24px_70px_rgba(15,23,42,0.12)] backdrop-blur duration-700 dark:border-white/10 dark:bg-slate-950/70 dark:text-white dark:shadow-[0_24px_70px_rgba(15,23,42,0.55)]">
+    <Card className="animate-in slide-in-from-bottom-5 mx-auto flex h-full w-full max-w-2xl flex-col rounded-[calc(1.5rem-0.25rem)] border border-slate-200 bg-white/95 text-slate-900 shadow-[0_24px_70px_rgba(15,23,42,0.12)] backdrop-blur duration-700 dark:border-white/10 dark:bg-slate-950/70 dark:text-white dark:shadow-[0_24px_70px_rgba(15,23,42,0.55)]">
       <CardHeader className="border-b border-slate-200/70 pb-8 text-center dark:border-white/10">
         <CardTitle className="text-2xl">Send me a message</CardTitle>
         <CardDescription className="text-slate-600 dark:text-white/60">
