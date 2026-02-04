@@ -3,22 +3,13 @@
 import Image from 'next/image';
 import { useEffect, useMemo, useState } from 'react';
 
-type ContributionDay = {
-  date: string;
-  count: number;
-};
-
-type ApiContributionDay = ContributionDay & {
-  color?: string;
-};
-
-type ContributionsResponse = {
-  totalContributions?: number;
-  weeks?: Array<{
-    contributionDays: ApiContributionDay[];
-  }>;
-  contributions?: ApiContributionDay[];
-};
+import {
+  CURRENT_YEAR,
+  GITHUB_USERNAME,
+  YEARS,
+  fetchContributionsRange,
+} from '@/lib/github/contributions-api';
+import { buildYearlyData, getColorIndex, type YearlyData } from '@/lib/github/contributions-helpers';
 
 const COLOR_SCALE = [
   'bg-emerald-50/80 dark:bg-emerald-200/20',
@@ -32,118 +23,76 @@ const TILE_SIZE = 10;
 const TILE_GAP = 2;
 const DAY_LABELS = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
 
-const USERNAME = 'TaulantSela';
-const CURRENT_YEAR = new Date().getFullYear();
-const START_YEAR = 2017;
-const YEARS = Array.from({ length: CURRENT_YEAR - START_YEAR + 1 }, (_, idx) => CURRENT_YEAR - idx);
-const API_BASE = 'https://github-contributions-api.jogruber.de/v4';
-const fallbackChartUrl = `https://ghchart.rshah.org/4062FF/${USERNAME}`;
-
-function getColorIndex(count: number) {
-  if (count === 0) return 0;
-  if (count < 3) return 1;
-  if (count < 6) return 2;
-  if (count < 11) return 3;
-  return 4;
-}
+const fallbackChartUrl = `https://ghchart.rshah.org/4062FF/${GITHUB_USERNAME}`;
 
 export default function GithubContributions() {
-  const [activeYear, setActiveYear] = useState<number>(CURRENT_YEAR);
-  const [pendingYear, setPendingYear] = useState<number | null>(CURRENT_YEAR);
-  const [yearData, setYearData] = useState<Record<number, ContributionsResponse>>({});
+  const [activeYear, setActiveYear] = useState<number | null>(null);
+  const [yearData, setYearData] = useState<Record<number, YearlyData>>({});
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    if (pendingYear === null) return;
-
-    const controller = new AbortController();
-    const year = pendingYear;
-    const from = `${year}-01-01`;
-    const to = `${year}-12-31`;
-    const url = `${API_BASE}/${USERNAME}?from=${from}&to=${to}`;
-
     let cancelled = false;
+    const controller = new AbortController();
 
-    setError(null);
-    setIsLoading(true);
+    async function preloadYears() {
+      setIsLoading(true);
+      setError(null);
 
-    fetch(url, { cache: 'no-store', signal: controller.signal })
-      .then(async (res) => {
-        if (!res.ok) {
-          throw new Error(`Status ${res.status}`);
+      try {
+        const response = await fetchContributionsRange({ signal: controller.signal });
+        if (cancelled) return;
+
+        const nextData = buildYearlyData(response.contributions, response.total);
+        const bestYear = YEARS.reduce((best, year) =>
+          nextData[year].total > nextData[best].total ? year : best,
+        YEARS[0]);
+
+        setYearData(nextData);
+        setActiveYear(bestYear);
+      } catch (error) {
+        const isAbortError =
+          error instanceof DOMException && error.name === 'AbortError';
+
+        if (!isAbortError) {
+          if (!cancelled) {
+            setError('Unable to load.');
+          }
+          console.error('Failed to load GitHub contributions', error);
         }
-        const json = (await res.json()) as ContributionsResponse;
+      } finally {
         if (!cancelled) {
-          setYearData((prev) => ({ ...prev, [year]: json }));
-          setActiveYear(year);
-          setPendingYear(null);
           setIsLoading(false);
         }
-      })
-      .catch((err) => {
-        if (!cancelled && err.name !== 'AbortError') {
-          setError('Unable to load.');
-          setPendingYear(null);
-          setIsLoading(false);
-        }
-      });
+      }
+    }
+
+    preloadYears();
 
     return () => {
       cancelled = true;
       controller.abort();
     };
-  }, [pendingYear]);
+  }, []);
 
-  const activeData = yearData[activeYear];
-
-  const normalizedDays = useMemo(() => {
-    const map = new Map<string, number>();
-    if (activeData) {
-      if (Array.isArray(activeData.weeks)) {
-        activeData.weeks.forEach((week) => {
-          week.contributionDays.forEach((day) => {
-            if (day?.date) {
-              map.set(day.date, day.count);
-            }
-          });
-        });
-      }
-      if (Array.isArray(activeData.contributions)) {
-        activeData.contributions.forEach((day) => {
-          if (day?.date) {
-            map.set(day.date, day.count);
-          }
-        });
-      }
-    }
-
-    const startOfYear = new Date(Date.UTC(activeYear, 0, 1));
-    const endOfYear = new Date(Date.UTC(activeYear, 11, 31));
-
-    const days: ContributionDay[] = [];
-    for (let ts = startOfYear.getTime(); ts <= endOfYear.getTime(); ts += 24 * 60 * 60 * 1000) {
-      const iso = new Date(ts).toISOString().slice(0, 10);
-      days.push({ date: iso, count: map.get(iso) ?? 0 });
-    }
-
-    return days;
-  }, [activeData, activeYear]);
+  const activeData = activeYear === null ? undefined : yearData[activeYear];
+  const normalizedDays = useMemo(() => activeData?.contributions ?? [], [activeData]);
+  const total = activeData?.total ?? 0;
+  const activeYearLabel = activeYear ?? CURRENT_YEAR;
 
   const firstDayOffset = useMemo(() => {
+    if (activeYear === null) return 0;
     const startOfYear = new Date(Date.UTC(activeYear, 0, 1));
     return (startOfYear.getUTCDay() + 6) % 7;
   }, [activeYear]);
 
-  const total = useMemo(() => normalizedDays.reduce((acc, day) => acc + day.count, 0), [normalizedDays]);
-  const showGrid = normalizedDays.length > 0;
+  const showGrid = normalizedDays.length > 0 && !isLoading;
   // Always use 53 weeks for consistent width across all years
   const fixedWeekCount = 53;
   const heatmapWidth = fixedWeekCount * (TILE_SIZE + TILE_GAP) - TILE_GAP;
-  const skeletonWidth = fixedWeekCount * (TILE_SIZE + TILE_GAP) - TILE_GAP;
 
   const monthPositions = useMemo(() => {
-    if (normalizedDays.length === 0) return [];
+    if (normalizedDays.length === 0 || activeYear === null) return [];
 
     const positions: Array<{ label: string; offset: number }> = [];
     let currentMonth = -1;
@@ -183,17 +132,9 @@ export default function GithubContributions() {
   }, [normalizedDays, activeYear, firstDayOffset]);
 
   const handleYearClick = (year: number) => {
-    if (year === activeYear || pendingYear === year) return;
-
-    if (yearData[year]) {
-      setActiveYear(year);
-      setError(null);
-      setIsLoading(false);
-      setPendingYear(null);
-      return;
-    }
-
-    setPendingYear(year);
+    if (year === activeYear) return;
+    if (!yearData[year]) return;
+    setActiveYear(year);
   };
 
   return (
@@ -208,12 +149,12 @@ export default function GithubContributions() {
             <div className="pointer-events-none absolute inset-0 bg-white/68 dark:bg-slate-900/40" />
             <div className="pointer-events-none absolute inset-0 border border-white/40 mix-blend-overlay dark:border-white/10" />
 
-            <div className="relative flex min-h-[20px] items-center text-xs tracking-[0.3em] text-slate-400 uppercase dark:text-white/50">
+            <div className="relative flex min-h-5 items-center text-xs tracking-[0.3em] text-slate-400 uppercase dark:text-white/50">
               {!showGrid && isLoading ? (
                 <span>Loading…</span>
               ) : showGrid ? (
                 <span>
-                  {total.toLocaleString()} {total === 1 ? 'contribution' : 'contributions'} in {activeYear}
+                  {total.toLocaleString()} {total === 1 ? 'contribution' : 'contributions'} in {activeYearLabel}
                 </span>
               ) : (
                 <span>Snapshot</span>
@@ -295,7 +236,7 @@ export default function GithubContributions() {
                       gridAutoFlow: 'column',
                       columnGap: TILE_GAP,
                       rowGap: TILE_GAP,
-                      width: skeletonWidth,
+                      width: heatmapWidth,
                     }}
                   >
                     {Array.from({ length: fixedWeekCount * 7 }).map((_, index) => (
@@ -311,7 +252,7 @@ export default function GithubContributions() {
                 <div className="flex w-full justify-center py-4">
                   <Image
                     src={fallbackChartUrl}
-                    alt={`GitHub contributions for ${USERNAME}`}
+                    alt={`GitHub contributions for ${GITHUB_USERNAME}`}
                     width={720}
                     height={180}
                     className="h-auto w-full max-w-lg rounded border border-white/40 object-cover dark:border-white/10"
@@ -336,12 +277,12 @@ export default function GithubContributions() {
               key={year}
               type="button"
               onClick={() => handleYearClick(year)}
-              disabled={pendingYear === year}
+              disabled={isLoading}
               className={`cursor-pointer rounded-full border px-3 py-1 text-[11px] tracking-[0.35em] whitespace-nowrap uppercase transition-colors duration-300 disabled:cursor-not-allowed ${
                 year === activeYear
                   ? 'border-emerald-400 text-emerald-500 dark:border-emerald-300 dark:text-emerald-200'
                   : 'border-slate-200 text-slate-500 hover:border-slate-300 hover:text-slate-900 dark:border-white/15 dark:text-white/60 dark:hover:border-white/40 dark:hover:text-white'
-              } ${pendingYear === year ? 'opacity-60' : ''}`}
+              }`}
             >
               {year}
             </button>
@@ -354,7 +295,7 @@ export default function GithubContributions() {
           <span>Less</span>
           <span className="flex items-center gap-1">
             {COLOR_SCALE.map((color) => (
-              <span key={color} className={`h-2 w-4 rounded-[4px] ${color}`} />
+              <span key={color} className={`h-2 w-4 rounded-lg ${color}`} />
             ))}
           </span>
           <span>More</span>
