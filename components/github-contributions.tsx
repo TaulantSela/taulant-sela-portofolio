@@ -3,12 +3,7 @@
 import Image from 'next/image';
 import { useEffect, useMemo, useState } from 'react';
 
-import {
-  CURRENT_YEAR,
-  GITHUB_USERNAME,
-  YEARS,
-  fetchContributionsRange,
-} from '@/lib/github/contributions-api';
+import { CURRENT_YEAR, GITHUB_USERNAME, YEARS, fetchContributionsRange } from '@/lib/github/contributions-api';
 import { buildYearlyData, getColorIndex, type YearlyData } from '@/lib/github/contributions-helpers';
 
 const COLOR_SCALE = [
@@ -44,15 +39,15 @@ export default function GithubContributions() {
         if (cancelled) return;
 
         const nextData = buildYearlyData(response.contributions, response.total);
-        const bestYear = YEARS.reduce((best, year) =>
-          nextData[year].total > nextData[best].total ? year : best,
-        YEARS[0]);
+        const bestYear = YEARS.reduce(
+          (best, year) => (nextData[year].total > nextData[best].total ? year : best),
+          YEARS[0],
+        );
 
         setYearData(nextData);
         setActiveYear(bestYear);
       } catch (error) {
-        const isAbortError =
-          error instanceof DOMException && error.name === 'AbortError';
+        const isAbortError = error instanceof DOMException && error.name === 'AbortError';
 
         if (!isAbortError) {
           if (!cancelled) {
