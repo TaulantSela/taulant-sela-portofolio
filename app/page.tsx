@@ -11,6 +11,8 @@ import { fetchFeaturedProjects } from '@/lib/projects/projects';
 import { fetchProjectsSectionContent } from '@/lib/projects/projects-section-content';
 import { fetchSkillsSectionContent } from '@/lib/skills/skills-section-content';
 
+export const revalidate = false;
+
 export default async function Portfolio() {
   const [heroContent, projectsContent, featuredProjects, skillsContent, blogContent, latestPosts, contactContent] =
     await Promise.all([
