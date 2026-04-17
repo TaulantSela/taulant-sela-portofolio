@@ -14,6 +14,8 @@ const siteUrl = 'https://taulantsela.com';
 const pageUrl = `${siteUrl}/blog`;
 const socialImage = `${siteUrl}/og-image.svg`;
 
+export const revalidate = false;
+
 export const metadata: Metadata = {
   title: 'Blog',
   description:
