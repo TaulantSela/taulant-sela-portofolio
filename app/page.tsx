@@ -11,8 +11,6 @@ import { fetchFeaturedProjects } from '@/lib/projects/projects';
 import { fetchProjectsSectionContent } from '@/lib/projects/projects-section-content';
 import { fetchSkillsSectionContent } from '@/lib/skills/skills-section-content';
 
-export const revalidate = 60;
-
 export default async function Portfolio() {
   const [heroContent, projectsContent, featuredProjects, skillsContent, blogContent, latestPosts, contactContent] =
     await Promise.all([
@@ -24,26 +22,6 @@ export default async function Portfolio() {
       fetchLatestBlogPosts(3),
       fetchContactSectionContent(),
     ]);
-
-  if (!heroContent) {
-    throw new Error('Hero section content is not configured in Contentful.');
-  }
-
-  if (!projectsContent) {
-    throw new Error('Projects section content is not configured in Contentful.');
-  }
-
-  if (!skillsContent) {
-    throw new Error('Skills section content is not configured in Contentful.');
-  }
-
-  if (!blogContent) {
-    throw new Error('Blog section content is not configured in Contentful.');
-  }
-
-  if (!contactContent) {
-    throw new Error('Contact section content is not configured in Contentful.');
-  }
 
   return (
     <div className="relative overflow-hidden">

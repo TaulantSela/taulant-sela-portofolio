@@ -14,8 +14,6 @@ const siteUrl = 'https://taulantsela.com';
 const pageUrl = `${siteUrl}/blog`;
 const socialImage = `${siteUrl}/og-image.svg`;
 
-export const revalidate = 60;
-
 export const metadata: Metadata = {
   title: 'Blog',
   description:
@@ -54,10 +52,6 @@ export const metadata: Metadata = {
 
 export default async function BlogPage() {
   const [posts, pageContent] = await Promise.all([fetchBlogPosts(), fetchBlogPageContent()]);
-
-  if (!pageContent) {
-    throw new Error('Blog page content is not configured in Contentful.');
-  }
 
   const { heading, description } = pageContent;
 
