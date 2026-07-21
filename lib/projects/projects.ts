@@ -225,6 +225,140 @@ export const projects: Project[] = [
     context:
       'The platform combines a modern PHP + MySQL frontend with an authenticated admin dashboard to add devices, manage categories, and publish service offerings without touching code.',
   },
+  {
+    id: 'watchpaper',
+    featuredIndex: null,
+    title: 'WatchPaper - Watch Dial Wallpapers',
+    role: 'personal',
+    tags: ['Next.js', 'React 19', 'TypeScript', 'SVG Generation', 'iOS Shortcuts'],
+    imageFit: 'contain',
+    image: '/placeholder.png',
+    links: [
+      { label: 'Live Demo', href: 'https://watchpaper.vercel.app' },
+      { label: 'GitHub', href: 'https://github.com/TaulantSela/watchpaper', icon: 'github' },
+    ],
+    description:
+      'Wallpaper generator that turns iconic watch dials into logo-free color-and-texture lock screens, plus a studio that extracts a palette from a photo of your own watch on-device.',
+    context:
+      'Built a parametric SVG generator with server-side PNG rendering via resvg, on-device k-means palette extraction, and an iOS Shortcuts integration for one-tap wallpaper setting.',
+  },
+  {
+    id: 'claude-code-semaphore',
+    featuredIndex: null,
+    title: 'Claude Code Semaphore - Menu Bar Status Light',
+    role: 'oss',
+    tags: ['Go', 'Claude Code Plugin', 'Shell', 'Cross-Platform', 'CI/CD'],
+    imageFit: 'contain',
+    image: '/placeholder.png',
+    links: [
+      { label: 'GitHub', href: 'https://github.com/TaulantSela/claude-code-semaphore', icon: 'github' },
+    ],
+    description:
+      'Published Claude Code plugin that drives a menu-bar traffic light—red when Claude needs you, orange while it works, green when done—visible from any window on macOS, Windows, and Linux.',
+    context:
+      'Shipped a cross-platform Go tray binary, a shell-hook plugin, and an automated GitHub Actions release pipeline, distributed through the Claude Code plugin marketplace.',
+  },
+  {
+    id: 'bookslot',
+    featuredIndex: null,
+    title: 'BookSlot - Appointment Booking SaaS',
+    role: 'personal',
+    tags: ['Next.js', 'React 19', 'TypeScript', 'Drizzle', 'Turso', 'Resend'],
+    imageFit: 'contain',
+    image: '/placeholder.png',
+    links: [{ label: 'GitHub', href: 'https://github.com/TaulantSela/bookslot', icon: 'github' }],
+    description:
+      'Multi-tenant appointment-booking SaaS giving local service businesses a public booking page, an embeddable widget, a management dashboard, and automated email reminders.',
+    context:
+      'Built end to end with multi-tenant auth, Drizzle on Turso/libSQL, Resend email, and a Vercel cron job for daily reminders.',
+  },
+  {
+    id: 'fakt',
+    featuredIndex: null,
+    title: 'Fakt - North Macedonia E-Invoicing',
+    role: 'personal',
+    tags: ['Next.js', 'React 19', 'TypeScript', 'Prisma', 'NextAuth', 'XAdES'],
+    imageFit: 'contain',
+    image: '/placeholder.png',
+    links: [{ label: 'GitHub', href: 'https://github.com/TaulantSela/fakt', icon: 'github' }],
+    description:
+      'Electronic invoicing app for North Macedonia that creates UBL invoices and submits them to the government UJP e-Faktura system, including qualified electronic signature (XAdES) signing.',
+    context:
+      'Implemented OAuth to the UJP platform, XAdES-BES qualified signing with WebCrypto, internationalization, and a Prisma/NextAuth data layer for a non-trivial regulatory domain.',
+  },
+  {
+    id: 'react-state-management-thesis',
+    featuredIndex: null,
+    title: 'Master Thesis - React State Management Study',
+    role: 'personal',
+    tags: ['React', 'Redux Toolkit', 'Zustand', 'Vite', 'Benchmarking'],
+    imageFit: 'contain',
+    image: '/placeholder.png',
+    links: [{ label: 'GitHub', href: 'https://github.com/TaulantSela/master-thesis', icon: 'github' }],
+    description:
+      'Empirical master-thesis study testing whether React state-management performance depends on application type, benchmarking Multiple Contexts against Redux Toolkit across read-heavy, form, and real-time apps.',
+    context:
+      'Built six comparable apps in a monorepo with Vitest benchmarking, a developer-experience survey, and written performance and DX analysis reports.',
+  },
+  {
+    id: 'watchcrop',
+    featuredIndex: null,
+    title: 'WatchCrop - Daily Watch Guessing Game',
+    role: 'personal',
+    tags: ['Next.js', 'TypeScript', 'Neon', 'Drizzle', 'Tailwind CSS'],
+    imageFit: 'contain',
+    image: '/placeholder.png',
+    links: [{ label: 'GitHub', href: 'https://github.com/TaulantSela/watchcrop', icon: 'github' }],
+    description:
+      'Daily guess-the-watch game that starts zoomed into a dial detail and zooms out on each wrong guess—name the brand and model before the full reveal.',
+    context:
+      'Designed a server-authoritative anti-cheat flow with HMAC-signed state, a dual-database setup (Neon Postgres + PGlite), and a Sharp-based crop pipeline, with product and risk docs gating the launch.',
+  },
+  {
+    id: 'freelancr',
+    featuredIndex: null,
+    title: 'Freelancr - Freelancer Tax & Invoicing (MK)',
+    role: 'personal',
+    tags: ['Next.js', 'React 19', 'TypeScript', 'Drizzle', 'Neon', 'JWT'],
+    imageFit: 'contain',
+    image: '/placeholder.png',
+    links: [
+      { label: 'Live Demo', href: 'https://freelancr.vercel.app' },
+      { label: 'GitHub', href: 'https://github.com/TaulantSela/freelancr', icon: 'github' },
+    ],
+    description:
+      'Invoicing and tax-compliance SaaS for North Macedonia freelancers, covering multi-currency invoicing, VAT threshold monitoring, income-tax brackets, and quarterly deadline tracking.',
+    context:
+      'Built the full stack with Server Actions, Drizzle on Neon, custom JWT sessions, and PDF invoice rendering, encoding local tax logic ahead of the 2026 e-invoicing mandate.',
+  },
+  {
+    id: 'soundscape',
+    featuredIndex: null,
+    title: 'Soundscape - Ambient Audio Mixer',
+    role: 'personal',
+    tags: ['Monorepo', 'Next.js', 'Expo', 'Electron', 'Express', 'Prisma'],
+    imageFit: 'contain',
+    image: '/placeholder.png',
+    links: [{ label: 'GitHub', href: 'https://github.com/TaulantSela/soundscape', icon: 'github' }],
+    description:
+      'Cross-platform ambient-audio mixer for blending curated sound layers into a shareable mix, delivered across web, mobile, desktop, and an API from one codebase.',
+    context:
+      'Structured an npm-workspaces monorepo spanning a Next.js web client, an Expo mobile app, an Electron desktop shell, and an Express/Prisma API with shared audio and config packages.',
+  },
+  {
+    id: 'ui-library',
+    featuredIndex: null,
+    title: 'UI Library - Component System & Storybook',
+    role: 'oss',
+    tags: ['Monorepo', 'React 19', 'Storybook', 'shadcn/ui', 'Playwright'],
+    imageFit: 'contain',
+    image: '/placeholder.png',
+    links: [{ label: 'GitHub', href: 'https://github.com/TaulantSela/ui-library', icon: 'github' }],
+    description:
+      'Component-library monorepo with a shared UI package documented in Storybook and consumed by multiple demo apps.',
+    context:
+      'Set up a workspaces monorepo with shadcn/Base UI components, Storybook with accessibility and docs addons, and Vitest plus Playwright browser testing.',
+  },
 ];
 
 export const fetchProjects = cache(async (): Promise<Project[]> => projects);
