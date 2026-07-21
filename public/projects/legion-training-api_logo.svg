@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" role="img" aria-labelledby="title desc">
+  <title id="title">Legion Training Platform API Logo</title>
+  <desc id="desc">Minimal badge with stylized L glyph and gradient background</desc>
+  <defs>
+    <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#111827" />
+      <stop offset="100%" stop-color="#1f2937" />
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#8b5cf6" />
+      <stop offset="100%" stop-color="#06b6d4" />
+    </linearGradient>
+  </defs>
+  <rect width="400" height="400" rx="28" fill="url(#gradient)" />
+  <g transform="translate(80 80)">
+    <rect x="0" y="0" width="32" height="240" rx="16" fill="#e5e7eb" opacity="0.85" />
+    <path d="M60 208h152c40 0 72-32 72-72s-32-72-72-72H132" fill="none" stroke="url(#accent)" stroke-width="32" stroke-linecap="round" stroke-linejoin="round" />
+    <circle cx="228" cy="136" r="20" fill="#f9fafb" />
+  </g>
+  <text x="50%" y="360" text-anchor="middle" font-family="'Inter', 'Helvetica Neue', Arial, sans-serif" font-size="36" fill="#f9fafb" opacity="0.9">
+    Legion API
+  </text>
+</svg>

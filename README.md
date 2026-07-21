@@ -8,7 +8,7 @@
     <a href="https://taulantsela.com" target="_blank" rel="noopener noreferrer"><strong>Visit the Live Site ↗</strong></a>
   </p>
 
-  <p>Personal portfolio built with Next.js, TypeScript and Contentful.</p>
+  <p>Personal portfolio built with Next.js and TypeScript.</p>
 
   <p>
     <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://taulantsela.com" alt="QR Code - Scan to visit portfolio" />
@@ -46,29 +46,16 @@ This project uses [`next/font`](https://nextjs.org/docs/app/building-your-applic
 
 - `docs/project-overview.md` — architecture summary, integrations and update log. Update this file with every noticeable change.
 
-## Contentful setup
+## Content
 
-1. Create a free [Contentful](https://www.contentful.com/) space and add a dataset (environment) – the default is `master`.
-2. Define the content models used by the site:
-   - `Post` (`post`) with fields for title, slug, excerpt, publishDate, readTime, category, author, externalUrl, imageFit (optional enum: `cover`, `contain`), and heroImage (asset).
-   - `Project` (`project`) with fields for title, slug, description, context, tags (short text list), role (enum: `company`, `personal`, `oss`), links (JSON array of `{ label, href, icon }`), imageFit (optional enum), heroImage (asset), and featuredIndex (number for ordering highlights).
-   - `Blog Page` (`blogPage`) with single-entry fields for heading (short text) and description (long text).
-   - `Projects Page` (`projectsPage`) with single-entry fields for heading (short text) and description (long text).
-3. Generate a Content Delivery API access token (and an optional Preview API token for draft previewing).
-4. Add the following environment variables when running locally or deploying:
-   - `CONTENTFUL_SPACE_ID`
-   - `CONTENTFUL_ENVIRONMENT` (defaults to `master` if omitted)
-   - `CONTENTFUL_DELIVERY_TOKEN`
-   - `CONTENTFUL_PREVIEW_TOKEN` (only required if you enable preview mode)
-   - `CONTENTFUL_BLOG_PAGE_CONTENT_TYPE_ID` (defaults to `blogPage`)
-   - `CONTENTFUL_PROJECTS_PAGE_CONTENT_TYPE_ID` (defaults to `projectsPage`)
-5. Trigger a rebuild (or run `npm run dev`) after updating CMS content so the latest entries are fetched.
+All site content lives in code under `lib/`. Edit the relevant module and redeploy to publish changes:
 
-### Managing archive pages
+- `lib/projects/projects.ts` — project cards (ordered by `featuredIndex`).
+- `lib/blog/blog-posts.ts` — blog post cards (ordered newest first).
+- `lib/hero/`, `lib/skills/`, `lib/contact/`, and the `*-section-content.ts` / `*-page-content.ts` files — section and archive-page copy.
+- `lib/skills/tech-stack.ts` — the tech stack grid.
 
-- The full `/blog` archive pulls its heading and description from the single `Blog Page` entry. The “Back to Highlights” button always links to `/#blog`.
-- The `/projects` archive works the same way using the `Projects Page` entry and returns to `/#projects`.
-- Update those entries in Contentful to change the copy without redeploying code. If either entry is missing required fields, the page will throw an error during rendering.
+Images and the CV live in `public/` (`public/projects/`, `public/blog/`, `public/cv/`). Add an asset there and reference it with an absolute path (e.g. `/projects/my-logo.png`).
 
 ## Email setup (contact form)
 
@@ -83,8 +70,6 @@ The `/contact` form sends submissions through Gmail using Nodemailer.
 4. After updating the variables, restart the dev server (`npm run dev`) or redeploy so the new credentials are picked up.
 
 If either `GMAIL_USER` or `GMAIL_APP_PASSWORD` is missing, the API will return a 500 error and log a configuration warning.
-
-The site expects the Contentful credentials to be present; without them the blog and projects sections will render empty states.
 
 ## Learn More
 

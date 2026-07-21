@@ -1,7 +1,4 @@
-import type { Asset, Entry, EntryFieldTypes, EntrySkeletonType } from 'contentful';
 import { cache } from 'react';
-
-import { extractAssetUrl, getContentfulClient, isContentfulConfigured, resolveLocalizedField } from '@/lib/contentful';
 
 export type HeroSectionContent = {
   headlineHighlight: string;
@@ -11,70 +8,23 @@ export type HeroSectionContent = {
   cvUrl: string;
 };
 
-type ContentfulHeroSectionFields = {
-  headlineHighlight?: EntryFieldTypes.Symbol;
-  headlineSecondary?: EntryFieldTypes.Symbol;
-  description?: EntryFieldTypes.Text;
-  marqueeItems?: EntryFieldTypes.Array<EntryFieldTypes.Symbol>;
-  cv?: EntryFieldTypes.AssetLink;
+export const heroSectionContent: HeroSectionContent = {
+  headlineHighlight: 'Taulant Sela',
+  headlineSecondary: 'Software Engineer turning ideas into refined products.',
+  description:
+    'Collaborating with teams to design and develop modern web products that are built with clean architecture, reliable systems, and long-term maintainability in mind.',
+  marqueeItems: [
+    'Clean Architecture',
+    'Performance Optimization',
+    'Maintainable Codebases',
+    'Scalable Systems',
+    'Technical Consulting',
+    'Codebase Refactoring',
+    'Team Leadership',
+    'Technical Mentorship',
+    'Agile & Scrum',
+  ],
+  cvUrl: '/cv/Taulant_Sela_-_CV.pdf',
 };
 
-type ContentfulHeroSectionSkeleton = EntrySkeletonType<ContentfulHeroSectionFields, string>;
-type ContentfulHeroSectionEntry = Entry<ContentfulHeroSectionSkeleton>;
-
-function mapHeroSection(entry: ContentfulHeroSectionEntry): HeroSectionContent {
-  const headlineHighlight = resolveLocalizedField<string>(entry.fields.headlineHighlight)?.trim();
-  const headlineSecondary = resolveLocalizedField<string>(entry.fields.headlineSecondary)?.trim();
-  const description = resolveLocalizedField<string>(entry.fields.description)?.trim();
-
-  const marqueeItemsRaw = resolveLocalizedField<string[]>(entry.fields.marqueeItems) ?? [];
-  const marqueeItems = marqueeItemsRaw
-    .map((item) => (typeof item === 'string' ? item.trim() : ''))
-    .filter((item): item is string => Boolean(item));
-
-  const cvAsset = resolveLocalizedField<Asset | null>(entry.fields.cv) ?? null;
-  const cvUrl = cvAsset ? extractAssetUrl(cvAsset) : '';
-
-  if (!headlineHighlight || !headlineSecondary || !description || !marqueeItems || !cvUrl) {
-    throw new Error('Hero section entry is missing required fields.');
-  }
-
-  return {
-    headlineHighlight,
-    headlineSecondary,
-    description,
-    marqueeItems,
-    cvUrl,
-  };
-}
-
-const heroSectionContentTypeId = process.env.CONTENTFUL_HERO_SECTION_CONTENT_TYPE_ID ?? 'heroSection';
-
-export const fetchHeroSectionContent = cache(async (): Promise<HeroSectionContent | null> => {
-  if (!isContentfulConfigured) {
-    return null;
-  }
-
-  try {
-    const client = getContentfulClient();
-    const entries = await client.getEntries<ContentfulHeroSectionSkeleton>({
-      content_type: heroSectionContentTypeId,
-      limit: 1,
-      include: 2,
-    });
-
-    const entry = entries.items[0];
-
-    if (!entry) {
-      return null;
-    }
-
-    return mapHeroSection(entry);
-  } catch (error) {
-    console.error(
-      `Failed to fetch hero section content from Contentful (content_type="${heroSectionContentTypeId}")`,
-      error,
-    );
-    return null;
-  }
-});
+export const fetchHeroSectionContent = cache(async (): Promise<HeroSectionContent> => heroSectionContent);
