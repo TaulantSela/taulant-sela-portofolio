@@ -73,6 +73,9 @@ export const metadata: Metadata = {
   publisher: 'Taulant Sela',
   alternates: {
     canonical: '/',
+    types: {
+      'application/rss+xml': [{ url: '/blog/rss.xml', title: 'Taulant Sela — Blog' }],
+    },
   },
   openGraph: {
     type: 'website',

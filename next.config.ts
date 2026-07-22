@@ -1,3 +1,4 @@
+import createMDX from '@next/mdx';
 import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
@@ -19,4 +20,9 @@ const nextConfig: NextConfig = {
   },
 };
 
-export default nextConfig;
+// Wires the MDX loader into both Turbopack (`next dev --turbopack`) and the webpack build.
+// Posts live in `content/blog/*.mdx` and are imported by `app/blog/[slug]`, not routed directly,
+// so `pageExtensions` stays untouched.
+const withMDX = createMDX({});
+
+export default withMDX(nextConfig);

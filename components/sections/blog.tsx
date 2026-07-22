@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 import { ArrowRight, Calendar, Clock } from 'lucide-react';
 import Link from 'next/link';
 
-import type { BlogPost } from '@/lib/blog/blog-posts';
+import { blogPostLinkProps, type BlogPost } from '@/lib/blog/blog-posts';
 import type { BlogSectionContent } from '@/lib/blog/blog-section-content';
 
 type BlogProps = {
@@ -76,9 +76,7 @@ type Post = BlogPost;
 function LeadArticle({ post }: { post: Post }) {
   return (
     <Link
-      href={post.url}
-      target="_blank"
-      rel="noopener noreferrer"
+      {...blogPostLinkProps(post)}
       className="group relative isolate flex h-full flex-col rounded-3xl border border-slate-200 bg-white/90 shadow-[0_16px_48px_rgba(148,163,184,0.28)] transition-transform duration-500 hover:-translate-y-2 hover:border-slate-300 dark:border-white/15 dark:bg-gradient-to-br dark:from-slate-900 dark:via-slate-900/90 dark:to-indigo-900 dark:shadow-[0_20px_60px_rgba(15,23,42,0.45)]"
     >
       <div className="pointer-events-none absolute inset-0 overflow-hidden rounded-3xl bg-[radial-gradient(circle_at_top_left,rgba(59,130,246,0.18),transparent_55%),radial-gradient(circle_at_bottom_right,rgba(251,191,36,0.18),transparent_45%)] opacity-80 transition-opacity duration-700 group-hover:opacity-100 dark:bg-[radial-gradient(circle_at_top_left,rgba(79,70,229,0.35),transparent_55%),radial-gradient(circle_at_bottom_right,rgba(236,72,153,0.25),transparent_45%)]" />
@@ -110,9 +108,7 @@ function LeadArticle({ post }: { post: Post }) {
 function ArticleCard({ post }: { post: Post }) {
   return (
     <Link
-      href={post.url}
-      target="_blank"
-      rel="noopener noreferrer"
+      {...blogPostLinkProps(post)}
       className="group relative flex flex-col gap-3 rounded-3xl border border-slate-200 bg-white/90 p-5 shadow-[0_10px_30px_rgba(148,163,184,0.2)] transition-transform duration-300 hover:-translate-y-1 hover:border-slate-300 dark:border-white/15 dark:bg-gradient-to-br dark:from-slate-900 dark:via-slate-900/90 dark:to-slate-800 dark:shadow-[0_12px_40px_rgba(15,23,42,0.35)]"
     >
       <div className="pointer-events-none absolute inset-0 overflow-hidden rounded-3xl bg-[radial-gradient(circle_at_top_left,rgba(59,130,246,0.12),transparent_55%),radial-gradient(circle_at_bottom_right,rgba(251,191,36,0.12),transparent_45%)] opacity-80 transition-opacity duration-500 group-hover:opacity-100 dark:bg-[radial-gradient(circle_at_top_left,rgba(79,70,229,0.25),transparent_55%),radial-gradient(circle_at_bottom_right,rgba(236,72,153,0.2),transparent_45%)]" />

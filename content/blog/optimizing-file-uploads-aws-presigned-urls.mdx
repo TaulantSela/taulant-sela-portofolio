@@ -1,0 +1,85 @@
+![presign\_url.png (1680×660)](https://i0.wp.com/opstree.com/blog/wp-content/uploads/2024/08/presign_url.png?w=1680&ssl=1)
+
+## Introduction
+
+Handling file uploads efficiently is a crucial aspect of web applications. In our project, we initially used a traditional approach, where users filled out a form and uploaded their files, which were sent together to a `/register` API. However, we faced performance issues when dealing with files larger than 5 MB, and even slightly smaller ones sometimes caused failures. Security concerns and the potential risk of overloading our server also led us to explore an alternative solution: AWS pre-signed URLs.
+
+## The Challenge with Traditional File Uploads
+
+Previously, our system accepted file uploads directly through our API. This approach presented several challenges:
+
+![](https://d2908q01vomqb2.cloudfront.net/1b6453892473a467d07372d45eb05abc2031647a/2020/09/09/s3-1.png)
+
+**Performance Issues**: Files close to the 5MB limit were causing timeouts and failures, leading to a poor user experience.
+
+**Security Risks**: Accepting direct file uploads made our backend vulnerable to potential security threats, such as malicious files or denial-of-service attacks.
+
+**Server Overload**: Handling both user data and file storage placed a high load on our infrastructure.
+
+**Scalability**: As the number of users and file sizes increased, our system struggled to keep up with demand.
+
+To address these issues, we decided to implement AWS pre-signed URLs.
+
+## What Are AWS Pre-Signed URLs?
+
+AWS pre-signed URLs are secure, time-limited links that allow users to upload files directly to an Amazon S3 bucket. Instead of sending files to our backend, we generate these URLs on our server, and users can upload their files directly to AWS. This approach ensures:
+
+**Reduced Backend Load**: Since files are uploaded directly to S3, our server is no longer a bottleneck.
+
+**Improved Security**: Pre-signed URLs expire after a set period, limiting unauthorized access.
+
+**Better Performance**: Upload speeds improve as files bypass our API and go straight to AWS.
+
+## Our New Approach: A Three-Step Process
+
+We restructured our file upload process by introducing a new flow:
+
+**Pre-Registration Phase**
+
+Instead of sending files directly, users first send their data and the number of files they wish to upload via a `/pre-register` API.
+
+![](https://lh5.googleusercontent.com/6qBnC8obpEX97aovqyaBV5aad5I4PkjDYJbhGhZy3yQIqowZds6d1bgOZXVzbEbJxsirXkND4JGy4AO35uGrNgbAG7OEaq7QdQjP-m4EN0LerxBboWyBuAEzCVB-DXMBk0SUoZpHDal-LdbXL7hyl73HS5EeOgm-nxeD_YxQgLmchIESZ-yNiPnOGD55eQ)
+
+The server validates user information and generates pre-signed URLs for each file.
+
+The server responds with a **pre-registration ID** and a list of pre-signed URLs.![](https://lh5.googleusercontent.com/H1yf10FIlLEX3aTxBBsCg1v_PD8qG4Jg0Or8O4YZWPGYXTUB5sMy0SxUHNPB6g0sMsZF5fycdkYt3oksiPzyq2WzvSehXAQ3pHqh1EyA8m2VG8ehTNeVmXCq-VYepK6scdXG0Ti8jZVkkPiISg4crZq2B0iZ6rh1vJXhRrtbrm9VkW7XSwi7HOdkzjunXw)
+
+**Direct File Upload to S3**
+
+The frontend uploads files directly to the pre-signed URLs provided by AWS.
+
+![](https://lh5.googleusercontent.com/H1yf10FIlLEX3aTxBBsCg1v_PD8qG4Jg0Or8O4YZWPGYXTUB5sMy0SxUHNPB6g0sMsZF5fycdkYt3oksiPzyq2WzvSehXAQ3pHqh1EyA8m2VG8ehTNeVmXCq-VYepK6scdXG0Ti8jZVkkPiISg4crZq2B0iZ6rh1vJXhRrtbrm9VkW7XSwi7HOdkzjunXw)
+
+**Completion Phase**
+
+Once all files are successfully uploaded, the frontend calls a `/complete-registration` API, providing the pre-registration ID.
+
+The server fetches files from the temporary S3 location and processes them accordingly.
+
+## Benefits of This New Approach
+
+By implementing AWS pre-signed URLs, we achieved several key improvements:
+
+**Increased Efficiency**: Uploading files directly to S3 removes unnecessary load from our API, improving response times and system stability.
+
+**Enhanced Security**: Temporary URLs ensure that unauthorized users cannot access or tamper with files.
+
+**Scalability**: The new process allows for seamless handling of larger file uploads without impacting application performance.
+
+**Better User Experience**: Faster uploads and fewer failures lead to a more seamless user interaction.
+
+## Implementation and Impact
+
+This change required updates to multiple components within our system:
+
+**Frontend Changes**: The user flow was modified to handle the pre-registration step and file uploads separately.
+
+**Backend Modifications**: The introduction of `/pre-register` and `/complete-registration` endpoints to manage file uploads more efficiently.
+
+**AWS Integration**: S3 bucket setup and permission configurations were optimized for security and performance.
+
+## Conclusion
+
+Switching to AWS pre-signed URLs was a game-changer for our file upload process. It improved performance, security, and scalability while reducing server load. This shift aligns with modern best practices for file handling and ensures a smoother experience for both users and developers.
+
+By leveraging AWS’s capabilities, we’ve positioned our application for future growth and a more robust infrastructure.

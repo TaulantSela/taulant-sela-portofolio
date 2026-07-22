@@ -8,7 +8,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import { fetchBlogPageContent } from '@/lib/blog/blog-page-content';
-import { fetchBlogPosts } from '@/lib/blog/blog-posts';
+import { blogPostCtaLabel, blogPostLinkProps, fetchBlogPosts, isMirror } from '@/lib/blog/blog-posts';
 
 const siteUrl = 'https://taulantsela.com';
 const pageUrl = `${siteUrl}/blog`;
@@ -117,12 +117,22 @@ export default async function BlogPage() {
                         {post.readTime}
                       </div>
                     </div>
-                    <Link href={post.url} target="_blank" rel="noopener noreferrer" className="mt-auto block">
-                      <Button variant="ghost" size="sm" className="group/btn w-full">
-                        Read More
-                        <ArrowRight className="ml-2 h-3 w-3 transition-transform duration-300 group-hover/btn:translate-x-1" />
-                      </Button>
-                    </Link>
+                    <div className="mt-auto space-y-1">
+                      <Link {...blogPostLinkProps(post)} className="block">
+                        <Button variant="ghost" size="sm" className="group/btn w-full">
+                          {blogPostCtaLabel(post)}
+                          <ArrowRight className="ml-2 h-3 w-3 transition-transform duration-300 group-hover/btn:translate-x-1" />
+                        </Button>
+                      </Link>
+                      {isMirror(post) && !post.mirror.primary ? (
+                        <Link
+                          href={`/blog/${post.mirror.slug}`}
+                          className="block text-center text-xs text-slate-500 dark:text-slate-400"
+                        >
+                          or read the archived copy here
+                        </Link>
+                      ) : null}
+                    </div>
                   </CardContent>
                 </Card>
               </ScrollReveal>
