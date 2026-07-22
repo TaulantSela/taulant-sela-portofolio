@@ -51,8 +51,7 @@ export const projects: Project[] = [
     ],
     description:
       'AI-assisted packing planner that generates travel-ready checklists from trip details, weather, and activities with real-time editing tools.',
-    context:
-      'Built as a personal SaaS-style project to explore AI-assisted UX and modern Next.js app router patterns.',
+    context: 'Built as a personal SaaS-style project to explore AI-assisted UX and modern Next.js app router patterns.',
   },
   {
     id: 'hoyo-smart-office',
@@ -251,6 +250,7 @@ export const projects: Project[] = [
     imageFit: 'contain',
     image: '/projects/claude-code-semaphore_logo.svg',
     links: [
+      { label: 'Website', href: 'https://claude-semaphore.vercel.app' },
       { label: 'GitHub', href: 'https://github.com/TaulantSela/claude-code-semaphore', icon: 'github' },
     ],
     description:
@@ -266,7 +266,10 @@ export const projects: Project[] = [
     tags: ['Next.js', 'React 19', 'TypeScript', 'Drizzle', 'Turso', 'Resend'],
     imageFit: 'contain',
     image: '/projects/bookslot_logo.svg',
-    links: [{ label: 'GitHub', href: 'https://github.com/TaulantSela/bookslot', icon: 'github' }],
+    links: [
+      { label: 'Live Demo', href: 'https://bookslot-rho.vercel.app' },
+      { label: 'GitHub', href: 'https://github.com/TaulantSela/bookslot', icon: 'github' },
+    ],
     description:
       'Multi-tenant appointment-booking SaaS giving local service businesses a public booking page, an embeddable widget, a management dashboard, and automated email reminders.',
     context:
@@ -280,7 +283,10 @@ export const projects: Project[] = [
     tags: ['Next.js', 'React 19', 'TypeScript', 'Prisma', 'NextAuth', 'XAdES'],
     imageFit: 'contain',
     image: '/projects/fakt_logo.svg',
-    links: [{ label: 'GitHub', href: 'https://github.com/TaulantSela/fakt', icon: 'github' }],
+    links: [
+      { label: 'Live Demo', href: 'https://fakt-rust.vercel.app' },
+      { label: 'GitHub', href: 'https://github.com/TaulantSela/fakt', icon: 'github' },
+    ],
     description:
       'Electronic invoicing app for North Macedonia that creates UBL invoices and submits them to the government UJP e-Faktura system, including qualified electronic signature (XAdES) signing.',
     context:
@@ -294,11 +300,22 @@ export const projects: Project[] = [
     tags: ['React', 'Redux Toolkit', 'Zustand', 'Vite', 'Benchmarking'],
     imageFit: 'contain',
     image: '/projects/master-thesis_logo.svg',
-    links: [{ label: 'GitHub', href: 'https://github.com/TaulantSela/master-thesis', icon: 'github' }],
+    links: [
+      { label: 'Catalog — Context API', href: 'https://thesis-catalog-context-chi.vercel.app' },
+      { label: 'Catalog — Context Hell', href: 'https://thesis-catalog-context-hell-henna.vercel.app' },
+      { label: 'Catalog — Local State', href: 'https://thesis-catalog-local-state-pink.vercel.app' },
+      { label: 'Catalog — Redux Toolkit', href: 'https://thesis-catalog-redux-rtk-ruddy.vercel.app' },
+      { label: 'Catalog — Zustand', href: 'https://thesis-catalog-zustand.vercel.app' },
+      { label: 'Dashboard — Context', href: 'https://thesis-dashboard-context.vercel.app' },
+      { label: 'Dashboard — Redux', href: 'https://thesis-dashboard-redux-opal.vercel.app' },
+      { label: 'Form — Context', href: 'https://thesis-form-context.vercel.app' },
+      { label: 'Form — Redux', href: 'https://thesis-form-redux-livid.vercel.app' },
+      { label: 'GitHub', href: 'https://github.com/TaulantSela/master-thesis', icon: 'github' },
+    ],
     description:
       'Empirical master-thesis study testing whether React state-management performance depends on application type, benchmarking Multiple Contexts against Redux Toolkit across read-heavy, form, and real-time apps.',
     context:
-      'Built six comparable apps in a monorepo with Vitest benchmarking, a developer-experience survey, and written performance and DX analysis reports.',
+      'Built nine comparable apps in a monorepo—catalog, dashboard, and form variants across Local State, Context API, Context Hell, Redux Toolkit, and Zustand—with Vitest benchmarking, a developer-experience survey, and written performance and DX analysis reports.',
   },
   {
     id: 'watchcrop',
@@ -308,7 +325,10 @@ export const projects: Project[] = [
     tags: ['Next.js', 'TypeScript', 'Neon', 'Drizzle', 'Tailwind CSS'],
     imageFit: 'contain',
     image: '/projects/watchcrop_logo.svg',
-    links: [{ label: 'GitHub', href: 'https://github.com/TaulantSela/watchcrop', icon: 'github' }],
+    links: [
+      { label: 'Live Demo', href: 'https://watchcrop.vercel.app' },
+      { label: 'GitHub', href: 'https://github.com/TaulantSela/watchcrop', icon: 'github' },
+    ],
     description:
       'Daily guess-the-watch game that starts zoomed into a dial detail and zooms out on each wrong guess—name the brand and model before the full reveal.',
     context:
@@ -323,7 +343,7 @@ export const projects: Project[] = [
     imageFit: 'contain',
     image: '/projects/freelancr_logo.svg',
     links: [
-      { label: 'Live Demo', href: 'https://freelancr.vercel.app' },
+      { label: 'Live Demo', href: 'https://freelancr-mk.vercel.app' },
       { label: 'GitHub', href: 'https://github.com/TaulantSela/freelancr', icon: 'github' },
     ],
     description:
@@ -339,7 +359,10 @@ export const projects: Project[] = [
     tags: ['Monorepo', 'Next.js', 'Expo', 'Electron', 'Express', 'Prisma'],
     imageFit: 'contain',
     image: '/projects/soundscape_logo.svg',
-    links: [{ label: 'GitHub', href: 'https://github.com/TaulantSela/soundscape', icon: 'github' }],
+    links: [
+      { label: 'Live Demo', href: 'https://soundscape-web-one.vercel.app' },
+      { label: 'GitHub', href: 'https://github.com/TaulantSela/soundscape', icon: 'github' },
+    ],
     description:
       'Cross-platform ambient-audio mixer for blending curated sound layers into a shareable mix, delivered across web, mobile, desktop, and an API from one codebase.',
     context:
@@ -353,7 +376,12 @@ export const projects: Project[] = [
     tags: ['Monorepo', 'React 19', 'Storybook', 'shadcn/ui', 'Playwright'],
     imageFit: 'contain',
     image: '/projects/ui-library_logo.svg',
-    links: [{ label: 'GitHub', href: 'https://github.com/TaulantSela/ui-library', icon: 'github' }],
+    links: [
+      { label: 'Shared UI Library', href: 'https://ui-library-ui.vercel.app' },
+      { label: 'Acme Dashboard Demo', href: 'https://ui-library-app-one.vercel.app' },
+      { label: 'Bloom Settings Demo', href: 'https://ui-library-app-two.vercel.app' },
+      { label: 'GitHub', href: 'https://github.com/TaulantSela/ui-library', icon: 'github' },
+    ],
     description:
       'Component-library monorepo with a shared UI package documented in Storybook and consumed by multiple demo apps.',
     context:
