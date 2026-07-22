@@ -1,8 +1,14 @@
 import { cache } from 'react';
 
+import { fetchRepoMetrics, parseRepoSlug } from '@/lib/github/repo-metrics';
+
 export type ProjectLink = { label: string; href: string; icon?: 'github' | 'external' };
 
-export type Project = {
+/**
+ * Authored project data. For anything with a public repo the dates here are only a
+ * fallback — {@link fetchProjects} overwrites them with what GitHub reports.
+ */
+export type ProjectSource = {
   id: string;
   title: string;
   description: string;
@@ -12,14 +18,78 @@ export type Project = {
   imageFit?: 'cover' | 'contain';
   role: 'company' | 'personal' | 'oss';
   context: string;
-  featuredIndex?: number | null;
+  /** Month work started, `YYYY-MM`. Falls back to this when there's no repo. */
+  startedAt: string;
+  /** Month of the most recent meaningful work, `YYYY-MM`. Falls back to this when there's no repo. */
+  updatedAt: string;
+  /**
+   * Editorial 0-100 weight: scope, business impact, and how relevant the project is to
+   * the work I want. This is the half of "notable" that GitHub can't measure — commit
+   * volume and recency are blended in at fetch time. Keep values distinct.
+   */
+  weight: number;
 };
 
-// Ordered by featuredIndex (ascending); entries without one fall to the end.
-export const projects: Project[] = [
+export type Project = ProjectSource & {
+  /** `owner/name`, derived from the GitHub link. */
+  repo?: string;
+  /** Commits I authored, per GitHub. Absent when there's no public repo. */
+  commits?: number;
+  stars?: number;
+  /** 0-100 blend of {@link ProjectSource.weight} and live GitHub activity. Drives "Most notable". */
+  signal: number;
+};
+
+export const PROJECT_SORTS = [
+  { key: 'latest', label: 'Latest' },
+  { key: 'oldest', label: 'Oldest' },
+  { key: 'notable', label: 'Most notable' },
+] as const;
+
+export type ProjectSortKey = (typeof PROJECT_SORTS)[number]['key'];
+
+export const DEFAULT_PROJECT_SORT: ProjectSortKey = 'latest';
+
+export function isProjectSortKey(value: unknown): value is ProjectSortKey {
+  return PROJECT_SORTS.some((sort) => sort.key === value);
+}
+
+/**
+ * An authored `YYYY-MM` and a GitHub ISO timestamp have to be comparable, so months are
+ * padded to mid-month — a neutral guess that won't jump a hand-written date past a repo
+ * pushed the same month.
+ */
+function sortableDate(value: string) {
+  return value.length <= 7 ? `${value}-15T00:00:00Z` : value;
+}
+
+export function sortProjects(items: Project[], sort: ProjectSortKey): Project[] {
+  const sorted = [...items];
+
+  if (sort === 'notable') {
+    // Ties break on recency so the order never looks arbitrary.
+    return sorted.sort(
+      (a, b) => b.signal - a.signal || sortableDate(b.updatedAt).localeCompare(sortableDate(a.updatedAt)),
+    );
+  }
+
+  // Latest and oldest are the same axis — last activity — so they read as exact mirrors.
+  // Sorting "oldest" by first commit instead would let a long-running project sit near
+  // the top of both lists, which just looks broken.
+  const byRecency = sorted.sort(
+    (a, b) => sortableDate(b.updatedAt).localeCompare(sortableDate(a.updatedAt)) || b.signal - a.signal,
+  );
+
+  return sort === 'oldest' ? byRecency.reverse() : byRecency;
+}
+
+// Curated order — drives the homepage highlights. The /projects page sorts explicitly instead.
+export const projects: ProjectSource[] = [
   {
     id: 'goodyear-multi-brand-b2c',
-    featuredIndex: 1,
+    startedAt: '2021-11',
+    updatedAt: '2026-03',
+    weight: 98,
     title: 'Goodyear - Multi-Brand B2C Platform',
     role: 'company',
     tags: ['React', 'TypeScript', 'Redux Toolkit', 'Tailwind CSS', 'AEM', 'GraphQL'],
@@ -39,7 +109,9 @@ export const projects: Project[] = [
   },
   {
     id: 'pack-it-up',
-    featuredIndex: 2,
+    startedAt: '2025-08',
+    updatedAt: '2025-12',
+    weight: 76,
     title: 'Pack It Up - Smart Packing Assistant',
     role: 'personal',
     tags: ['Next.js 15', 'Clerk', 'Prisma', 'Neon', 'OpenAI', 'Tailwind CSS'],
@@ -55,7 +127,9 @@ export const projects: Project[] = [
   },
   {
     id: 'hoyo-smart-office',
-    featuredIndex: 3,
+    startedAt: '2020-09',
+    updatedAt: '2026-07',
+    weight: 92,
     title: 'Hoyo Tech Smart Office & HoyoHome',
     role: 'company',
     tags: ['Scrum Mastery', 'Product Leadership', 'React', 'React Native', 'IoT'],
@@ -72,7 +146,9 @@ export const projects: Project[] = [
   },
   {
     id: 'react-google-places-autocomplete',
-    featuredIndex: 4,
+    startedAt: '2025-06',
+    updatedAt: '2025-08',
+    weight: 60,
     title: 'React Google Places Autocomplete (Enhanced Fork)',
     role: 'oss',
     tags: ['React', 'TypeScript', 'Open Source'],
@@ -92,7 +168,9 @@ export const projects: Project[] = [
   },
   {
     id: 'bmg-production-music',
-    featuredIndex: 5,
+    startedAt: '2025-01',
+    updatedAt: '2026-03',
+    weight: 88,
     title: 'BMG Production Music Platform',
     role: 'company',
     tags: ['Next.js', 'React 19', 'TypeScript', 'Tailwind CSS'],
@@ -106,7 +184,9 @@ export const projects: Project[] = [
   },
   {
     id: 'parkber',
-    featuredIndex: 6,
+    startedAt: '2022-01',
+    updatedAt: '2022-12',
+    weight: 70,
     title: 'Parkber - Parking Management System',
     role: 'company',
     tags: ['React', 'Redux', 'Material UI', 'REST APIs'],
@@ -119,7 +199,9 @@ export const projects: Project[] = [
   },
   {
     id: 'stepline',
-    featuredIndex: 7,
+    startedAt: '2023-01',
+    updatedAt: '2023-12',
+    weight: 68,
     title: 'Stepline - Document Template Management',
     role: 'company',
     tags: ['Angular', 'RxJS', 'TypeScript'],
@@ -133,7 +215,9 @@ export const projects: Project[] = [
   },
   {
     id: 'monochain',
-    featuredIndex: 8,
+    startedAt: '2020-07',
+    updatedAt: '2021-04',
+    weight: 80,
     title: 'MonoChain Product Suite',
     role: 'company',
     tags: ['React', 'React Native', 'Redux', 'Node.js', 'MongoDB', 'Next.js'],
@@ -147,7 +231,9 @@ export const projects: Project[] = [
   },
   {
     id: 'orbit-irrigation',
-    featuredIndex: 9,
+    startedAt: '2018-09',
+    updatedAt: '2019-08',
+    weight: 64,
     title: 'Orbit Irrigation Data Platform',
     role: 'company',
     tags: ['ETL', 'Matillion', 'Snowflake', 'SQL', 'Data Warehousing'],
@@ -161,7 +247,9 @@ export const projects: Project[] = [
   },
   {
     id: 'seeu-web-decentralization',
-    featuredIndex: 10,
+    startedAt: '2017-12',
+    updatedAt: '2018-05',
+    weight: 30,
     title: 'SEEU Departmental Web Decentralization',
     role: 'company',
     tags: ['WordPress', 'Multisite', 'Content Strategy', 'Localization', 'Governance'],
@@ -175,7 +263,9 @@ export const projects: Project[] = [
   },
   {
     id: 'elevator-simulator',
-    featuredIndex: 12,
+    startedAt: '2022-05',
+    updatedAt: '2025-12',
+    weight: 40,
     title: 'Elevator Simulator System',
     role: 'personal',
     tags: ['React', 'TypeScript', 'State Machines', 'Simulation'],
@@ -192,7 +282,9 @@ export const projects: Project[] = [
   },
   {
     id: 'legion-training-api',
-    featuredIndex: 13,
+    startedAt: '2022-10',
+    updatedAt: '2025-11',
+    weight: 44,
     title: 'Legion Training Platform API',
     role: 'personal',
     tags: ['Node.js', 'Express', 'Swagger UI', 'JWT', 'Vercel'],
@@ -209,7 +301,9 @@ export const projects: Project[] = [
   },
   {
     id: 'elite-mobile',
-    featuredIndex: null,
+    startedAt: '2023-09',
+    updatedAt: '2025-12',
+    weight: 34,
     title: 'Elite Mobile',
     role: 'personal',
     tags: ['PHP', 'MySQL', 'Bootstrap', 'CRUD'],
@@ -226,7 +320,9 @@ export const projects: Project[] = [
   },
   {
     id: 'watchpaper',
-    featuredIndex: null,
+    startedAt: '2026-07',
+    updatedAt: '2026-07',
+    weight: 46,
     title: 'WatchPaper - Watch Dial Wallpapers',
     role: 'personal',
     tags: ['Next.js', 'React 19', 'TypeScript', 'SVG Generation', 'iOS Shortcuts'],
@@ -243,7 +339,9 @@ export const projects: Project[] = [
   },
   {
     id: 'claude-code-semaphore',
-    featuredIndex: null,
+    startedAt: '2026-07',
+    updatedAt: '2026-07',
+    weight: 82,
     title: 'Claude Code Semaphore - Menu Bar Status Light',
     role: 'oss',
     tags: ['Go', 'Claude Code Plugin', 'Shell', 'Cross-Platform', 'CI/CD'],
@@ -260,7 +358,9 @@ export const projects: Project[] = [
   },
   {
     id: 'bookslot',
-    featuredIndex: null,
+    startedAt: '2026-07',
+    updatedAt: '2026-07',
+    weight: 48,
     title: 'BookSlot - Appointment Booking SaaS',
     role: 'personal',
     tags: ['Next.js', 'React 19', 'TypeScript', 'Drizzle', 'Turso', 'Resend'],
@@ -277,7 +377,9 @@ export const projects: Project[] = [
   },
   {
     id: 'fakt',
-    featuredIndex: null,
+    startedAt: '2026-05',
+    updatedAt: '2026-07',
+    weight: 56,
     title: 'Fakt - North Macedonia E-Invoicing',
     role: 'personal',
     tags: ['Next.js', 'React 19', 'TypeScript', 'Prisma', 'NextAuth', 'XAdES'],
@@ -294,7 +396,9 @@ export const projects: Project[] = [
   },
   {
     id: 'react-state-management-thesis',
-    featuredIndex: null,
+    startedAt: '2024-01',
+    updatedAt: '2026-07',
+    weight: 78,
     title: 'Master Thesis - React State Management Study',
     role: 'personal',
     tags: ['React', 'Redux Toolkit', 'Zustand', 'Vite', 'Benchmarking'],
@@ -311,7 +415,9 @@ export const projects: Project[] = [
   },
   {
     id: 'watchcrop',
-    featuredIndex: null,
+    startedAt: '2026-06',
+    updatedAt: '2026-07',
+    weight: 54,
     title: 'WatchCrop - Daily Watch Guessing Game',
     role: 'personal',
     tags: ['Next.js', 'TypeScript', 'Neon', 'Drizzle', 'Tailwind CSS'],
@@ -328,7 +434,9 @@ export const projects: Project[] = [
   },
   {
     id: 'freelancr',
-    featuredIndex: null,
+    startedAt: '2026-05',
+    updatedAt: '2026-07',
+    weight: 58,
     title: 'Freelancr - Freelancer Tax & Invoicing (MK)',
     role: 'personal',
     tags: ['Next.js', 'React 19', 'TypeScript', 'Drizzle', 'Neon', 'JWT'],
@@ -345,7 +453,9 @@ export const projects: Project[] = [
   },
   {
     id: 'soundscape',
-    featuredIndex: null,
+    startedAt: '2025-12',
+    updatedAt: '2026-07',
+    weight: 52,
     title: 'Soundscape - Ambient Audio Mixer',
     role: 'personal',
     tags: ['Monorepo', 'Next.js', 'Expo', 'Electron', 'Express', 'Prisma'],
@@ -362,7 +472,9 @@ export const projects: Project[] = [
   },
   {
     id: 'ui-library',
-    featuredIndex: null,
+    startedAt: '2026-05',
+    updatedAt: '2026-07',
+    weight: 50,
     title: 'UI Library - Component System & Storybook',
     role: 'oss',
     tags: ['Monorepo', 'React 19', 'Storybook', 'shadcn/ui', 'Playwright'],
@@ -381,7 +493,79 @@ export const projects: Project[] = [
   },
 ];
 
-export const fetchProjects = cache(async (): Promise<Project[]> => projects);
+/** How much of "notable" GitHub activity is allowed to move, for projects that have a repo. */
+const ACTIVITY_SHARE = 0.45;
+
+function githubLink(project: ProjectSource) {
+  return project.links?.find((link) => link.icon === 'github' || parseRepoSlug(link.href));
+}
+
+/** Date -> months since year 0, so ranges can be normalised arithmetically. */
+function monthIndex(value: string) {
+  const [year, month] = value.slice(0, 7).split('-').map(Number);
+  return year * 12 + (month - 1);
+}
+
+function normalise(value: number, min: number, max: number) {
+  return max > min ? (value - min) / (max - min) : 1;
+}
+
+/**
+ * Merges authored copy with live GitHub metrics:
+ * dates come straight from the repo, and "notable" becomes a blend of the editorial
+ * weight and measured activity (commits dominate, then recency, then stars).
+ * Projects with no public repo — client work — keep their authored values untouched.
+ */
+export const fetchProjects = cache(async (): Promise<Project[]> => {
+  const slugs = projects.map((project) => {
+    const link = githubLink(project);
+    return link ? parseRepoSlug(link.href) : null;
+  });
+
+  const metrics = await fetchRepoMetrics(slugs.filter((slug): slug is string => Boolean(slug)));
+
+  const merged: Project[] = projects.map((project, index) => {
+    const slug = slugs[index];
+    const repoMetrics = slug ? metrics.get(slug) : undefined;
+
+    if (!repoMetrics) {
+      return { ...project, ...(slug ? { repo: slug } : {}), signal: project.weight };
+    }
+
+    return {
+      ...project,
+      repo: repoMetrics.repo,
+      startedAt: repoMetrics.createdAt,
+      updatedAt: repoMetrics.pushedAt,
+      commits: repoMetrics.commits,
+      stars: repoMetrics.stars,
+      signal: project.weight,
+    };
+  });
+
+  // Normalise against the whole set so one prolific repo can't peg every score at 100.
+  const maxCommits = Math.max(...merged.map((project) => project.commits ?? 0), 1);
+  const maxStars = Math.max(...merged.map((project) => project.stars ?? 0), 1);
+  const months = merged.map((project) => monthIndex(project.updatedAt));
+  const [oldest, newest] = [Math.min(...months), Math.max(...months)];
+
+  return merged.map((project) => {
+    if (project.commits === undefined) {
+      return project;
+    }
+
+    // log scale: the 5th commit says far more about a project than the 35th.
+    const commitScore = Math.log1p(project.commits) / Math.log1p(maxCommits);
+    const recencyScore = normalise(monthIndex(project.updatedAt), oldest, newest);
+    const starScore = (project.stars ?? 0) / maxStars;
+    const activity = 100 * (0.6 * commitScore + 0.25 * recencyScore + 0.15 * starScore);
+
+    return {
+      ...project,
+      signal: Math.round((1 - ACTIVITY_SHARE) * project.weight + ACTIVITY_SHARE * activity),
+    };
+  });
+});
 
 export async function fetchFeaturedProjects(count = 3) {
   const all = await fetchProjects();
