@@ -232,7 +232,7 @@ export const projects: Project[] = [
     role: 'personal',
     tags: ['Next.js', 'React 19', 'TypeScript', 'SVG Generation', 'iOS Shortcuts'],
     imageFit: 'contain',
-    image: '/placeholder.png',
+    image: '/projects/watchpaper_logo.png',
     links: [
       { label: 'Live Demo', href: 'https://watchpaper.vercel.app' },
       { label: 'GitHub', href: 'https://github.com/TaulantSela/watchpaper', icon: 'github' },
@@ -249,7 +249,7 @@ export const projects: Project[] = [
     role: 'oss',
     tags: ['Go', 'Claude Code Plugin', 'Shell', 'Cross-Platform', 'CI/CD'],
     imageFit: 'contain',
-    image: '/placeholder.png',
+    image: '/projects/claude-code-semaphore_logo.svg',
     links: [
       { label: 'GitHub', href: 'https://github.com/TaulantSela/claude-code-semaphore', icon: 'github' },
     ],
@@ -265,7 +265,7 @@ export const projects: Project[] = [
     role: 'personal',
     tags: ['Next.js', 'React 19', 'TypeScript', 'Drizzle', 'Turso', 'Resend'],
     imageFit: 'contain',
-    image: '/placeholder.png',
+    image: '/projects/bookslot_logo.svg',
     links: [{ label: 'GitHub', href: 'https://github.com/TaulantSela/bookslot', icon: 'github' }],
     description:
       'Multi-tenant appointment-booking SaaS giving local service businesses a public booking page, an embeddable widget, a management dashboard, and automated email reminders.',
@@ -279,7 +279,7 @@ export const projects: Project[] = [
     role: 'personal',
     tags: ['Next.js', 'React 19', 'TypeScript', 'Prisma', 'NextAuth', 'XAdES'],
     imageFit: 'contain',
-    image: '/placeholder.png',
+    image: '/projects/fakt_logo.svg',
     links: [{ label: 'GitHub', href: 'https://github.com/TaulantSela/fakt', icon: 'github' }],
     description:
       'Electronic invoicing app for North Macedonia that creates UBL invoices and submits them to the government UJP e-Faktura system, including qualified electronic signature (XAdES) signing.',
@@ -293,7 +293,7 @@ export const projects: Project[] = [
     role: 'personal',
     tags: ['React', 'Redux Toolkit', 'Zustand', 'Vite', 'Benchmarking'],
     imageFit: 'contain',
-    image: '/placeholder.png',
+    image: '/projects/master-thesis_logo.svg',
     links: [{ label: 'GitHub', href: 'https://github.com/TaulantSela/master-thesis', icon: 'github' }],
     description:
       'Empirical master-thesis study testing whether React state-management performance depends on application type, benchmarking Multiple Contexts against Redux Toolkit across read-heavy, form, and real-time apps.',
@@ -307,7 +307,7 @@ export const projects: Project[] = [
     role: 'personal',
     tags: ['Next.js', 'TypeScript', 'Neon', 'Drizzle', 'Tailwind CSS'],
     imageFit: 'contain',
-    image: '/placeholder.png',
+    image: '/projects/watchcrop_logo.svg',
     links: [{ label: 'GitHub', href: 'https://github.com/TaulantSela/watchcrop', icon: 'github' }],
     description:
       'Daily guess-the-watch game that starts zoomed into a dial detail and zooms out on each wrong guess—name the brand and model before the full reveal.',
@@ -321,7 +321,7 @@ export const projects: Project[] = [
     role: 'personal',
     tags: ['Next.js', 'React 19', 'TypeScript', 'Drizzle', 'Neon', 'JWT'],
     imageFit: 'contain',
-    image: '/placeholder.png',
+    image: '/projects/freelancr_logo.svg',
     links: [
       { label: 'Live Demo', href: 'https://freelancr.vercel.app' },
       { label: 'GitHub', href: 'https://github.com/TaulantSela/freelancr', icon: 'github' },
@@ -338,7 +338,7 @@ export const projects: Project[] = [
     role: 'personal',
     tags: ['Monorepo', 'Next.js', 'Expo', 'Electron', 'Express', 'Prisma'],
     imageFit: 'contain',
-    image: '/placeholder.png',
+    image: '/projects/soundscape_logo.svg',
     links: [{ label: 'GitHub', href: 'https://github.com/TaulantSela/soundscape', icon: 'github' }],
     description:
       'Cross-platform ambient-audio mixer for blending curated sound layers into a shareable mix, delivered across web, mobile, desktop, and an API from one codebase.',
@@ -352,7 +352,7 @@ export const projects: Project[] = [
     role: 'oss',
     tags: ['Monorepo', 'React 19', 'Storybook', 'shadcn/ui', 'Playwright'],
     imageFit: 'contain',
-    image: '/placeholder.png',
+    image: '/projects/ui-library_logo.svg',
     links: [{ label: 'GitHub', href: 'https://github.com/TaulantSela/ui-library', icon: 'github' }],
     description:
       'Component-library monorepo with a shared UI package documented in Storybook and consumed by multiple demo apps.',
