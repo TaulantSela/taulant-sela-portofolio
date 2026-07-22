@@ -270,10 +270,10 @@ export const projects: ProjectSource[] = [
     role: 'personal',
     tags: ['React', 'TypeScript', 'State Machines', 'Simulation'],
     imageFit: 'contain',
-    image: '/projects/elevator-system_logo.svg',
+    image: '/projects/elevator-simulator_logo.svg',
     links: [
       { label: 'Elevator Simulator', href: 'https://elevator-simulator-system.vercel.app/' },
-      { label: 'GitHub', href: 'https://github.com/TaulantSela/elevator-system', icon: 'github' },
+      { label: 'GitHub', href: 'https://github.com/TaulantSela/elevator-simulator', icon: 'github' },
     ],
     description:
       'Elevator simulator that visualizes hall-call priorities, cabin actions, and dispatch sequencing in real time.',
