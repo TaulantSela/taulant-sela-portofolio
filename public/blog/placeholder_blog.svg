@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675" role="img" aria-label="Article cover placeholder">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0f172a" />
+      <stop offset="55%" stop-color="#1e1b4b" />
+      <stop offset="100%" stop-color="#312e81" />
+    </linearGradient>
+    <radialGradient id="glow" cx="0.2" cy="0.15" r="0.8">
+      <stop offset="0%" stop-color="#818cf8" stop-opacity="0.45" />
+      <stop offset="100%" stop-color="#818cf8" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="675" fill="url(#bg)" />
+  <rect width="1200" height="675" fill="url(#glow)" />
+  <g fill="none" stroke="#c7d2fe" stroke-opacity="0.35" stroke-width="6" stroke-linecap="round">
+    <path d="M470 250h260" />
+    <path d="M470 330h260" />
+    <path d="M470 410h170" />
+  </g>
+  <text x="600" y="530" fill="#e0e7ff" fill-opacity="0.7" font-family="ui-sans-serif, system-ui, sans-serif" font-size="34" letter-spacing="12" text-anchor="middle">TAULANT SELA</text>
+</svg>
