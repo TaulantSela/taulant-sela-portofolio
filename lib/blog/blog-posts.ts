@@ -53,7 +53,6 @@ export type BlogPost = ExternalBlogPost | LocalBlogPost;
  * instead of a runtime 404.
  */
 const postBodies: Record<string, () => Promise<{ default: ComponentType }>> = {
-  'shipping-bookslot-on-turso': () => import('@/content/blog/shipping-bookslot-on-turso.mdx'),
   'introducing-pack-it-up': () => import('@/content/blog/introducing-pack-it-up.mdx'),
   'optimizing-file-uploads-aws-presigned-urls': () =>
     import('@/content/blog/optimizing-file-uploads-aws-presigned-urls.mdx'),
@@ -63,21 +62,6 @@ const postBodies: Record<string, () => Promise<{ default: ComponentType }>> = {
 
 // Ordered newest first (by date).
 const allBlogPosts: BlogPost[] = [
-  {
-    kind: 'local',
-    id: 'shipping-bookslot-on-turso',
-    slug: 'shipping-bookslot-on-turso',
-    title: 'Shipping BookSlot on Turso',
-    excerpt:
-      'Notes on building an embeddable appointment-booking widget: why the data layer ended up on Turso/libSQL, what the Vercel Hobby cron limit forced, and where the design still leaks.',
-    date: '2026-07-22T00:00+02:00',
-    readTime: '6 min read',
-    category: 'Next.js',
-    author: 'Taulant Sela',
-    imageFit: 'cover',
-    image: '/blog/placeholder_blog.svg',
-    draft: true,
-  },
   {
     kind: 'external',
     id: 'introducing-pack-it-up',
