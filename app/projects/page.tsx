@@ -8,13 +8,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { TbBrandGithub } from 'react-icons/tb';
 
-import { fetchProjects, type Project } from '@/lib/projects/projects';
+import { fetchProjects } from '@/lib/projects/projects';
 import { fetchProjectsPageContent } from '@/lib/projects/projects-page-content';
-
-// Beyond a few links the icon row becomes a wall of identical arrows, so those
-// projects list their links as labelled chips in the card body instead.
-const hasManyLinks = (project: Project) =>
-  (project.links?.filter((link) => link.icon !== 'github').length ?? 0) > 3;
 
 const siteUrl = 'https://taulantsela.com';
 const pageUrl = `${siteUrl}/projects`;
@@ -108,14 +103,14 @@ export default async function ProjectsPage() {
                           <span>{project.title}</span>
                         </div>
                         <div className="flex shrink-0 space-x-2">
-                          {(hasManyLinks(project) ? project.links?.filter((link) => link.icon === 'github') : project.links)?.map((link) => {
+                          {project.links?.map((link) => {
                             const Icon = link.icon === 'github' ? TbBrandGithub : ExternalLink;
+                            const external = link.href.startsWith('http');
                             return (
                               <Link
                                 key={link.href}
                                 href={link.href}
-                                target="_blank"
-                                rel="noopener noreferrer"
+                                {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
                                 className="text-slate-400 transition-all duration-300 hover:scale-125 hover:text-slate-600 dark:hover:text-slate-300"
                                 aria-label={`${project.title} ${link.label}`}
                               >
@@ -132,24 +127,6 @@ export default async function ProjectsPage() {
                   </CardHeader>
                   <CardContent className="flex flex-1 flex-col justify-between gap-4 pt-4">
                     <p className="line-clamp-5 text-sm text-slate-500 dark:text-slate-400">{project.context}</p>
-                    {hasManyLinks(project) ? (
-                      <div className="flex max-h-28 flex-wrap gap-2 overflow-y-auto">
-                        {project.links
-                          ?.filter((link) => link.icon !== 'github')
-                          .map((link) => (
-                            <Link
-                              key={link.href}
-                              href={link.href}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="inline-flex items-center gap-1 rounded-full border border-slate-200 px-2.5 py-1 text-xs text-slate-500 transition-colors duration-300 hover:border-slate-400 hover:text-slate-700 dark:border-white/15 dark:text-slate-400 dark:hover:border-white/40 dark:hover:text-slate-200"
-                            >
-                              <ExternalLink className="h-3 w-3" />
-                              {link.label}
-                            </Link>
-                          ))}
-                      </div>
-                    ) : null}
                     <div className="flex flex-wrap gap-2 pt-2">
                       {project.tags.slice(0, 6).map((tag) => (
                         <Badge

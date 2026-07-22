@@ -301,15 +301,7 @@ export const projects: Project[] = [
     imageFit: 'contain',
     image: '/projects/master-thesis_logo.svg',
     links: [
-      { label: 'Catalog — Context API', href: 'https://thesis-catalog-context-chi.vercel.app' },
-      { label: 'Catalog — Context Hell', href: 'https://thesis-catalog-context-hell-henna.vercel.app' },
-      { label: 'Catalog — Local State', href: 'https://thesis-catalog-local-state-pink.vercel.app' },
-      { label: 'Catalog — Redux Toolkit', href: 'https://thesis-catalog-redux-rtk-ruddy.vercel.app' },
-      { label: 'Catalog — Zustand', href: 'https://thesis-catalog-zustand.vercel.app' },
-      { label: 'Dashboard — Context', href: 'https://thesis-dashboard-context.vercel.app' },
-      { label: 'Dashboard — Redux', href: 'https://thesis-dashboard-redux-opal.vercel.app' },
-      { label: 'Form — Context', href: 'https://thesis-form-context.vercel.app' },
-      { label: 'Form — Redux', href: 'https://thesis-form-redux-livid.vercel.app' },
+      { label: 'Live Demos', href: '/projects/master-thesis' },
       { label: 'GitHub', href: 'https://github.com/TaulantSela/master-thesis', icon: 'github' },
     ],
     description:
