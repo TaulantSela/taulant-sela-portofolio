@@ -471,6 +471,25 @@ export const projects: ProjectSource[] = [
       'Structured an npm-workspaces monorepo spanning a Next.js web client, an Expo mobile app, an Electron desktop shell, and an Express/Prisma API with shared audio and config packages.',
   },
   {
+    id: 'pizza-menu',
+    startedAt: '2025-11',
+    updatedAt: '2025-12',
+    weight: 62,
+    title: 'Pizza Menu - Multi-Tenant Digital Restaurant Menu',
+    role: 'personal',
+    tags: ['Next.js 16', 'React 19', 'TypeScript', 'Sanity CMS', 'Multi-Tenant', 'Tailwind CSS'],
+    imageFit: 'contain',
+    image: '/projects/pizza-menu_logo.svg',
+    links: [
+      { label: 'Live Demo', href: 'https://suhotel.fastbite.app' },
+      { label: 'GitHub', href: 'https://github.com/metinjakupi/pizza-menu', icon: 'github' },
+    ],
+    description:
+      'Hosted digital menu platform for restaurants — each venue gets its own subdomain, branding, and Sanity-managed menu, served from a single Next.js app and running in production for Su Hotel Restaurant & Bar.',
+    context:
+      'Initiated the project and built it with a collaborator: subdomain- and query-based tenant resolution in middleware, per-client theming driven entirely from Sanity, a password-gated Studio, seed and migration scripts, and per-tenant SEO metadata.',
+  },
+  {
     id: 'ui-library',
     startedAt: '2026-05',
     updatedAt: '2026-07',
