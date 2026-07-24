@@ -1,0 +1,49 @@
+Give Claude Code a task, switch to another window to get on with something else, and come back a few minutes later hoping it's finished—only to find it's been sitting there the whole time, waiting for you to approve a single permission prompt. If you run coding agents, you've lived this. The work wasn't slow; you just weren't looking at the right window.
+
+**Claude Semaphore** answers that with the oldest status interface there is: a traffic light. It lives in your system tray (the menu bar on macOS) and stays visible from **any** window, on macOS, Windows, and Linux.
+
+**[▶ Watch the live demo](https://claude-semaphore.vercel.app/#demo)** · **[GitHub](https://github.com/TaulantSela/claude-semaphore)**
+
+## What it does
+
+One glance tells you where a session stands:
+
+- 🔴 **Red** — Claude is **waiting for your input**; a permission prompt or a question is open.
+- 🟠 **Orange** — Claude is **working** (or a session is sitting idle).
+- 🟢 **Green** — the task **finished**; come back and collect.
+- ⚪️ **White** — no active sessions.
+
+The busy states animate so you catch them from the corner of your eye: red beats like a heartbeat with a soft glow until you respond, and orange gently breathes while Claude works. Running several sessions at once? Any session that needs you wins the light (red); otherwise the most recently active one decides—so a window you left idle this morning can't hide a fresh green.
+
+## How it works
+
+Two small, deliberately boring parts.
+
+#### Hooks write the state
+
+The plugin ships hooks that fire on Claude Code's lifecycle events—prompt submitted, tool running, permission needed, response finished—and write one tiny state file per session into `~/.claude/semaphore/`.
+
+#### A Go tray app reads it
+
+A single static **Go** binary (built on [fyne.io/systray](https://github.com/fyne-io/systray)) polls that directory once a second and shows the aggregate state. That's the whole architecture. No network, no telemetry, no account—it reads local files and nothing else. Session files untouched for 12 hours are ignored, so a crashed session can't wedge the light on red.
+
+Getting the states _honest_ turned out to be the interesting part. Permission dialogs, tools kicked off in parallel that finish while a prompt is still waiting, plain-text questions that never open a dialog, and long-running commands during which no hooks fire at all—each needed handling so the light never lies to you. The [README](https://github.com/TaulantSela/claude-semaphore#known-quirks) documents those edge cases if you're curious.
+
+## Install
+
+Inside Claude Code:
+
+```text
+/plugin marketplace add TaulantSela/claude-semaphore
+/plugin install semaphore@claude-semaphore
+```
+
+Start a new session and the light appears in your tray within a few seconds. On first run it downloads the ~5 MB tray binary for your platform from GitHub Releases and registers it to start at login. The only requirement is `curl`, which you already have.
+
+## Why I built it
+
+I wanted my own answer to "is it my turn yet?" without alt-tabbing to check—and it turned into a satisfying little cross-platform exercise: a Go tray binary, a shell-hook plugin, and a **GitHub Actions** pipeline that cross-compiles releases for macOS, Linux, and Windows across amd64 and arm64, all distributed through the Claude Code plugin marketplace.
+
+It's open source under the MIT license. If it saves you one _"oh—it was waiting the whole time"_ moment, it's done its job.
+
+**[Try it on GitHub](https://github.com/TaulantSela/claude-semaphore)** · **[Live demo](https://claude-semaphore.vercel.app/#demo)**

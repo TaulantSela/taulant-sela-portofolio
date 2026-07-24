@@ -53,6 +53,7 @@ export type BlogPost = ExternalBlogPost | LocalBlogPost;
  * instead of a runtime 404.
  */
 const postBodies: Record<string, () => Promise<{ default: ComponentType }>> = {
+  'introducing-claude-semaphore': () => import('@/content/blog/introducing-claude-semaphore.mdx'),
   'introducing-pack-it-up': () => import('@/content/blog/introducing-pack-it-up.mdx'),
   'optimizing-file-uploads-aws-presigned-urls': () =>
     import('@/content/blog/optimizing-file-uploads-aws-presigned-urls.mdx'),
@@ -62,6 +63,20 @@ const postBodies: Record<string, () => Promise<{ default: ComponentType }>> = {
 
 // Ordered newest first (by date).
 const allBlogPosts: BlogPost[] = [
+  {
+    kind: 'local',
+    id: 'introducing-claude-semaphore',
+    slug: 'introducing-claude-semaphore',
+    title: 'Introducing Claude Semaphore: A Traffic Light for Claude Code in Your Menu Bar',
+    excerpt:
+      "A system-tray traffic light for Claude Code—red when it needs your input, orange while it works, green when the task's done—visible from any window on macOS, Windows, and Linux. Here's the itch it scratches and how the hooks-plus-Go-tray design keeps the light honest.",
+    date: '2026-07-24T00:00+01:00',
+    readTime: '4 min read',
+    category: 'Developer Tools',
+    author: 'Taulant Sela',
+    imageFit: 'contain',
+    image: '/blog/claude-semaphore_blog.svg',
+  },
   {
     kind: 'external',
     id: 'introducing-pack-it-up',
