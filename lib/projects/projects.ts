@@ -108,6 +108,25 @@ export const projects: ProjectSource[] = [
       'Maintained the legacy React/Class Components codebase while leading the migration to functional React + TypeScript, RTK Query, Tailwind CSS, and reusable Storybook-driven components. Embedded React modules into AEM via Web Components, delivered REST/GraphQL integrations, and implemented extensive unit testing to support the Chameleon architecture that powers each brand and market variant.',
   },
   {
+    id: 'claude-semaphore',
+    startedAt: '2026-07',
+    updatedAt: '2026-07',
+    weight: 82,
+    title: 'Claude Semaphore - Menu Bar Traffic Light',
+    role: 'oss',
+    tags: ['Go', 'Claude Code Plugin', 'Shell', 'Cross-Platform', 'CI/CD'],
+    imageFit: 'contain',
+    image: '/projects/claude-semaphore_logo.svg',
+    links: [
+      { label: 'Website', href: 'https://claude-semaphore.vercel.app' },
+      { label: 'GitHub', href: 'https://github.com/TaulantSela/claude-semaphore', icon: 'github' },
+    ],
+    description:
+      'Published Claude Code plugin that drives a menu-bar traffic light—red when Claude needs you, orange while it works, green when done—visible from any window on macOS, Windows, and Linux.',
+    context:
+      'Shipped a cross-platform Go tray binary, a shell-hook plugin, and an automated GitHub Actions release pipeline, distributed through the Claude Code plugin marketplace.',
+  },
+  {
     id: 'pack-it-up',
     startedAt: '2025-08',
     updatedAt: '2025-12',
@@ -336,25 +355,6 @@ export const projects: ProjectSource[] = [
       'Wallpaper generator that turns iconic watch dials into logo-free color-and-texture lock screens, plus a studio that extracts a palette from a photo of your own watch on-device.',
     context:
       'Built a parametric SVG generator with server-side PNG rendering via resvg, on-device k-means palette extraction, and an iOS Shortcuts integration for one-tap wallpaper setting.',
-  },
-  {
-    id: 'claude-semaphore',
-    startedAt: '2026-07',
-    updatedAt: '2026-07',
-    weight: 82,
-    title: 'Claude Semaphore - Menu Bar Traffic Light',
-    role: 'oss',
-    tags: ['Go', 'Claude Code Plugin', 'Shell', 'Cross-Platform', 'CI/CD'],
-    imageFit: 'contain',
-    image: '/projects/claude-semaphore_logo.svg',
-    links: [
-      { label: 'Website', href: 'https://claude-semaphore.vercel.app' },
-      { label: 'GitHub', href: 'https://github.com/TaulantSela/claude-semaphore', icon: 'github' },
-    ],
-    description:
-      'Published Claude Code plugin that drives a menu-bar traffic light—red when Claude needs you, orange while it works, green when done—visible from any window on macOS, Windows, and Linux.',
-    context:
-      'Shipped a cross-platform Go tray binary, a shell-hook plugin, and an automated GitHub Actions release pipeline, distributed through the Claude Code plugin marketplace.',
   },
   {
     id: 'bookslot',
