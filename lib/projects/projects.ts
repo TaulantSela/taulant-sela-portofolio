@@ -338,18 +338,18 @@ export const projects: ProjectSource[] = [
       'Built a parametric SVG generator with server-side PNG rendering via resvg, on-device k-means palette extraction, and an iOS Shortcuts integration for one-tap wallpaper setting.',
   },
   {
-    id: 'claude-code-semaphore',
+    id: 'claude-semaphore',
     startedAt: '2026-07',
     updatedAt: '2026-07',
     weight: 82,
-    title: 'Claude Code Semaphore - Menu Bar Status Light',
+    title: 'Claude Semaphore - Menu Bar Traffic Light',
     role: 'oss',
     tags: ['Go', 'Claude Code Plugin', 'Shell', 'Cross-Platform', 'CI/CD'],
     imageFit: 'contain',
-    image: '/projects/claude-code-semaphore_logo.svg',
+    image: '/projects/claude-semaphore_logo.svg',
     links: [
       { label: 'Website', href: 'https://claude-semaphore.vercel.app' },
-      { label: 'GitHub', href: 'https://github.com/TaulantSela/claude-code-semaphore', icon: 'github' },
+      { label: 'GitHub', href: 'https://github.com/TaulantSela/claude-semaphore', icon: 'github' },
     ],
     description:
       'Published Claude Code plugin that drives a menu-bar traffic light—red when Claude needs you, orange while it works, green when done—visible from any window on macOS, Windows, and Linux.',
