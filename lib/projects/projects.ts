@@ -490,6 +490,25 @@ export const projects: ProjectSource[] = [
       'Initiated the project and built it with a collaborator: subdomain- and query-based tenant resolution in middleware, per-client theming driven entirely from Sanity, a password-gated Studio, seed and migration scripts, and per-tenant SEO metadata.',
   },
   {
+    id: 'komshi',
+    startedAt: '2026-07',
+    updatedAt: '2026-08',
+    weight: 66,
+    title: 'Komshi - White-Label Grocery Ordering',
+    role: 'personal',
+    tags: ['Next.js 16', 'React 19', 'Expo', 'Prisma', 'Neon', 'Multi-Tenant'],
+    imageFit: 'contain',
+    image: '/projects/komshi_logo.svg',
+    links: [
+      { label: 'Live Demo', href: 'https://komshi.vercel.app' },
+      { label: 'GitHub', href: 'https://github.com/TaulantSela/komshi', icon: 'github' },
+    ],
+    description:
+      'White-label grocery ordering for neighbourhood shops in North Macedonia — each shop gets its own branded storefront with cash on delivery and a flat monthly fee instead of per-order commission.',
+    context:
+      'Built the platform end to end: multi-tenant storefronts, a shop-operator console, and a platform admin on Next.js with Prisma/Neon, plus one unified Expo app for shoppers and operators, with the order-status machine and pricing rules in a shared domain module imported by both.',
+  },
+  {
     id: 'ui-library',
     startedAt: '2026-05',
     updatedAt: '2026-07',

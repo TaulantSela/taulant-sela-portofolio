@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-label="Komshi">
+  <defs>
+    <linearGradient id="komshi-bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#8b9bff"/>
+      <stop offset="1" stop-color="#5a67e6"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="112" fill="url(#komshi-bg)"/>
+  <path d="M204 214 C204 140 308 140 308 214" fill="none" stroke="#ffffff" stroke-width="26" stroke-linecap="round"/>
+  <rect x="148" y="206" width="216" height="188" rx="36" fill="#ffffff"/>
+</svg>
