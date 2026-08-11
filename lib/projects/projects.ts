@@ -378,7 +378,7 @@ export const projects: ProjectSource[] = [
   {
     id: 'fakt',
     startedAt: '2026-05',
-    updatedAt: '2026-07',
+    updatedAt: '2026-08',
     weight: 56,
     title: 'Fakt - North Macedonia E-Invoicing',
     role: 'personal',
@@ -390,9 +390,9 @@ export const projects: ProjectSource[] = [
       { label: 'GitHub', href: 'https://github.com/TaulantSela/fakt', icon: 'github' },
     ],
     description:
-      'Electronic invoicing app for North Macedonia that creates UBL invoices and submits them to the government UJP e-Faktura system, including qualified electronic signature (XAdES) signing.',
+      'Demo e-invoicing platform exploring North Macedonia’s 2026 e-Faktura mandate, with multi-tenant invoicing, UBL 2.1 generation, XAdES-BES qualified signing, a simulated UJP clearance flow, and a trilingual UI.',
     context:
-      'Implemented OAuth to the UJP platform, XAdES-BES qualified signing with WebCrypto, internationalization, and a Prisma/NextAuth data layer for a non-trivial regulatory domain.',
+      'Built the full compliance pipeline—EN 16931 UBL generation, three-mode XAdES signing including HSM and local PEM, and an OAuth2 submission client—then reframed the repo as a case study after primary-source research showed UJP’s real API uses a proprietary JSON+JWS format with per-taxpayer qualified certificates, a lesson the repo now documents.',
   },
   {
     id: 'react-state-management-thesis',
