@@ -47,33 +47,62 @@ function getColorIndex(count: number) {
   return 4;
 }
 
+type CacheEntry = {
+  request: Promise<ContributionsResponse>;
+  data?: ContributionsResponse;
+};
+
+// Module-level so it outlives the component: navigating away and back reuses it, and a
+// click right after a hover picks up the request the hover already started.
+const yearCache = new Map<number, CacheEntry>();
+
+function loadYear(year: number) {
+  const cached = yearCache.get(year);
+  if (cached) return cached.request;
+
+  const entry: CacheEntry = {
+    request: fetch(`${API_BASE}/${USERNAME}?y=${year}`, { cache: 'no-store' }).then(async (res) => {
+      if (!res.ok) {
+        throw new Error(`Status ${res.status}`);
+      }
+      const json = (await res.json()) as ContributionsResponse;
+      entry.data = json;
+      return json;
+    }),
+  };
+  // Forget failures so the next hover or click retries instead of replaying the error.
+  entry.request.catch(() => yearCache.delete(year));
+  yearCache.set(year, entry);
+  return entry.request;
+}
+
+function getCachedYears() {
+  const data: Record<number, ContributionsResponse> = {};
+  yearCache.forEach((entry, year) => {
+    if (entry.data) data[year] = entry.data;
+  });
+  return data;
+}
+
 export default function GithubContributions() {
+  const [yearData, setYearData] = useState<Record<number, ContributionsResponse>>(getCachedYears);
   const [activeYear, setActiveYear] = useState<number>(CURRENT_YEAR);
-  const [pendingYear, setPendingYear] = useState<number | null>(CURRENT_YEAR);
-  const [yearData, setYearData] = useState<Record<number, ContributionsResponse>>({});
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [pendingYear, setPendingYear] = useState<number | null>(() => (yearData[CURRENT_YEAR] ? null : CURRENT_YEAR));
+  const [isLoading, setIsLoading] = useState<boolean>(() => !yearData[CURRENT_YEAR]);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     if (pendingYear === null) return;
 
-    const controller = new AbortController();
     const year = pendingYear;
-    const from = `${year}-01-01`;
-    const to = `${year}-12-31`;
-    const url = `${API_BASE}/${USERNAME}?from=${from}&to=${to}`;
-
     let cancelled = false;
 
     setError(null);
     setIsLoading(true);
 
-    fetch(url, { cache: 'no-store', signal: controller.signal })
-      .then(async (res) => {
-        if (!res.ok) {
-          throw new Error(`Status ${res.status}`);
-        }
-        const json = (await res.json()) as ContributionsResponse;
+    // No abort on cleanup: the request is shared with the cache, so let it finish and land there.
+    loadYear(year)
+      .then((json) => {
         if (!cancelled) {
           setYearData((prev) => ({ ...prev, [year]: json }));
           setActiveYear(year);
@@ -81,8 +110,8 @@ export default function GithubContributions() {
           setIsLoading(false);
         }
       })
-      .catch((err) => {
-        if (!cancelled && err.name !== 'AbortError') {
+      .catch(() => {
+        if (!cancelled) {
           setError('Unable to load.');
           setPendingYear(null);
           setIsLoading(false);
@@ -91,7 +120,6 @@ export default function GithubContributions() {
 
     return () => {
       cancelled = true;
-      controller.abort();
     };
   }, [pendingYear]);
 
@@ -194,6 +222,16 @@ export default function GithubContributions() {
     }
 
     setPendingYear(year);
+  };
+
+  const prefetchYear = (year: number) => {
+    if (yearData[year]) return;
+
+    loadYear(year)
+      .then((json) => setYearData((prev) => ({ ...prev, [year]: json })))
+      .catch(() => {
+        // Stay quiet on a failed prefetch; the click retries and shows the error.
+      });
   };
 
   return (
@@ -336,6 +374,8 @@ export default function GithubContributions() {
               key={year}
               type="button"
               onClick={() => handleYearClick(year)}
+              onPointerEnter={() => prefetchYear(year)}
+              onFocus={() => prefetchYear(year)}
               disabled={pendingYear === year}
               className={`cursor-pointer rounded-full border px-3 py-1 text-[11px] tracking-[0.35em] whitespace-nowrap uppercase transition-colors duration-300 disabled:cursor-not-allowed ${
                 year === activeYear
