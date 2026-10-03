@@ -1,8 +1,7 @@
 import { cache } from 'react';
 
-import { GITHUB_USERNAME } from '@/lib/github/contributions-api';
-
 const API_BASE = 'https://api.github.com';
+const GITHUB_USERNAME = 'TaulantSela';
 
 /** Repo metadata is refreshed daily; a stale month is harmless, a failed build is not. */
 const REVALIDATE_SECONDS = 60 * 60 * 24;
