@@ -13,7 +13,7 @@ import './globals.css';
 
 const inter = Inter({ subsets: ['latin'] });
 const siteUrl = 'https://taulantsela.com';
-const socialImage = `${siteUrl}/og-image.svg`;
+const socialImage = `${siteUrl}/opengraph-image`;
 const siteDescription =
   'Taulant Sela, Senior Software Engineer. React, TypeScript and Next.js on large platforms like Goodyear and BMG, plus products I build and ship myself.';
 
@@ -29,13 +29,14 @@ const structuredData = [
     knowsAbout: ['web development', 'frontend engineering', 'React', 'TypeScript', 'Next.js'],
     worksFor: {
       '@type': 'Organization',
-      name: 'Taulant Sela',
+      name: 'Hoyo Tech',
+      url: 'https://hoyo.tech',
     },
   },
   {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
-    name: 'Taulant Sela - Portfolio',
+    name: 'Taulant Sela',
     url: siteUrl,
     inLanguage: 'en',
     publisher: {
@@ -55,7 +56,7 @@ const structuredData = [
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: 'Taulant Sela - Portfolio',
+    default: 'Taulant Sela — Senior Software Engineer',
     template: '%s | Taulant Sela',
   },
   description: siteDescription,
@@ -83,15 +84,15 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'en_US',
     url: siteUrl,
-    title: 'Taulant Sela - Portfolio',
+    title: 'Taulant Sela — Senior Software Engineer',
     description: siteDescription,
-    siteName: 'Taulant Sela - Portfolio',
+    siteName: 'Taulant Sela',
     images: [
       {
         url: socialImage,
         width: 1200,
         height: 630,
-        alt: 'Taulant Sela - Portfolio',
+        alt: 'Taulant Sela, Senior Software Engineer',
       },
     ],
   },
@@ -99,7 +100,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     site: '@TaulantSela',
     creator: '@TaulantSela',
-    title: 'Taulant Sela - Portfolio',
+    title: 'Taulant Sela — Senior Software Engineer',
     description: siteDescription,
     images: [socialImage],
   },

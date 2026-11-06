@@ -15,7 +15,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
 const siteUrl = 'https://taulantsela.com';
-const socialImage = `${siteUrl}/og-image.svg`;
+const socialImage = `${siteUrl}/opengraph-image`;
 
 type PageProps = {
   params: Promise<{ slug: string }>;
