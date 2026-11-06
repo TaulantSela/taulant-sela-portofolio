@@ -199,8 +199,8 @@ export const projects: ProjectSource[] = [
   },
   {
     id: 'parkber',
-    startedAt: '2022-01',
-    updatedAt: '2022-12',
+    startedAt: '2023-02',
+    updatedAt: '2024-02',
     weight: 70,
     title: 'Parkber - Parking Management System',
     role: 'company',
@@ -214,8 +214,8 @@ export const projects: ProjectSource[] = [
   },
   {
     id: 'stepline',
-    startedAt: '2023-01',
-    updatedAt: '2023-12',
+    startedAt: '2020-09',
+    updatedAt: '2021-10',
     weight: 68,
     title: 'Stepline - Document Template Management',
     role: 'company',
