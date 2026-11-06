@@ -12,7 +12,7 @@ export const contactSectionContent: ContactSectionContent = {
   eyebrow: "Let's build something amazing",
   heading: 'Ready to bring your next idea to life?',
   description:
-    "Ready to ship your next big thing? Tell me the vision, the constraints, or the gap you need to close, and I'll chart the path from idea to launch.",
+    "Tell me what you're building, what's holding it back, and when it needs to ship. I'll reply with how I'd approach it.",
   highlightLabel: 'How I work',
   highlightDescription:
     'I stay close to product, design, and engineering partners—listening first, iterating thoughtfully, and shipping software that feels personal and dependable.',
