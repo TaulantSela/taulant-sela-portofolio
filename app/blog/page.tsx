@@ -12,12 +12,11 @@ import { blogPostCtaLabel, blogPostLinkProps, fetchBlogPosts, isMirror } from '@
 
 const siteUrl = 'https://taulantsela.com';
 const pageUrl = `${siteUrl}/blog`;
-const socialImage = `${siteUrl}/og-image.svg`;
+const socialImage = `${siteUrl}/opengraph-image`;
 
 export const metadata: Metadata = {
   title: 'Blog',
-  description:
-    'Read articles by Taulant Sela on shipping reliable products, web engineering best practices, and modern development workflows.',
+  description: 'Write-ups by Taulant Sela on front-end decisions, architecture trade-offs, and shipping products.',
   alternates: {
     canonical: '/blog',
   },
@@ -25,21 +24,20 @@ export const metadata: Metadata = {
     type: 'article',
     url: pageUrl,
     title: 'Articles by Taulant Sela',
-    description:
-      'Insights on shipping reliable products, web engineering best practices, and modern development workflows.',
+    description: 'Write-ups by Taulant Sela on front-end decisions, architecture trade-offs, and shipping products.',
     images: [
       {
         url: socialImage,
         width: 1200,
         height: 630,
-        alt: 'Taulant Sela - Portfolio',
+        alt: 'Taulant Sela, Senior Software Engineer',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Taulant Sela — Blog',
-    description: 'Engineering essays and notes on building resilient products, modern tooling, and impactful teams.',
+    description: 'Write-ups by Taulant Sela on front-end decisions, architecture trade-offs, and shipping products.',
     images: [socialImage],
   },
   keywords: [

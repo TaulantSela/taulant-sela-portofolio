@@ -10,7 +10,7 @@ import { TbBrandGithub } from 'react-icons/tb';
 
 const siteUrl = 'https://taulantsela.com';
 const pageUrl = `${siteUrl}/projects/master-thesis`;
-const socialImage = `${siteUrl}/og-image.svg`;
+const socialImage = `${siteUrl}/opengraph-image`;
 const repoUrl = 'https://github.com/TaulantSela/master-thesis';
 
 const title = 'Master Thesis - Live Demos';

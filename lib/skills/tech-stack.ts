@@ -129,7 +129,7 @@ export const techStack: TechStackItem[] = [
       'bg-gradient-to-br from-rose-500/10 to-amber-300/20 text-rose-500 ring-rose-400/40 group-hover:ring-rose-400/60 dark:text-rose-300',
   },
   {
-    name: 'Scrum Mastery',
+    name: 'Scrum',
     icon: PiKanbanBold,
     accent:
       'bg-gradient-to-br from-indigo-400/15 to-purple-500/20 text-indigo-400 ring-indigo-400/35 group-hover:ring-indigo-400/60 dark:text-indigo-200',

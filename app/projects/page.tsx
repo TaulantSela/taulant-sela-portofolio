@@ -10,12 +10,11 @@ import { fetchProjectsPageContent } from '@/lib/projects/projects-page-content';
 
 const siteUrl = 'https://taulantsela.com';
 const pageUrl = `${siteUrl}/projects`;
-const socialImage = `${siteUrl}/og-image.svg`;
+const socialImage = `${siteUrl}/opengraph-image`;
 
 export const metadata: Metadata = {
   title: 'Projects',
-  description:
-    'Explore projects delivered by Taulant Sela across product engineering, open source, and experimental builds.',
+  description: 'Client platforms, open source, and personal products built by Taulant Sela.',
   alternates: {
     canonical: '/projects',
   },
@@ -23,21 +22,20 @@ export const metadata: Metadata = {
     type: 'website',
     url: pageUrl,
     title: 'Projects by Taulant Sela',
-    description:
-      'A curated portfolio of production launches, open source contributions, and personal experiments from Taulant Sela.',
+    description: 'Client platforms, open source, and personal products built by Taulant Sela.',
     images: [
       {
         url: socialImage,
         width: 1200,
         height: 630,
-        alt: 'Taulant Sela - Portfolio',
+        alt: 'Taulant Sela, Senior Software Engineer',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Taulant Sela — Projects',
-    description: 'Recent product launches, open source work, and personal experiments built by Taulant Sela.',
+    description: 'Client platforms, open source, and personal products built by Taulant Sela.',
     images: [socialImage],
   },
   keywords: [
