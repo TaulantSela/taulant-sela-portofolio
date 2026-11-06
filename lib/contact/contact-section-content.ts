@@ -11,11 +11,9 @@ export type ContactSectionContent = {
 export const contactSectionContent: ContactSectionContent = {
   eyebrow: "Let's build something amazing",
   heading: 'Ready to bring your next idea to life?',
-  description:
-    "Ready to ship your next big thing? Tell me the vision, the constraints, or the gap you need to close, and I'll chart the path from idea to launch.",
+  description: "Tell me what you're building, what's holding it back, and when it needs to ship.",
   highlightLabel: 'How I work',
-  highlightDescription:
-    'I stay close to product, design, and engineering partners—listening first, iterating thoughtfully, and shipping software that feels personal and dependable.',
+  highlightDescription: 'I start with the problem, show progress in regular demos, and ship in small steps.',
 };
 
 export const fetchContactSectionContent = cache(async (): Promise<ContactSectionContent> => contactSectionContent);

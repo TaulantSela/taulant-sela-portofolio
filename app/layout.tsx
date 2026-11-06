@@ -14,6 +14,8 @@ import './globals.css';
 const inter = Inter({ subsets: ['latin'] });
 const siteUrl = 'https://taulantsela.com';
 const socialImage = `${siteUrl}/og-image.svg`;
+const siteDescription =
+  'Taulant Sela, Senior Software Engineer. React, TypeScript and Next.js on large platforms like Goodyear and BMG, plus products I build and ship myself.';
 
 const structuredData = [
   {
@@ -22,7 +24,7 @@ const structuredData = [
     name: 'Taulant Sela',
     url: siteUrl,
     image: socialImage,
-    jobTitle: 'Software Engineer',
+    jobTitle: 'Senior Software Engineer',
     sameAs: ['https://www.linkedin.com/in/taulantsela', 'https://github.com/TaulantSela', 'https://x.com/TaulantSela'],
     knowsAbout: ['web development', 'frontend engineering', 'React', 'TypeScript', 'Next.js'],
     worksFor: {
@@ -41,7 +43,7 @@ const structuredData = [
       name: 'Taulant Sela',
       url: siteUrl,
     },
-    description: 'Portfolio of Taulant Sela, Software Engineer, showcasing web development projects and skills.',
+    description: siteDescription,
     potentialAction: {
       '@type': 'SearchAction',
       target: `${siteUrl}/?q={search_term_string}`,
@@ -56,7 +58,7 @@ export const metadata: Metadata = {
     default: 'Taulant Sela - Portfolio',
     template: '%s | Taulant Sela',
   },
-  description: 'Portfolio of Taulant Sela, Software Engineer, showcasing web development projects and skills.',
+  description: siteDescription,
   keywords: [
     'Taulant Sela',
     'Taulant Sela portfolio',
@@ -82,7 +84,7 @@ export const metadata: Metadata = {
     locale: 'en_US',
     url: siteUrl,
     title: 'Taulant Sela - Portfolio',
-    description: 'Portfolio of Taulant Sela, Software Engineer, showcasing web development projects and skills.',
+    description: siteDescription,
     siteName: 'Taulant Sela - Portfolio',
     images: [
       {
@@ -98,7 +100,7 @@ export const metadata: Metadata = {
     site: '@TaulantSela',
     creator: '@TaulantSela',
     title: 'Taulant Sela - Portfolio',
-    description: 'Portfolio of Taulant Sela, Software Engineer, showcasing web development projects and skills.',
+    description: siteDescription,
     images: [socialImage],
   },
   robots: {

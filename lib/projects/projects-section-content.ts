@@ -9,10 +9,9 @@ export type ProjectsSectionContent = {
 
 export const projectsSectionContent: ProjectsSectionContent = {
   badgeLeading: 'Selected Projects',
-  badgeTrailing: 'Recent partnerships & experiments',
-  heading: 'Lean collaborations rooted in steady delivery.',
-  description:
-    'Front-end architecture, design system tuning, and release support for teams shipping on schedule.',
+  badgeTrailing: 'Client work & side projects',
+  heading: "Things I've built.",
+  description: 'Client platforms, open source, and products of my own.',
 };
 
 export const fetchProjectsSectionContent = cache(async (): Promise<ProjectsSectionContent> => projectsSectionContent);

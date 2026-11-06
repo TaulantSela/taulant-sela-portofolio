@@ -7,8 +7,7 @@ export type BlogPageContent = {
 
 export const blogPageContent: BlogPageContent = {
   heading: 'All Blog Posts',
-  description:
-    'Explore the full collection of writing on modern products, thoughtful engineering, and steady team delivery.',
+  description: 'All my write-ups on front-end decisions, architecture trade-offs, and the products I ship.',
 };
 
 export const fetchBlogPageContent = cache(async (): Promise<BlogPageContent> => blogPageContent);

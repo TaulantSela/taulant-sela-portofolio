@@ -8,9 +8,8 @@ export type BlogSectionContent = {
 
 export const blogSectionContent: BlogSectionContent = {
   eyebrow: 'Blog',
-  heading: 'Blog posts on building modern products and leading teams steadily.',
-  description:
-    'Occasional write-ups covering front-end decisions, design system upkeep, and day-to-day delivery habits.',
+  heading: "Things I've written.",
+  description: 'Occasional write-ups covering front-end decisions, architecture trade-offs, and the products I ship.',
 };
 
 export const fetchBlogSectionContent = cache(async (): Promise<BlogSectionContent> => blogSectionContent);
