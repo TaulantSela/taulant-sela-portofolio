@@ -38,6 +38,8 @@ export const heroSectionContent: HeroSectionContent = {
         { name: 'Komshi', href: 'https://komshi.vercel.app' },
         { name: 'Watchcraft', href: 'https://watchcraft-app.vercel.app' },
         { name: 'Claude Semaphore', href: 'https://github.com/TaulantSela/claude-semaphore' },
+        { name: 'Pack It Up', href: 'https://packitup.vercel.app' },
+        { name: 'WatchPaper', href: 'https://watchpaper.vercel.app' },
       ],
     },
     {
