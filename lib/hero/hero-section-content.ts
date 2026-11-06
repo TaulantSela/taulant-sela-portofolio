@@ -11,6 +11,7 @@ export type HeroSectionContent = {
   headlineSecondary: string;
   description: string;
   location: string;
+  locationDetail: string;
   facts: HeroFact[];
   marqueeItems: string[];
   cvUrl: string;
@@ -20,7 +21,8 @@ export const heroSectionContent: HeroSectionContent = {
   headlineHighlight: 'Taulant Sela',
   headlineSecondary: 'Senior Software Engineer',
   description: 'I build web apps with React and Next.js, from large platforms for clients to products of my own.',
-  location: 'Struga, North Macedonia · Remote',
+  location: 'Struga, North Macedonia',
+  locationDetail: 'Working remotely',
   facts: [
     {
       label: 'Now',

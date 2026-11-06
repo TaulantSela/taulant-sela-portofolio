@@ -13,7 +13,8 @@ type HeroProps = {
 };
 
 export default function Hero({ content }: HeroProps) {
-  const { headlineHighlight, headlineSecondary, description, location, facts, marqueeItems, cvUrl } = content;
+  const { headlineHighlight, headlineSecondary, description, location, locationDetail, facts, marqueeItems, cvUrl } =
+    content;
 
   return (
     <section
@@ -60,8 +61,8 @@ export default function Hero({ content }: HeroProps) {
                 <div className="flex items-center gap-4 border-b border-slate-200/70 pb-5 dark:border-white/10">
                   <Image src="/favicon.ico" alt="" width={56} height={56} className="h-14 w-14" />
                   <div>
-                    <p className="font-medium text-slate-900 dark:text-white">{headlineHighlight}</p>
-                    <p className="text-sm text-slate-500 dark:text-white/60">{location}</p>
+                    <p className="font-medium text-slate-900 dark:text-white">{location}</p>
+                    <p className="text-sm text-slate-500 dark:text-white/60">{locationDetail}</p>
                   </div>
                 </div>
                 <dl className="divide-y divide-slate-200/70 dark:divide-white/10">
