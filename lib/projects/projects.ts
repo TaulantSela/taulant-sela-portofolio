@@ -509,6 +509,22 @@ export const projects: ProjectSource[] = [
       'Built the platform end to end: multi-tenant storefronts, a shop-operator console, and a platform admin on Next.js with Prisma/Neon, plus one unified Expo app for shoppers and operators, with the order-status machine and pricing rules in a shared domain module imported by both.',
   },
   {
+    id: 'watchcraft',
+    startedAt: '2026-10',
+    updatedAt: '2026-10',
+    weight: 72,
+    title: 'Watchcraft - 3D Watch Configurator',
+    role: 'personal',
+    tags: ['Next.js 16', 'React 19', 'TypeScript', 'three.js', 'Zustand', 'Vitest'],
+    imageFit: 'contain',
+    image: '/projects/watchcraft_logo.svg',
+    links: [{ label: 'Live Demo', href: 'https://watchcraft-app.vercel.app' }],
+    description:
+      'Design your own watch step by step in real-time 3D, see it at your actual wrist size, and get the parts list to order and assemble it yourself.',
+    context:
+      "Built a real-time three.js configurator covering style, movement, case, dial, hands and strap, with each part step matched to listings checked against the chosen movement, a seller's dial photo applied straight onto the watch, and visual regression tests over 22 rendered configurations.",
+  },
+  {
     id: 'ui-library',
     startedAt: '2026-05',
     updatedAt: '2026-07',
