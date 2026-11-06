@@ -10,9 +10,8 @@ export type HeroSectionContent = {
 
 export const heroSectionContent: HeroSectionContent = {
   headlineHighlight: 'Taulant Sela',
-  headlineSecondary: 'Software Engineer turning ideas into refined products.',
-  description:
-    'Collaborating with teams to design and develop modern web products that are built with clean architecture, reliable systems, and long-term maintainability in mind.',
+  headlineSecondary: 'Senior Software Engineer',
+  description: 'I build web apps with React and Next.js, from large platforms for clients to products of my own.',
   marqueeItems: [
     'Goodyear in 30+ Markets',
     'BMG Production Music',

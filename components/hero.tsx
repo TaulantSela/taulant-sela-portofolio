@@ -27,7 +27,9 @@ export default function Hero({ content }: HeroProps) {
                 <span className="block">
                   <span className="animate-gradient-text">{headlineHighlight}</span>
                 </span>
-                <span className="block">{headlineSecondary}</span>
+                <span className="mt-3 block text-2xl font-medium text-slate-600 sm:text-3xl lg:text-4xl dark:text-white/80">
+                  {headlineSecondary}
+                </span>
               </h1>
               <p className="max-w-2xl text-lg text-slate-600 sm:text-xl dark:text-white/70">{description}</p>
             </div>
