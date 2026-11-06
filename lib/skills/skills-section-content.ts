@@ -12,9 +12,8 @@ export type SkillsSectionContent = {
 export const skillsSectionContent: SkillsSectionContent = {
   badgeLeading: 'Tech Arsenal',
   badgeTrailing: 'Core Stack',
-  heading: 'The toolkit behind thoughtful digital experiences.',
-  description:
-    'A collection of frameworks and tools that help me craft dependable, well-designed software.',
+  heading: 'What I work with.',
+  description: 'The languages, frameworks and tools I use at work and on my own projects.',
   captionLeading: 'Featured stack',
   captionTrailing: 'Always evolving',
 };

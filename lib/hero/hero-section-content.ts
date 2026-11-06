@@ -20,7 +20,7 @@ export type HeroSectionContent = {
 export const heroSectionContent: HeroSectionContent = {
   headlineHighlight: 'Taulant Sela',
   headlineSecondary: 'Senior Software Engineer',
-  description: 'I build web apps with React and Next.js, from large platforms for clients to products of my own.',
+  description: 'I build React and Next.js apps for clients, and ship my own products on the side.',
   location: 'Struga, North Macedonia',
   locationDetail: 'Working remotely',
   facts: [
