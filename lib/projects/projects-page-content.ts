@@ -7,8 +7,7 @@ export type ProjectsPageContent = {
 
 export const projectsPageContent: ProjectsPageContent = {
   heading: 'All Projects',
-  description:
-    'Browse the full collection of company initiatives, open source contributions, and personal products I have built.',
+  description: "Everything I've worked on: client platforms, open source, and products of my own.",
 };
 
 export const fetchProjectsPageContent = cache(async (): Promise<ProjectsPageContent> => projectsPageContent);

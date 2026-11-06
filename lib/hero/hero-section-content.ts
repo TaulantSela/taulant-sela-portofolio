@@ -40,6 +40,7 @@ export const heroSectionContent: HeroSectionContent = {
         { name: 'Claude Semaphore', href: 'https://github.com/TaulantSela/claude-semaphore' },
         { name: 'Pack It Up', href: 'https://packitup.vercel.app' },
         { name: 'WatchPaper', href: 'https://watchpaper.vercel.app' },
+        { name: 'Pizza Menu', href: 'https://suhotel.fastbite.app' },
       ],
     },
     {
@@ -49,15 +50,14 @@ export const heroSectionContent: HeroSectionContent = {
     },
   ],
   marqueeItems: [
-    'Goodyear in 30+ Markets',
-    'BMG Production Music',
     'Angular 8 → Next.js 15',
     'Legacy React → TypeScript',
-    'Technical Team Lead',
-    'Scrum Master',
+    'Multi-Brand Platforms',
+    'Multi-Tenant SaaS',
+    'Web & Mobile Apps',
     'Mentoring Juniors & Interns',
-    "Master's in Software Engineering",
-    'Published Claude Code Plugin',
+    'Requirement Calls & Client Demos',
+    'Open Source',
   ],
   cvUrl: '/cv/Taulant_Sela_-_CV.pdf',
 };
