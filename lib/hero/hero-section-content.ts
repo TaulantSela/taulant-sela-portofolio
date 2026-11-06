@@ -23,9 +23,9 @@ export const heroSectionContent: HeroSectionContent = {
   location: 'Struga, North Macedonia',
   facts: [
     {
-      label: 'Now',
+      label: 'Currently',
       items: [{ name: 'Hoyo Tech', href: 'https://hoyo.tech' }],
-      detail: 'Technical team lead & Scrum Master',
+      detail: 'Software engineer, team lead & Scrum Master',
     },
     {
       label: 'Built for',
