@@ -37,7 +37,7 @@ export default function Hero({ content }: HeroProps) {
                 size="lg"
                 className="bg-slate-900 text-white transition-transform duration-300 hover:-translate-y-1 hover:bg-slate-800 active:translate-y-0 dark:bg-white dark:text-slate-950 dark:hover:bg-slate-100"
               >
-                <NextLink href="#contact">Start a project</NextLink>
+                <NextLink href="#contact">Get in touch</NextLink>
               </Button>
               <Button
                 asChild
@@ -46,7 +46,7 @@ export default function Hero({ content }: HeroProps) {
                 className="border-slate-300 bg-white/70 text-slate-900 transition-transform duration-300 hover:-translate-y-1 hover:bg-white dark:border-white/40 dark:bg-white/10 dark:text-white dark:hover:bg-white/20"
               >
                 <a href={cvUrl} target="_blank" rel="noopener noreferrer">
-                  Download credentials
+                  View CV
                 </a>
               </Button>
             </div>

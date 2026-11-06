@@ -110,7 +110,7 @@ export default function Navigation() {
             Taulant Sela
           </Link>
           <span className="hidden text-[11px] tracking-[0.35em] text-slate-500 uppercase transition-colors duration-300 sm:inline dark:text-white/60">
-            Software Engineer
+            Senior Software Engineer
           </span>
         </div>
 
