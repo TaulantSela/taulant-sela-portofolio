@@ -105,7 +105,7 @@ export const projects: ProjectSource[] = [
     description:
       'AEM-powered B2C ecosystem serving Goodyear, Dunlop, Vulco, Premio, SuperService, and other brands across 30+ markets, covering consumer, commercial, retail, shop and motorcycle TBUs.',
     context:
-      'Maintained the legacy React/Class Components codebase while leading the migration to functional React + TypeScript, RTK Query, Tailwind CSS, and reusable Storybook-driven components. Embedded React modules into AEM via Web Components, delivered REST/GraphQL integrations, and implemented extensive unit testing to support the Chameleon architecture that powers each brand and market variant.',
+      'Maintained the legacy React/Class Components codebase and contributed to the migration to functional React + TypeScript, RTK Query, Tailwind CSS, and reusable Storybook-driven components. Embedded React modules into AEM via Web Components, consumed REST and GraphQL APIs, and wrote unit tests for components shared across brand and market variants.',
   },
   {
     id: 'claude-semaphore',
@@ -149,19 +149,15 @@ export const projects: ProjectSource[] = [
     startedAt: '2020-09',
     updatedAt: '2026-07',
     weight: 92,
-    title: 'Hoyo Tech Smart Office & HoyoHome',
+    title: 'HoyoHome - Smart Home Platform',
     role: 'company',
-    tags: ['Scrum Mastery', 'Product Leadership', 'React', 'React Native', 'IoT'],
+    tags: ['Scrum', 'React', 'React Native', 'IoT'],
     imageFit: 'cover',
     image: '/projects/hoyohome_logo.webp',
-    links: [
-      { label: 'Smart Office', href: 'https://smart.hoyo.tech/' },
-      { label: 'Hoyo Tech', href: 'https://hoyo.tech/' },
-    ],
+    links: [{ label: 'Hoyo Tech', href: 'https://hoyo.tech/' }],
     description:
-      'Second-generation smart office and smart living ecosystem that delivers real-time energy analytics, environmental intelligence, smart lighting, and climate automation across Hoyo Tech environments.',
-    context:
-      'As Scrum Master, coordinated cross-functional squads, migrated Angular modules to React, rebuilt native apps in React Native, and documented agile workflows to keep the platform shipping predictably.',
+      'Smart-home platform for remote control of IoT devices, with scheduling, voice control and scenes, on web, tablet and mobile.',
+    context: 'Scrum Master for the HoyoHome team, and a developer on some of its features.',
   },
   {
     id: 'react-google-places-autocomplete',
@@ -197,9 +193,9 @@ export const projects: ProjectSource[] = [
     image: '/projects/bmgpm_logo.webp',
     links: [{ label: 'BMG Production Music', href: 'https://bmgproductionmusic.com/' }],
     description:
-      'Migrated a legacy Angular 8 catalog and licensing tool to Next.js 15 with React 19, unlocking faster search, preview, and licensing flows for music supervisors.',
+      'Migration of a legacy Angular 8 catalog and licensing tool to Next.js 15 with React 19, for faster search, preview, and licensing flows for music supervisors.',
     context:
-      'Spearheaded the full rewrite from Angular to a modern Next.js stack—rebuilding feature parity, modernizing the UI system, and ensuring SSR/ISR performance for global catalog searches.',
+      'Contributed to the rewrite from Angular to Next.js: rebuilt catalog browsing and track previews with server-side rendering, built reusable React components, and integrated Contentful CMS and Harvest services.',
   },
   {
     id: 'parkber',
