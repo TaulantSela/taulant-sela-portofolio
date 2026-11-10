@@ -298,7 +298,7 @@ export const projects: ProjectSource[] = [
   {
     id: 'legion-training-api',
     startedAt: '2022-10',
-    updatedAt: '2025-11',
+    updatedAt: '2026-11',
     weight: 44,
     title: 'Legion Training Platform API',
     role: 'personal',
@@ -312,7 +312,7 @@ export const projects: ProjectSource[] = [
     description:
       'Multi-tenant REST API for gyms and coaches to orchestrate workouts, track progress, and manage members with granular role-based auth.',
     context:
-      'Designed a modular Express service with JWT authentication, automated Swagger documentation, caching, and CI-ready integration tests—deployed serverlessly on Vercel.',
+      'Designed a modular Express service where each gym is a tenant: JWT auth with per-gym roles, tenant isolation enforced in Postgres, Swagger documentation, and integration tests running in CI. Deployed serverlessly on Vercel.',
   },
   {
     id: 'elite-mobile',
