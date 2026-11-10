@@ -25,7 +25,7 @@ export const heroSectionContent: HeroSectionContent = {
     {
       label: 'Currently',
       items: [{ name: 'Hoyo Tech', href: 'https://hoyo.tech' }],
-      detail: 'Software engineer, team lead & Scrum Master',
+      detail: 'Software engineer, Team Lead & Scrum Master',
     },
     {
       label: 'Built for',
