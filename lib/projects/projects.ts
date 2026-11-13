@@ -133,7 +133,7 @@ export const projects: ProjectSource[] = [
     weight: 76,
     title: 'Pack It Up - Smart Packing Assistant',
     role: 'personal',
-    tags: ['Next.js 15', 'Clerk', 'Prisma', 'Neon', 'OpenAI', 'Tailwind CSS'],
+    tags: ['Next.js 15', 'AI SDK', 'Gemini', 'Clerk', 'Prisma', 'Neon'],
     imageFit: 'cover',
     image: '/projects/pack-it-up_logo.avif',
     links: [
