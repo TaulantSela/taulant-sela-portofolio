@@ -1,87 +1,140 @@
-<div align="center">
-
+<p align="center">
   <img src="app/favicon.ico" alt="Taulant Sela logo" width="96" height="96" />
+</p>
 
-  <h1>Taulant Sela — Portfolio</h1>
+<h1 align="center">👨‍💻 Taulant Sela — Portfolio</h1>
 
-  <p>
-    <a href="https://taulantsela.com" target="_blank" rel="noopener noreferrer"><strong>Visit the Live Site ↗</strong></a>
-  </p>
+<p align="center">
+  The source of my personal site: the client platforms I've worked on, the products I build on the side, and the articles I've written about them.
+</p>
 
-  <p>Personal portfolio built with Next.js and TypeScript.</p>
-
-  <p>
-    <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://taulantsela.com" alt="QR Code - Scan to visit portfolio" />
-  </p>
-
-  <p><em>Scan the QR code to visit my portfolio</em></p>
-
-</div>
+<p align="center">
+  <strong><a href="https://taulantsela.com">▶ Visit taulantsela.com →</a></strong>
+</p>
 
 ---
 
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+Everything on the site (projects, posts, bio, tech stack) lives in typed TypeScript modules in this
+repo. There is no CMS: adding a project or a post is a code change and a redeploy. Project dates
+and commit counts come live from GitHub, so the projects page stays current without manual edits.
 
-## Getting Started
+## What's on the site
 
-First, run the development server:
+| Route | What you'll find |
+|-------|------------------|
+| `/` | Hero with current role and links, a GitHub contribution calendar with a year picker, three highlighted projects, the tech stack grid, the latest three posts, and a contact form |
+| `/projects` | Every project as a card (company, personal, open source), sortable by **Latest**, **Oldest** or **Most notable** |
+| `/projects/master-thesis` | The nine deployed apps from my React state-management study, grouped by application type |
+| `/blog` | Posts written here (MDX, rendered at `/blog/<slug>`) and posts published elsewhere, such as the Hoyo Tech blog |
+| `/blog/rss.xml` | RSS feed of the on-site posts |
+
+Also included: light, dark and system themes, a generated Open Graph image, `sitemap.xml` and
+`robots.txt`, a CV linked from the hero, and Vercel Analytics + Speed Insights.
+
+## How it works
+
+1. **Next.js 15 App Router** with React 19 Server Components and TypeScript. Styling is
+   Tailwind CSS v4 with shadcn/ui primitives in `components/ui/`, the Geist font, and Lucide /
+   react-icons.
+2. **Content modules** in `lib/` each export a typed constant plus a `fetch*` accessor wrapped in
+   React's `cache`. The pages read them on the server and render statically.
+3. **GitHub metrics** (`lib/github/repo-metrics.ts`): for every project with a GitHub link, the
+   site fetches the repo's creation date, last push, stars and the number of commits I authored.
+   Responses are cached for 24 hours. If a request fails (private repo without a token, rate
+   limit, renamed repo), that project falls back to its hand-written dates.
+4. **Most notable** blends an editorial `weight` (0–100) with measured activity: commits count
+   most, then recency, then stars. Client work with no public repo keeps its authored values.
+5. **Blog posts** are MDX files in `content/blog/`, compiled by `@next/mdx` and styled with
+   `mdx-components.tsx` and Tailwind Typography. Posts published elsewhere can keep an on-site
+   mirror. The mirror's `rel=canonical` points at the original and it stays out of the sitemap
+   and the feed, so the two copies never compete in search.
+6. **Contact form** posts to `/api/contact`, which sends the message through Gmail SMTP with
+   Nodemailer and sets `Reply-To` to the sender.
+
+`docs/project-overview.md` holds the longer architecture notes and the update log. Update it with
+every noticeable change.
+
+## Adding content
+
+### A project
+
+1. Put the logo in `public/projects/` (e.g. `my-app_logo.svg`).
+2. Add an entry to the `projects` array in `lib/projects/projects.ts`:
+
+   ```ts
+   {
+     id: 'my-app',
+     startedAt: '2026-11', // YYYY-MM, fallback only when there is a GitHub link
+     updatedAt: '2026-11',
+     weight: 60, // 0–100, keep values distinct
+     title: 'My App - Short Tagline',
+     role: 'personal', // 'company' | 'personal' | 'oss'
+     tags: ['Next.js', 'TypeScript'],
+     imageFit: 'contain',
+     image: '/projects/my-app_logo.svg',
+     links: [
+       { label: 'Live Demo', href: 'https://my-app.vercel.app' },
+       { label: 'GitHub', href: 'https://github.com/TaulantSela/my-app', icon: 'github' },
+     ],
+     description: 'One or two sentences for the card.',
+     context: 'What I did on it, shown under the description.',
+   },
+   ```
+
+3. Position matters: the array order is the homepage order, and the first three entries are the
+   highlights. `/projects` ignores it and sorts on its own.
+
+### A blog post
+
+- **Written here:** add `content/blog/<slug>.mdx`, register it in `postBodies` in
+  `lib/blog/blog-posts.ts`, and add a `kind: 'local'` entry to the list (newest first). Set
+  `draft: true` to see it in `npm run dev` only.
+- **Published elsewhere:** add a `kind: 'external'` entry with the original `url`. Cards link out.
+  To keep an on-site copy, add the MDX file and a `mirror: { slug }`. If the original ever
+  disappears, set `mirror.primary: true` and the on-site copy takes over.
+
+Cover images go in `public/blog/`.
+
+### Everything else
+
+- `lib/hero/`, `lib/skills/`, `lib/contact/` and the `*-section-content.ts` /
+  `*-page-content.ts` modules: section and archive-page copy.
+- `lib/skills/tech-stack.ts`: the tech stack grid.
+- `lib/projects/thesis-demos.ts`: the master-thesis demo links.
+- `public/cv/`: the CV linked from the hero.
+
+Reference assets in `public/` with an absolute path, e.g. `/projects/my-app_logo.svg`.
+
+## Run locally
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+cp .env.example .env   # then fill in the values you need
+npm run dev            # http://localhost:3000 (Turbopack)
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Other scripts: `npm run lint`, `npm run build`, `npm run start`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+| Variable | Needed for |
+|----------|------------|
+| `GMAIL_USER` | Contact form: the Gmail account that sends the messages |
+| `GMAIL_APP_PASSWORD` | Contact form: a Gmail App Password for that account |
+| `CONTACT_RECIPIENT_EMAIL` | Optional: the inbox that receives messages (defaults to `GMAIL_USER`) |
+| `GITHUB_TOKEN` | Optional: GitHub metrics on `/projects`. Needs the `repo` scope, because some linked repos are private |
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Without `GITHUB_TOKEN`, requests go out anonymously: private repos (and anything past GitHub's
+60-requests-per-hour limit) fall back to the dates in `lib/projects/projects.ts`.
 
-## Project documentation
+### Contact form email setup
 
-- `docs/project-overview.md` — architecture summary, integrations and update log. Update this file with every noticeable change.
+1. Turn on 2-Step Verification for the Gmail account you'll send from.
+2. Create an App Password (Google Account → Security → App passwords).
+3. Set `GMAIL_USER` and `GMAIL_APP_PASSWORD` in `.env` and in your Vercel project.
+4. Restart `npm run dev` or redeploy so the new values are picked up.
 
-## Content
+If either variable is missing, `/api/contact` returns a 500 and logs a configuration warning.
 
-All site content lives in code under `lib/`. Edit the relevant module and redeploy to publish changes:
+## Deploy
 
-- `lib/projects/projects.ts` — project cards (ordered by `featuredIndex`).
-- `lib/blog/blog-posts.ts` — blog post cards (ordered newest first).
-- `lib/hero/`, `lib/skills/`, `lib/contact/`, and the `*-section-content.ts` / `*-page-content.ts` files — section and archive-page copy.
-- `lib/skills/tech-stack.ts` — the tech stack grid.
-
-Images and the CV live in `public/` (`public/projects/`, `public/blog/`, `public/cv/`). Add an asset there and reference it with an absolute path (e.g. `/projects/my-logo.png`).
-
-## Email setup (contact form)
-
-The `/contact` form sends submissions through Gmail using Nodemailer.
-
-1. Enable 2-Step Verification on the Gmail account you plan to send from.
-2. Generate a Gmail App Password (Account settings → Security → App passwords) and copy it.
-3. Add the following environment variables locally (`.env`) and in your deployment platform:
-   - `_MAIL_USER`\_ the Gmail address used to send emails.
-   - `GMAIL_APP_PASSWORD`: the 16-character app password generated above.
-   - `CONTACT_RECIPIENT_EMAIL` _(optional)_: overrides the inbox that receives messages. Defaults to `GMAIL_USER`.
-4. After updating the variables, restart the dev server (`npm run dev`) or redeploy so the new credentials are picked up.
-
-If either `GMAIL_USER` or `GMAIL_APP_PASSWORD` is missing, the API will return a 500 error and log a configuration warning.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+The site runs on Vercel. Content lives in code, so every change ships with a redeploy. Set the
+same environment variables in the Vercel project as in your local `.env`.
