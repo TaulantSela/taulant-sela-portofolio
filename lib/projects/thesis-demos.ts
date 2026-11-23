@@ -26,17 +26,17 @@ export const thesisDemoGroups: ThesisDemoGroup[] = [
       {
         approach: 'Context API',
         href: 'https://thesis-catalog-context-chi.vercel.app',
-        note: 'Multiple focused contexts, split to limit re-render scope.',
+        note: 'One AppContext holding products, cart, wishlist and UI.',
       },
       {
         approach: 'Context Hell',
         href: 'https://thesis-catalog-context-hell-henna.vercel.app',
-        note: 'Deliberate anti-pattern: one wide context re-rendering the tree.',
+        note: 'Cart, wishlist, products and UI each in their own context: the provider stack the name refers to.',
       },
       {
         approach: 'Redux Toolkit',
         href: 'https://thesis-catalog-redux-rtk-ruddy.vercel.app',
-        note: 'Normalized slices with selector-based subscriptions.',
+        note: 'One slice per domain, with per-product selectors.',
       },
       {
         approach: 'Zustand',
@@ -57,7 +57,7 @@ export const thesisDemoGroups: ThesisDemoGroup[] = [
       {
         approach: 'Redux Toolkit',
         href: 'https://thesis-dashboard-redux-opal.vercel.app',
-        note: 'Store-driven updates with memoized selectors.',
+        note: 'One slice per stream, read through selectors.',
       },
     ],
   },
