@@ -62,6 +62,7 @@ Maintain this log chronologically with latest entries first.
 
 | Date (UTC) | Change                                                                                                                                                                                                                       |
 | ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 2026-11-23 | Removed the Fakt and Freelancr cards. Fakt is retired; Freelancr returns as one card once it's refocused on clients, invoices and payments. |
 | 2026-07-21 | Removed Contentful entirely: migrated all content to typed modules under `lib/`, moved assets/CV into `public/`, dropped the `contentful` dependency and all `CONTENTFUL_*` env vars. Content pages now render fully static. |
 | 2025-11-11 | Expanded Contentful usage to power landing + archive sections, polished navigation/mobile styling, enabled analytics, and updated docs.                                                                                      |
 | 2025-11-10 | Renamed the project and refreshed landing page copy/structure.                                                                                                                                                               |
