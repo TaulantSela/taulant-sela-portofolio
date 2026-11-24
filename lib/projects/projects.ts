@@ -137,7 +137,7 @@ export const projects: ProjectSource[] = [
     imageFit: 'cover',
     image: '/projects/pack-it-up_logo.avif',
     links: [
-      { label: 'Live Demo', href: 'https://packitup.vercel.app/' },
+      { label: 'Live Demo', href: 'https://packitup.taulantsela.com/' },
       { label: 'GitHub', href: 'https://github.com/TaulantSela/pack-it-up', icon: 'github' },
     ],
     description:
@@ -344,7 +344,7 @@ export const projects: ProjectSource[] = [
     imageFit: 'contain',
     image: '/projects/watchpaper_logo.png',
     links: [
-      { label: 'Live Demo', href: 'https://watchpaper.vercel.app' },
+      { label: 'Live Demo', href: 'https://watchpaper.taulantsela.com' },
       { label: 'GitHub', href: 'https://github.com/TaulantSela/watchpaper', icon: 'github' },
     ],
     description:
@@ -421,7 +421,7 @@ export const projects: ProjectSource[] = [
     imageFit: 'contain',
     image: '/projects/watchcrop_logo.svg',
     links: [
-      { label: 'Live Demo', href: 'https://watchcrop.vercel.app' },
+      { label: 'Live Demo', href: 'https://watchcrop.taulantsela.com' },
       { label: 'GitHub', href: 'https://github.com/TaulantSela/watchcrop', icon: 'github' },
     ],
     description:
@@ -440,7 +440,7 @@ export const projects: ProjectSource[] = [
     imageFit: 'contain',
     image: '/projects/soundscape_logo.svg',
     links: [
-      { label: 'Live Demo', href: 'https://soundscape-web-one.vercel.app' },
+      { label: 'Live Demo', href: 'https://soundscape.taulantsela.com' },
       { label: 'GitHub', href: 'https://github.com/TaulantSela/soundscape', icon: 'github' },
     ],
     description:
@@ -496,7 +496,7 @@ export const projects: ProjectSource[] = [
     tags: ['Next.js 16', 'React 19', 'TypeScript', 'three.js', 'Zustand', 'Vitest'],
     imageFit: 'contain',
     image: '/projects/watchcraft_logo.svg',
-    links: [{ label: 'Live Demo', href: 'https://watchcraft-app.vercel.app' }],
+    links: [{ label: 'Live Demo', href: 'https://watchcraft.taulantsela.com' }],
     description:
       'Design your own watch step by step in real-time 3D, see it at your actual wrist size, and get the parts list to order and assemble it yourself.',
     context:
