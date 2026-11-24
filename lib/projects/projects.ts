@@ -387,9 +387,9 @@ export const projects: ProjectSource[] = [
       { label: 'GitHub', href: 'https://github.com/TaulantSela/freelancr', icon: 'github' },
     ],
     description:
-      'Invoicing and tax app for freelancers in North Macedonia: clients at home and abroad, invoices in each client’s language, payments converted at the National Bank’s daily rate, and what’s owed to UJP each month with the е-ПДД deadlines.',
+      'Invoicing and tax app for freelancers in North Macedonia: clients at home and abroad, invoices in each client’s language, payments at the National Bank’s daily rate, and what’s owed to UJP each month.',
     context:
-      'Rebuilt from primary-source research into the Personal Income Tax and VAT laws: payments settle invoices in single-statement SQL writes, monthly tax applies foreign-tax credits and local withholding, and a daily Vercel cron sends deadline reminders. Ships with a captioned walkthrough and per-visitor sandbox accounts.',
+      'Built from the income tax and VAT laws: single-statement SQL writes settle invoices, monthly tax nets out tax paid abroad or withheld locally, and visitors get a walkthrough and a 24-hour sandbox.',
   },
   {
     id: 'react-state-management-thesis',
