@@ -35,7 +35,7 @@ export const heroSectionContent: HeroSectionContent = {
     {
       label: 'Building',
       items: [
-        { name: 'Komshi', href: 'https://komshi.vercel.app' },
+        { name: 'Komshi', href: 'https://komshi.taulantsela.com' },
         { name: 'Watchcraft', href: 'https://watchcraft.taulantsela.com' },
         { name: 'Claude Semaphore', href: 'https://github.com/TaulantSela/claude-semaphore' },
         { name: 'Pack It Up', href: 'https://packitup.taulantsela.com' },
