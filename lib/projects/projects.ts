@@ -118,7 +118,7 @@ export const projects: ProjectSource[] = [
     imageFit: 'contain',
     image: '/projects/claude-semaphore_logo.svg',
     links: [
-      { label: 'Website', href: 'https://claude-semaphore.vercel.app' },
+      { label: 'Website', href: 'https://claude-semaphore.taulantsela.com' },
       { label: 'GitHub', href: 'https://github.com/TaulantSela/claude-semaphore', icon: 'github' },
     ],
     description:
@@ -287,7 +287,7 @@ export const projects: ProjectSource[] = [
     imageFit: 'contain',
     image: '/projects/elevator-simulator_logo.svg',
     links: [
-      { label: 'Elevator Simulator', href: 'https://elevator-simulator-system.vercel.app/' },
+      { label: 'Elevator Simulator', href: 'https://elevator-simulator.taulantsela.com/' },
       { label: 'GitHub', href: 'https://github.com/TaulantSela/elevator-simulator', icon: 'github' },
     ],
     description:
@@ -325,7 +325,7 @@ export const projects: ProjectSource[] = [
     imageFit: 'cover',
     image: '/projects/elite-mobile_logo.png',
     links: [
-      { label: 'Elite Mobile', href: 'https://elite-mobile.vercel.app/', icon: 'external' },
+      { label: 'Elite Mobile', href: 'https://elite-mobile.taulantsela.com/', icon: 'external' },
       { label: 'GitHub', href: 'https://github.com/TaulantSela/elite-mobile', icon: 'github' },
     ],
     description:
@@ -478,7 +478,7 @@ export const projects: ProjectSource[] = [
     imageFit: 'contain',
     image: '/projects/komshi_logo.svg',
     links: [
-      { label: 'Live Demo', href: 'https://komshi.vercel.app' },
+      { label: 'Live Demo', href: 'https://komshi.taulantsela.com' },
       { label: 'GitHub', href: 'https://github.com/TaulantSela/komshi', icon: 'github' },
     ],
     description:
