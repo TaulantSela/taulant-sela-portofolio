@@ -374,7 +374,7 @@ export const projects: ProjectSource[] = [
   {
     id: 'react-state-management-thesis',
     startedAt: '2024-01',
-    updatedAt: '2026-07',
+    updatedAt: '2026-11',
     weight: 78,
     title: 'Master Thesis - React State Management Study',
     role: 'personal',
@@ -386,7 +386,7 @@ export const projects: ProjectSource[] = [
       { label: 'GitHub', href: 'https://github.com/TaulantSela/master-thesis', icon: 'github' },
     ],
     description:
-      'Empirical master-thesis study testing whether React state-management performance depends on application type, benchmarking Multiple Contexts against Redux Toolkit across read-heavy, form, and real-time apps.',
+      'Defended master’s thesis testing whether React state-management performance depends on application type, benchmarking Multiple Contexts against Redux Toolkit across read-heavy, form, and real-time apps.',
     context:
       'Built nine comparable apps in a monorepo—catalog, dashboard, and form variants across Local State, Context API, Context Hell, Redux Toolkit, and Zustand—with Vitest benchmarking, a developer-experience survey, and written performance and DX analysis reports.',
   },
