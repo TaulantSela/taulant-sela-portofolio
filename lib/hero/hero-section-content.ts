@@ -36,10 +36,10 @@ export const heroSectionContent: HeroSectionContent = {
       label: 'Building',
       items: [
         { name: 'Komshi', href: 'https://komshi.vercel.app' },
-        { name: 'Watchcraft', href: 'https://watchcraft-app.vercel.app' },
+        { name: 'Watchcraft', href: 'https://watchcraft.taulantsela.com' },
         { name: 'Claude Semaphore', href: 'https://github.com/TaulantSela/claude-semaphore' },
-        { name: 'Pack It Up', href: 'https://packitup.vercel.app' },
-        { name: 'WatchPaper', href: 'https://watchpaper.vercel.app' },
+        { name: 'Pack It Up', href: 'https://packitup.taulantsela.com' },
+        { name: 'WatchPaper', href: 'https://watchpaper.taulantsela.com' },
         { name: 'Pizza Menu', href: 'https://suhotel.fastbite.app' },
       ],
     },

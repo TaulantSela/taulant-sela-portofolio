@@ -62,6 +62,7 @@ Maintain this log chronologically with latest entries first.
 
 | Date (UTC) | Change                                                                                                                                                                                                                       |
 | ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 2026-11-24 | Project links now use each app's own subdomain of taulantsela.com: freelancr, watchcrop, watchpaper, watchcraft, packitup and soundscape (the old vercel.app addresses still work). |
 | 2026-11-24 | Re-added the Freelancr card: rebuilt around clients, invoices, payments and the monthly UJP tax, with a walkthrough at /demo. |
 | 2026-11-23 | Removed the Fakt and Freelancr cards. Fakt is retired; Freelancr returns as one card once it's refocused on clients, invoices and payments. |
 | 2026-07-21 | Removed Contentful entirely: migrated all content to typed modules under `lib/`, moved assets/CV into `public/`, dropped the `contentful` dependency and all `CONTENTFUL_*` env vars. Content pages now render fully static. |
