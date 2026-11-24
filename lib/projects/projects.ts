@@ -382,8 +382,8 @@ export const projects: ProjectSource[] = [
     imageFit: 'contain',
     image: '/projects/freelancr_logo.svg',
     links: [
-      { label: 'Live Demo', href: 'https://freelancr-mk.vercel.app' },
-      { label: 'Walkthrough', href: 'https://freelancr-mk.vercel.app/demo' },
+      { label: 'Live Demo', href: 'https://freelancr.taulantsela.com' },
+      { label: 'Walkthrough', href: 'https://freelancr.taulantsela.com/demo' },
       { label: 'GitHub', href: 'https://github.com/TaulantSela/freelancr', icon: 'github' },
     ],
     description:
