@@ -372,6 +372,26 @@ export const projects: ProjectSource[] = [
       'Built end to end with multi-tenant auth, Drizzle on Turso/libSQL, Resend email, and a Vercel cron job for daily reminders.',
   },
   {
+    id: 'freelancr',
+    startedAt: '2026-05',
+    updatedAt: '2026-11',
+    weight: 58,
+    title: 'Freelancr - Invoices & UJP Tax for MK Freelancers',
+    role: 'personal',
+    tags: ['Next.js', 'React 19', 'TypeScript', 'Drizzle', 'Neon', 'Resend'],
+    imageFit: 'contain',
+    image: '/projects/freelancr_logo.svg',
+    links: [
+      { label: 'Live Demo', href: 'https://freelancr-mk.vercel.app' },
+      { label: 'Walkthrough', href: 'https://freelancr-mk.vercel.app/demo' },
+      { label: 'GitHub', href: 'https://github.com/TaulantSela/freelancr', icon: 'github' },
+    ],
+    description:
+      'Invoicing and tax app for freelancers in North Macedonia: clients at home and abroad, invoices in each client’s language, payments converted at the National Bank’s daily rate, and what’s owed to UJP each month with the е-ПДД deadlines.',
+    context:
+      'Rebuilt from primary-source research into the Personal Income Tax and VAT laws: payments settle invoices in single-statement SQL writes, monthly tax applies foreign-tax credits and local withholding, and a daily Vercel cron sends deadline reminders. Ships with a captioned walkthrough and per-visitor sandbox accounts.',
+  },
+  {
     id: 'react-state-management-thesis',
     startedAt: '2024-01',
     updatedAt: '2026-11',
