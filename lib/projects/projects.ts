@@ -363,7 +363,7 @@ export const projects: ProjectSource[] = [
     imageFit: 'contain',
     image: '/projects/bookslot_logo.svg',
     links: [
-      { label: 'Live Demo', href: 'https://bookslot-rho.vercel.app' },
+      { label: 'Live Demo', href: 'https://bookslot.taulantsela.com' },
       { label: 'GitHub', href: 'https://github.com/TaulantSela/bookslot', icon: 'github' },
     ],
     description:
