@@ -451,21 +451,21 @@ export const projects: ProjectSource[] = [
   {
     id: 'pizza-menu',
     startedAt: '2025-11',
-    updatedAt: '2025-12',
+    updatedAt: '2026-11',
     weight: 62,
     title: 'Pizza Menu - Multi-Tenant Digital Restaurant Menu',
     role: 'personal',
-    tags: ['Next.js 16', 'React 19', 'TypeScript', 'Sanity CMS', 'Multi-Tenant', 'Tailwind CSS'],
+    tags: ['Next.js 16', 'React 19', 'TypeScript', 'Prisma', 'Neon', 'Multi-Tenant'],
     imageFit: 'contain',
     image: '/projects/pizza-menu_logo.svg',
     links: [
-      { label: 'Live Demo', href: 'https://suhotel.fastbite.app' },
-      { label: 'GitHub', href: 'https://github.com/metinjakupi/pizza-menu', icon: 'github' },
+      { label: 'Live Demo', href: 'https://demo.pizza-menu.taulantsela.com' },
+      { label: 'GitHub', href: 'https://github.com/TaulantSela/pizza-menu', icon: 'github' },
     ],
     description:
-      'Hosted digital menu platform for restaurants — each venue gets its own subdomain, branding, and Sanity-managed menu, served from a single Next.js app and running in production for Su Hotel Restaurant & Bar.',
+      'Digital restaurant menu where the pizza is the menu — every pizza fills a round page, and the menu opens and turns like a book with a swipe or a tap. Each restaurant gets its own subdomain, branding, and link-preview image, all from one Next.js app.',
     context:
-      'Initiated the project and built it with a collaborator: subdomain- and query-based tenant resolution in middleware, per-client theming driven entirely from Sanity, a password-gated Studio, seed and migration scripts, and per-tenant SEO metadata.',
+      'Started it with a collaborator, then took it over: moved the menus from Sanity to Postgres (Neon, Prisma) with photos in Vercel Blob, fitted every photo to its pizza circle, rebuilt page turning (swipe, no flicker), resolved each restaurant from its subdomain in the proxy, and closed the holes in the Studio login.',
   },
   {
     id: 'komshi',
