@@ -17,7 +17,8 @@ export type ProjectSource = {
   links?: ProjectLink[];
   imageFit?: 'cover' | 'contain';
   role: 'company' | 'personal' | 'oss';
-  context: string;
+  /** Optional second paragraph: what I did on it. */
+  context?: string;
   /** Month work started, `YYYY-MM`. Falls back to this when there's no repo. */
   startedAt: string;
   /** Month of the most recent meaningful work, `YYYY-MM`. Falls back to this when there's no repo. */
@@ -463,9 +464,7 @@ export const projects: ProjectSource[] = [
       { label: 'GitHub', href: 'https://github.com/TaulantSela/pizza-menu', icon: 'github' },
     ],
     description:
-      'Digital restaurant menu where the pizza is the menu — every pizza fills a round page, and the menu opens and turns like a book with a swipe or a tap. Each restaurant gets its own subdomain, branding, and link-preview image, all from one Next.js app.',
-    context:
-      'Started it with a collaborator, then took it over: moved the menus from Sanity to Postgres (Neon, Prisma) with photos in Vercel Blob, fitted every photo to its pizza circle, rebuilt page turning (swipe, no flicker), resolved each restaurant from its subdomain in the proxy, and closed the holes in the Studio login.',
+      'A digital restaurant menu where the pizza is the menu: it opens and turns like a book, one pizza per page.',
   },
   {
     id: 'komshi',
