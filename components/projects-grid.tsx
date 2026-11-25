@@ -124,7 +124,9 @@ export function ProjectsGrid({ projects }: ProjectsGridProps) {
                 </CardDescription>
               </CardHeader>
               <CardContent className="flex flex-1 flex-col justify-between gap-4 pt-4">
-                <p className="line-clamp-5 text-sm text-slate-500 dark:text-slate-400">{project.context}</p>
+                {project.context ? (
+                  <p className="line-clamp-5 text-sm text-slate-500 dark:text-slate-400">{project.context}</p>
+                ) : null}
                 <div className="flex flex-wrap gap-2 pt-2">
                   {project.tags.slice(0, 6).map((tag) => (
                     <Badge
