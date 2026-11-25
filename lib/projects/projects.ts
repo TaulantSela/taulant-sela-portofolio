@@ -464,7 +464,7 @@ export const projects: ProjectSource[] = [
       { label: 'GitHub', href: 'https://github.com/TaulantSela/pizza-menu', icon: 'github' },
     ],
     description:
-      'A digital restaurant menu where the pizza is the menu: it opens and turns like a book, one pizza per page.',
+      'A digital restaurant menu where the pizza is the menu: it opens and turns like a book, one pizza per page. Restaurants share it by link or QR code, each on its own subdomain with its own branding.',
   },
   {
     id: 'komshi',
