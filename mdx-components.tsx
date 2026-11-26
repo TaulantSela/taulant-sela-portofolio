@@ -32,8 +32,8 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       // Mirrored posts carry images hotlinked from wherever the original hosted them. Routing those
       // through next/image would mean allow-listing every third-party host, so they stay plain tags.
       if (typeof src !== 'string' || !src.startsWith('/')) {
-        // eslint-disable-next-line @next/next/no-img-element
         return (
+          // eslint-disable-next-line @next/next/no-img-element
           <img
             {...props}
             src={typeof src === 'string' ? src : ''}

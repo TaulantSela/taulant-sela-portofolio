@@ -97,6 +97,8 @@ export default function GithubContributions() {
     const year = pendingYear;
     let cancelled = false;
 
+    // Starting a fetch is what this effect is for; the loading state has to flip with it
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setError(null);
     setIsLoading(true);
 

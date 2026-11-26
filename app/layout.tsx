@@ -127,7 +127,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    // globals.css sets scroll-behavior: smooth; this keeps route changes jumping straight to the top
+    // as they did before Next 16, which no longer overrides it on navigation by itself
+    <html lang="en" data-scroll-behavior="smooth">
       <head>
         <style>{`
           html {

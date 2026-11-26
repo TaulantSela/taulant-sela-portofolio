@@ -7,6 +7,8 @@ export function ThemeProvider({ children, ...props }: React.ComponentProps<typeo
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    // Renders nothing until hydration finishes, so the server and client agree on the theme
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setMounted(true);
   }, []);
 
