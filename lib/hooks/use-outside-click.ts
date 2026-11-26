@@ -4,6 +4,8 @@ type PossibleRefs = RefObject<HTMLElement | null | undefined>[];
 
 export function useOutsideClick(refs: PossibleRefs, handler: () => void, enabled: boolean = true) {
   const latestHandler = useRef(handler);
+  // Keeps the listener calling the newest handler without re-subscribing on every render
+  // eslint-disable-next-line react-hooks/refs
   latestHandler.current = handler;
 
   useEffect(() => {
