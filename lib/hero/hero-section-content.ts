@@ -40,7 +40,7 @@ export const heroSectionContent: HeroSectionContent = {
         { name: 'Claude Semaphore', href: 'https://github.com/TaulantSela/claude-semaphore' },
         { name: 'Pack It Up', href: 'https://packitup.taulantsela.com' },
         { name: 'WatchPaper', href: 'https://watchpaper.taulantsela.com' },
-        { name: 'Pizza Menu', href: 'https://suhotel.fastbite.app' },
+        { name: 'Libretto', href: 'https://suhotel.fastbite.app' },
       ],
     },
     {
