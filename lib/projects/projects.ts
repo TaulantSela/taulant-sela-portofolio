@@ -450,18 +450,18 @@ export const projects: ProjectSource[] = [
       'Structured an npm-workspaces monorepo spanning a Next.js web client, an Expo mobile app, an Electron desktop shell, and an Express/Prisma API with shared audio and config packages.',
   },
   {
-    id: 'pizza-menu',
+    id: 'libretto',
     startedAt: '2025-11',
     updatedAt: '2026-11',
     weight: 62,
-    title: 'Pizza Menu - Multi-Tenant Digital Restaurant Menu',
+    title: 'Libretto - Multi-Tenant Digital Restaurant Menu',
     role: 'personal',
     tags: ['Next.js 16', 'React 19', 'TypeScript', 'Prisma', 'Neon', 'Multi-Tenant'],
     imageFit: 'contain',
-    image: '/projects/pizza-menu_logo.svg',
+    image: '/projects/libretto_logo.svg',
     links: [
-      { label: 'Live Demo', href: 'https://demo.pizza-menu.taulantsela.com' },
-      { label: 'GitHub', href: 'https://github.com/TaulantSela/pizza-menu', icon: 'github' },
+      { label: 'Live Demo', href: 'https://demo.libretto.taulantsela.com' },
+      { label: 'GitHub', href: 'https://github.com/TaulantSela/libretto', icon: 'github' },
     ],
     description:
       'A digital restaurant menu where the pizza is the menu: it opens and turns like a book, one pizza per page.',
